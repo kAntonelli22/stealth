@@ -1,7 +1,7 @@
 extends Node2D
 
 # scenes
-var guard_scene := preload("res://enemy.tscn")
+var guard_scene := preload("res://scenes/enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,5 +18,5 @@ func instance_guard(guard_position : Vector2, guard_rotation : int):
    print("map: instancing guard at ", guard_position)
    var guard := guard_scene.instantiate()
    guard.position = guard_position
-   guard.rotate(guard_rotation)
+   guard.rotation += deg_to_rad(guard_rotation)
    add_child(guard)
