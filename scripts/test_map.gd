@@ -3,10 +3,13 @@ extends Node2D
 # scenes
 var guard_scene := preload("res://scenes/enemy.tscn")
 
+#
+@onready var player = $Player
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-   instance_guard(Vector2(100, 100), 90)
-   instance_guard(Vector2(200, 200), 180)
+   instance_guard(Vector2(200, 200), 90)
+   instance_guard(Vector2(300, 500), 180)
    pass # Replace with function body.
 
 

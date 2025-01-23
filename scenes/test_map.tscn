@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://dy7iekkcyj4q5"]
+[gd_scene load_steps=7 format=3 uid="uid://dy7iekkcyj4q5"]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_kb20g"]
 [ext_resource type="PackedScene" uid="uid://dsml2iuyada4p" path="res://scenes/player.tscn" id="2_3of0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwj2h"]
+size = Vector2(1184, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuvqv"]
+size = Vector2(1184, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_80bf0"]
+size = Vector2(16, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkksp"]
+size = Vector2(16, 648)
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource("1_kb20g")
@@ -12,3 +24,31 @@ offset_bottom = 648.0
 
 [node name="Player" parent="." instance=ExtResource("2_3of0j")]
 position = Vector2(64, 64)
+
+[node name="top" type="StaticBody2D" parent="."]
+position = Vector2(16, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+position = Vector2(560, 8)
+shape = SubResource("RectangleShape2D_vwj2h")
+
+[node name="bottom" type="StaticBody2D" parent="."]
+position = Vector2(16, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom"]
+position = Vector2(560, 8)
+shape = SubResource("RectangleShape2D_vuvqv")
+
+[node name="left" type="StaticBody2D" parent="."]
+position = Vector2(-8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
+position = Vector2(0, 316)
+shape = SubResource("RectangleShape2D_80bf0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1160, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 316)
+shape = SubResource("RectangleShape2D_hkksp")

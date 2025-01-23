@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
-
+# physics variables
 const SPEED = 300.0
 
+# logic variables
+var type : String = "Player"
 
 func _physics_process(delta: float) -> void:
    # get the direction the player is moving as a vector2
