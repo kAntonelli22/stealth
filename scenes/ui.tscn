@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://c45cr4c720ty"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf4rr"]
+bg_color = Color(0.135, 0.179083, 0.25, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sik2"]
+bg_color = Color(0.66, 0.264, 0.264, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 600.0
+offset_right = 384.0
+offset_bottom = 648.0
+grow_vertical = 0
+color = Color(0.1116, 0.12984, 0.18, 1)
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="ColorRect/HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_styles/background = SubResource("StyleBoxFlat_xf4rr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6sik2")
+value = 50.0
+show_percentage = false

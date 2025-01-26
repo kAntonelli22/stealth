@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://3p71jcnnkdqp"]
+
+[ext_resource type="Texture2D" uid="uid://bhpujpj4trrxe" path="res://assets/triangle.png" id="1_2cd6l"]
+[ext_resource type="Script" path="res://scripts/melee.gd" id="1_asrox"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4wc8"]
+radius = 64.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ns4x7"]
+size = Vector2(128, 64)
+
+[node name="Melee" type="Node2D"]
+script = ExtResource("1_asrox")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_q4wc8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(12, -20)
+scale = Vector2(0.5, 1.5)
+texture = ExtResource("1_2cd6l")
+
+[node name="DirectionBox" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirectionBox"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_ns4x7")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_exited"]
+[connection signal="body_entered" from="DirectionBox" to="." method="_on_direction_box_entered"]
+[connection signal="body_exited" from="DirectionBox" to="." method="_on_direction_box_exited"]

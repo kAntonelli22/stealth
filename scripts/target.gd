@@ -6,8 +6,8 @@ const ROTATE_SPEED = 2.0
 var move_target : Vector2 = Vector2(-1, -1)
 
 # ---- # logic variables # ---- #
-var type : String = "Guard"
-var status : String = "normal"      # normal | alert | engaging | dead
+var type : String = "Target"
+var status : String = "normal"      # normal | alert | running | dead
 var alert : bool = false
 
 # ---- # sight variables # ---- #
@@ -19,19 +19,19 @@ var health : int = 100     # 0 - 100
 func _process(delta: float) -> void:
    if health <= 0:
       status = "dead"
-      print("guard: guard ", self.name, " has died")
+      print("target: target ", self.name, " has died")
 
 func _physics_process(delta: float) -> void:
    # ---- # loops through all spotted objects and determines what to do # ---- #
    for object in spotted_objects:
-      if object.type == "Player":      # engage the player
+      if object.type == "Player":      # run from the player
          move_target = object.position
          if status != "engaging": status == "engaging"
       elif object.type == "Guard":
-         #print("guard: guard spotted")
+         #print("target: guard spotted")
          if object.status == "alert": status = "alert"
          elif object.status == "engaging":
-            status = "engaging"
+            status = "running"
             move_target = object.move_target
          elif object.status == "dead": status = "alert"
    # ---- # end of for loop # ------------------------------------------------ #
