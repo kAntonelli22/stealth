@@ -20,6 +20,7 @@ func _process(delta: float) -> void:
    if health <= 0:
       status = "dead"
       print("target: target ", self.name, " has died")
+      process_mode = PROCESS_MODE_DISABLED      # pause node on death
 
 func _physics_process(delta: float) -> void:
    # ---- # loops through all spotted objects and determines what to do # ---- #
@@ -44,6 +45,15 @@ func _physics_process(delta: float) -> void:
       pass
       # return to last patrol point 
    move_and_slide()
+
+# ---- # called by weapons on objects they have hit # ------------------------ #
+func hit(weapon : Node2D, damage : int):
+   if status == "dead": return
+   if status != "running": # and weapon.type == "stealth":
+      print("target: hit by stealth takedown")
+      health = 0
+   else:
+      health -= damage
 
 # ---- # add collision object to list when it enters vision cone # ----------- #
 func _on_vision_cone_entered(body: Node2D) -> void:

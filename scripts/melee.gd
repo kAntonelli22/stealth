@@ -15,7 +15,7 @@ func _ready() -> void:
 func attack():
    for object in hurtbox_objects:
       if object != holder and directionbox_objects.has(object):
-         object.health -= damage    # replace with object hit signal
+         object.hit(holder, self, damage)
          print("melee: ", object.type, " hit for ", damage, " damage")
 
 

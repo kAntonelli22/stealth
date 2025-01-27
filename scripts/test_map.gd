@@ -3,7 +3,8 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
    Global.instance_guard(self, [Vector2(200, 200)], 90)
-   Global.instance_guard(self, [Vector2(300, 500)], 180)
+   Global.instance_guard(self, [Vector2(600, 400)], 180)
+   Global.instance_target(self, [Vector2(400, 400)], 180)
    pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -11,8 +12,7 @@ func _process(delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - guard rotation goes the wrong way when on the far left
-# - guard continues rotating after player leaves vision cone
+# - error finding the body that left the vision cone
 # - guard does not continue rotating to the players last know location
 
 # ---- # Issue List # -------------------------------------------------------- #
