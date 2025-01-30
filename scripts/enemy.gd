@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 # ---- # nodes # ---- #
-@onready var sprite := $Sprite2D
-@onready var vision_cone := $VisionCone2D2
-@onready var collider := $CollisionShape2D
+@onready var sprite := $Sprite
+@onready var vision_cone := $VisionCone
+@onready var collider := $Collider
+@onready var detection_shadow := $DetectionShadow
 @onready var detection_bar := $DetectionBar
 
 # ---- # physics variables # ---- #

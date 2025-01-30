@@ -18,10 +18,9 @@ func _process(delta: float) -> void:
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
-# - add detection meters
 # - add attack cooldown
 # - add dash and stamina
-# - add player shadow for chasing unseen players
+# - add player shadow in guard scenes for chasing unseen players
 # - add guard paths
 # - add guard pathfinding
 # - add guard weapons (knife, batton, pistol, shotgun, smg, rifle)
