@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://chk74u280841r"]
+
+[ext_resource type="Script" path="res://exit.gd" id="1_eahav"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fore7"]
+size = Vector2(48, 48)
+
+[node name="Exit" type="Node2D"]
+script = ExtResource("1_eahav")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.6003, 0.87, 0.685705, 0.498039)
+polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+
+[node name="ExitArea" type="Area2D" parent="."]
+
+[node name="AreaCollider" type="CollisionShape2D" parent="ExitArea"]
+shape = SubResource("RectangleShape2D_fore7")
+
+[node name="ExitTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_entered"]
+[connection signal="body_exited" from="ExitArea" to="." method="_on_exit_area_exited"]
+[connection signal="timeout" from="ExitTimer" to="." method="_on_exit_timer_timeout"]

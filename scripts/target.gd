@@ -46,15 +46,6 @@ func _physics_process(delta: float) -> void:
       # return to last patrol point 
    move_and_slide()
 
-# ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(weapon : Node2D, damage : int):
-   if status == "dead": return
-   if status != "running": # and weapon.type == "stealth":
-      print("target: hit by stealth takedown")
-      health = 0
-   else:
-      health -= damage
-
 # ---- # add collision object to list when it enters vision cone # ----------- #
 func _on_vision_cone_entered(body: Node2D) -> void:
    print("guard: vision cone entered by: ", body.type)
@@ -64,3 +55,14 @@ func _on_vision_cone_entered(body: Node2D) -> void:
 func _on_vision_cone_exited(body: Node2D) -> void:
    print("guard: vision cone exited: ", body.type)
    spotted_objects.remove_at(spotted_objects.find(body))
+
+# ---- # called by weapons on objects they have hit # ------------------------ #
+func hit(weapon : Node2D, damage : int):
+   if status == "dead": return
+   if status != "running": # and weapon.type == "stealth":
+      print("target: hit by stealth takedown")
+      health = 0
+   else: health -= damage
+      
+func exit():
+   print("target: exiting scene")

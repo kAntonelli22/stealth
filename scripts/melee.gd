@@ -1,18 +1,33 @@
 extends Node2D
 
+# ---- # nodes # ---- #
 @onready var holder : Node2D = get_parent()
+@onready var sprite := $Sprite
+@onready var hurtbox := $Hurtbox
+@onready var directionbox := $DirectionBox
+@onready var recharge_bar := $RechargeBar
+
+# ---- # arrays # ---- #
 var hurtbox_objects : Array = []
 var directionbox_objects : Array = []
 
 # ---- # weapon stats # ---- #
 var damage : int = 10
 var attack_speed : int
+var cooldown : float = 1.5      # cooldown time before next attack
+var recharge : float = 1.5      # current recharge time
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-   pass # Replace with function body.
+   recharge_bar.max_value = cooldown
+
+func _process(delta: float) -> void:
+   recharge += delta
+   if recharge > cooldown: recharge = cooldown
+   recharge_bar.value = recharge
 
 func attack():
+   recharge = 0
    for object in hurtbox_objects:
       if object != holder and directionbox_objects.has(object):
          object.hit(holder, self, damage)

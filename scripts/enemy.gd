@@ -31,6 +31,7 @@ func _process(delta: float) -> void:
       status = "dead"
       print("guard: guard ", self.name, " has died")
       vision_cone.visible = false
+      detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
 
 func _physics_process(delta: float) -> void:
@@ -61,7 +62,17 @@ func _physics_process(delta: float) -> void:
       pass
       # return to last patrol point 
    move_and_slide()
-   
+
+# ---- # add collision object to list when it enters vision cone # ----------- #
+func _on_vision_cone_entered(body: Node2D) -> void:
+   print("guard: vision cone entered by: ", body.type)
+   if body != self: spotted_objects.append(body)
+
+# ---- # remove collision object from list when it exits cone # -------------- #
+func _on_vision_cone_exited(body: Node2D) -> void:
+   print("guard: vision cone exited: ", body.type)
+   if body != self: spotted_objects.remove_at(spotted_objects.find(body))
+
 # ---- # called by weapons on objects they have hit # ------------------------ #
 func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
    if status == "dead": return
@@ -69,18 +80,4 @@ func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
    if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
       print("guard: hit by stealth takedown")
       health = 0
-   else:
-      health -= damage
-      
-
-# ---- # add collision object to list when it enters vision cone # ----------- #
-func _on_vision_cone_entered(body: Node2D) -> void:
-   print("guard: vision cone entered by: ", body.type)
-   if body != self: spotted_objects.append(body)
-   print("guard: spotted objects include ", spotted_objects, " body ", body, " find ", spotted_objects.find(body))
-
-# ---- # remove collision object from list when it exits cone # -------------- #
-func _on_vision_cone_exited(body: Node2D) -> void:
-   print("guard: vision cone exited: ", body.type)
-   spotted_objects.remove_at(spotted_objects.find(body))
-   print("guard: spotted objects include ", spotted_objects, " body ", body, " find ", spotted_objects.find(body))
+   else: health -= damage

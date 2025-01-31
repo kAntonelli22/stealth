@@ -12,14 +12,11 @@ func _process(delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - error finding the body that left the vision cone
 # - guard does not continue rotating to the players last know location
 
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
-# - add attack cooldown
-# - add dash and stamina
 # - add player shadow in guard scenes for chasing unseen players
 # - add guard paths
 # - add guard pathfinding
@@ -29,5 +26,6 @@ func _process(delta: float) -> void:
 # - weapon sprites and animations
 # - entry and exit points
 # - guard reinforce and vip exit points
+# - dash increases detection
 
 # ---- # Todo List # --------------------------------------------------------- #
