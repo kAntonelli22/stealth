@@ -26,13 +26,6 @@ func _process(delta: float) -> void:
    if recharge > cooldown: recharge = cooldown
    recharge_bar.value = recharge
 
-func attack():
-   recharge = 0
-   for object in hurtbox_objects:
-      if object != holder and directionbox_objects.has(object):
-         object.hit(holder, self, damage)
-         print("melee: ", object.type, " hit for ", damage, " damage")
-
 
 func _on_hurtbox_entered(body: Node2D) -> void:
    print("melee: hurtbox entered by: ", body.type)
@@ -49,4 +42,16 @@ func _on_direction_box_entered(body: Node2D) -> void:
 func _on_direction_box_exited(body: Node2D) -> void:
    print("melee: directionbox exited by: ", body.type)
    directionbox_objects.remove_at(directionbox_objects.find(body))
-   
+
+# ---- # attack function called by holder when it wants to attack # ---------- # 
+func attack():
+   recharge = 0
+   for object in hurtbox_objects:
+      if object != holder and directionbox_objects.has(object):
+         object.hit(holder, self, damage)
+         print("melee: ", object.type, " hit for ", damage, " damage")
+
+# ---- # can hit function called to check if something can be hit by ai # ---- #
+func can_hit(object : CharacterBody2D) -> bool:
+   if directionbox_objects.has(object) and hurtbox_objects.has(object): return true
+   else: return false

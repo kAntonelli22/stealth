@@ -1,5 +1,13 @@
 extends CharacterBody2D
 
+# ---- # nodes # ---- #
+@onready var sprite := $Sprite
+@onready var vision_cone := $VisionCone
+@onready var collider := $Collider
+@onready var detection_shadow := $DetectionShadow
+@onready var detection_bar := $DetectionBar
+var weapon
+
 # ---- # physics variables # ---- #
 const SPEED = 200.0
 const ROTATE_SPEED = 2.0
@@ -12,30 +20,45 @@ var alert : bool = false
 
 # ---- # sight variables # ---- #
 var spotted_objects : Array = []
+var detection : int = 0             # 0 - 100
+var threat_detected : bool = false
 
 # ---- # guard stats # ---- #
 var health : int = 100     # 0 - 100
 
 func _process(delta: float) -> void:
+   detection_bar.value = detection
    if health <= 0:
-      status = "dead"
       print("target: target ", self.name, " has died")
+      status = "dead"
+      vision_cone.visible = false
+      detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
-
+   
 func _physics_process(delta: float) -> void:
-   # ---- # loops through all spotted objects and determines what to do # ---- #
+   
+# ---- # loops through all spotted objects and determines what to do # ---- #
+   var player : CharacterBody2D
    for object in spotted_objects:
-      if object.type == "Player":      # run from the player
-         move_target = object.position
+      if object.type == "Player":      # engage the player
+         player = object
+         if threat_detected: move_target = object.position
          if status != "engaging": status == "engaging"
       elif object.type == "Guard":
-         #print("target: guard spotted")
+         #print("guard: guard spotted")
          if object.status == "alert": status = "alert"
          elif object.status == "engaging":
-            status = "running"
+            status = "engaging"
             move_target = object.move_target
          elif object.status == "dead": status = "alert"
    # ---- # end of for loop # ------------------------------------------------ #
+   if player and detection < 100: detection += 1
+   if detection == 100: threat_detected = true
+   
+   # ---- # ai attack code # ------------------------------------------------- #
+   if player and weapon and weapon.can_hit(player):
+      if weapon.cooldown <= weapon.recharge: weapon.attack()
+      
    if move_target != position and move_target != Vector2(-1, -1):
       #print("guard: moving to: ", move_target)
       position = position.move_toward(move_target, delta * SPEED)
@@ -57,12 +80,14 @@ func _on_vision_cone_exited(body: Node2D) -> void:
    spotted_objects.remove_at(spotted_objects.find(body))
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(weapon : Node2D, damage : int):
+func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
    if status == "dead": return
-   if status != "running": # and weapon.type == "stealth":
-      print("target: hit by stealth takedown")
+   if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
+      print("guard: hit by stealth takedown")
       health = 0
-   else: health -= damage
+   else:
+      health -= damage
+      detection = 100
       
 func exit():
    print("target: exiting scene")

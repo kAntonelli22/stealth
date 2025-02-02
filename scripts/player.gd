@@ -20,6 +20,7 @@ var dash_cost : int = 10         # amount subtracted from stamina when dashing
 @onready var weapon : Node2D = $Melee
 
 func _physics_process(delta: float) -> void:
+   if health <= 0: Global.game_over(true)
    # ---- # get mouse position and direction the player is moving # ---------- #
    var mouse_position : Vector2 = get_global_mouse_position()
    var direction : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
@@ -41,12 +42,14 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
    # handle attack event
-   if event.is_action_pressed("attack"): if weapon.cooldown <= weapon.recharge: weapon.attack()
+   if event.is_action_pressed("attack") and weapon.cooldown <= weapon.recharge: weapon.attack()
    if event.is_action_pressed("dash"): dashing = true
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(weapon : Node2D, damage : int):
+func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
    health -= damage
+   print("player: took ", damage, " damage")
+   Signals.emit_signal("update_attributes", health)
 
 func exit():
-   print("player: exiting scene, game over")
+   Global.game_over(false)

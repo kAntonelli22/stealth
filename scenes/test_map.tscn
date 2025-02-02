@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mbtu0gx6lkn4" path="res://scenes/enemy.tscn" id="3_x073k"]
 [ext_resource type="PackedScene" uid="uid://dm7r1ttsqy55p" path="res://scenes/wall.tscn" id="4_wq0hb"]
 [ext_resource type="PackedScene" uid="uid://dsjdenieys0u" path="res://scenes/glass.tscn" id="5_dyel1"]
-[ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://exit.tscn" id="7_fove2"]
+[ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://scenes/exit.tscn" id="7_fove2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwj2h"]
 size = Vector2(1184, 16)
@@ -24,7 +24,7 @@ size = Vector2(16, 648)
 script = ExtResource("1_kb20g")
 
 [node name="Background" type="Polygon2D" parent="."]
-color = Color(0.147672, 0.147672, 0.147672, 1)
+color = Color(0.129412, 0.145098, 0.160784, 1)
 polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 
 [node name="Player" parent="." instance=ExtResource("2_3of0j")]

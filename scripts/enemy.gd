@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var collider := $Collider
 @onready var detection_shadow := $DetectionShadow
 @onready var detection_bar := $DetectionBar
+var weapon
 
 # ---- # physics variables # ---- #
 const SPEED = 200.0
@@ -28,18 +29,18 @@ var health : int = 100     # 0 - 100
 func _process(delta: float) -> void:
    detection_bar.value = detection
    if health <= 0:
-      status = "dead"
       print("guard: guard ", self.name, " has died")
+      status = "dead"
       vision_cone.visible = false
       detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
 
 func _physics_process(delta: float) -> void:
    # ---- # loops through all spotted objects and determines what to do # ---- #
-   var player_spotted : bool = false
+   var player : CharacterBody2D
    for object in spotted_objects:
       if object.type == "Player":      # engage the player
-         player_spotted = true
+         player = object
          if threat_detected: move_target = object.position
          if status != "engaging": status == "engaging"
       elif object.type == "Guard":
@@ -50,8 +51,12 @@ func _physics_process(delta: float) -> void:
             move_target = object.move_target
          elif object.status == "dead": status = "alert"
    # ---- # end of for loop # ------------------------------------------------ #
-   if player_spotted and detection < 100: detection += 1
+   if player and detection < 100: detection += 1
    if detection == 100: threat_detected = true
+   
+   # ---- # ai attack code # ------------------------------------------------- #
+   if player and weapon and weapon.can_hit(player):
+      if weapon.cooldown <= weapon.recharge: weapon.attack()
    
    if move_target != position and move_target != Vector2(-1, -1):
       #print("guard: moving to: ", move_target)
@@ -76,8 +81,9 @@ func _on_vision_cone_exited(body: Node2D) -> void:
 # ---- # called by weapons on objects they have hit # ------------------------ #
 func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
    if status == "dead": return
-   print("guard: find ", spotted_objects.find(holder), " ", !spotted_objects.find(holder))
    if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
       print("guard: hit by stealth takedown")
       health = 0
-   else: health -= damage
+   else:
+      health -= damage
+      detection = 100
