@@ -2,6 +2,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+   Global.games_played += 1
    Global.map = self
    Global.instance_guard([Vector2(200, 200)], 90, Global.melee)
    Global.instance_guard([Vector2(600, 400)], 180, Global.melee)

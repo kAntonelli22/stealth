@@ -40,6 +40,10 @@ theme_override_font_sizes/font_size = 26
 text = "Stealth Game"
 horizontal_alignment = 1
 
+[node name="Continue" type="Button" parent="Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
 [node name="Start Game" type="Button" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start"
@@ -56,6 +60,7 @@ text = "Guide"
 layout_mode = 2
 text = "Quit"
 
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Guide" to="." method="_on_guide_pressed"]

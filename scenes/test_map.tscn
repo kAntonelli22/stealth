@@ -91,5 +91,5 @@ position = Vector2(976, 120)
 scale = Vector2(1, 5)
 
 [node name="Exit" parent="." instance=ExtResource("7_fove2")]
-position = Vector2(124, 516)
-scale = Vector2(5.1, 5.4)
+position = Vector2(79, 464)
+scale = Vector2(3, 3)

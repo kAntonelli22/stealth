@@ -1,5 +1,10 @@
 extends Node
 
+
+# ---- # save game stuff # ---- #
+var save_game_placeholder : bool = true
+var games_played : int = 0
+
 # ---- # assets # ---- #
 var godot_icon := preload("res://icon.svg")
 
