@@ -34,62 +34,66 @@ rotation = 1.5708
 [node name="Enemy" parent="." instance=ExtResource("3_x073k")]
 position = Vector2(856, 309)
 
-[node name="top" type="StaticBody2D" parent="."]
-position = Vector2(16, -16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
-position = Vector2(560, 8)
-shape = SubResource("RectangleShape2D_vwj2h")
-
-[node name="bottom" type="StaticBody2D" parent="."]
-position = Vector2(16, 648)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom"]
-position = Vector2(560, 8)
-shape = SubResource("RectangleShape2D_vuvqv")
-
-[node name="left" type="StaticBody2D" parent="."]
-position = Vector2(-8, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left"]
-position = Vector2(0, 316)
-shape = SubResource("RectangleShape2D_80bf0")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(1160, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 316)
-shape = SubResource("RectangleShape2D_hkksp")
-
 [node name="UI" parent="." instance=ExtResource("3_08am1")]
 modulate = Color(1, 1, 1, 0.501961)
 top_level = true
 
-[node name="Wall" parent="." instance=ExtResource("4_wq0hb")]
-position = Vector2(216, 360)
-scale = Vector2(9, 1)
-
-[node name="Wall2" parent="." instance=ExtResource("4_wq0hb")]
-position = Vector2(734, 551)
-scale = Vector2(1, 4)
-
-[node name="Wall3" parent="." instance=ExtResource("4_wq0hb")]
-position = Vector2(856, 360)
-scale = Vector2(6, 1)
-
-[node name="Glass" parent="." instance=ExtResource("5_dyel1")]
-position = Vector2(572, 360)
-scale = Vector2(5.8, 1)
-
-[node name="Wall5" parent="." instance=ExtResource("4_wq0hb")]
-position = Vector2(272, 480)
-scale = Vector2(1, 4)
-
-[node name="Wall6" parent="." instance=ExtResource("4_wq0hb")]
-position = Vector2(976, 120)
-scale = Vector2(1, 5)
-
 [node name="Exit" parent="." instance=ExtResource("7_fove2")]
 position = Vector2(79, 464)
 scale = Vector2(3, 3)
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="Wall" parent="Walls" instance=ExtResource("4_wq0hb")]
+position = Vector2(216, 360)
+scale = Vector2(9, 1)
+
+[node name="Wall2" parent="Walls" instance=ExtResource("4_wq0hb")]
+position = Vector2(734, 551)
+scale = Vector2(1, 4)
+
+[node name="Wall3" parent="Walls" instance=ExtResource("4_wq0hb")]
+position = Vector2(856, 360)
+scale = Vector2(6, 1)
+
+[node name="Glass" parent="Walls" instance=ExtResource("5_dyel1")]
+position = Vector2(572, 360)
+scale = Vector2(5.8, 1)
+
+[node name="Wall5" parent="Walls" instance=ExtResource("4_wq0hb")]
+position = Vector2(272, 480)
+scale = Vector2(1, 4)
+
+[node name="Wall6" parent="Walls" instance=ExtResource("4_wq0hb")]
+position = Vector2(976, 120)
+scale = Vector2(1, 5)
+
+[node name="Bounds" type="Node" parent="."]
+
+[node name="top" type="StaticBody2D" parent="Bounds"]
+position = Vector2(16, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/top"]
+position = Vector2(560, 8)
+shape = SubResource("RectangleShape2D_vwj2h")
+
+[node name="bottom" type="StaticBody2D" parent="Bounds"]
+position = Vector2(16, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/bottom"]
+position = Vector2(560, 8)
+shape = SubResource("RectangleShape2D_vuvqv")
+
+[node name="left" type="StaticBody2D" parent="Bounds"]
+position = Vector2(-8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/left"]
+position = Vector2(0, 316)
+shape = SubResource("RectangleShape2D_80bf0")
+
+[node name="right" type="StaticBody2D" parent="Bounds"]
+position = Vector2(1160, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/right"]
+position = Vector2(0, 316)
+shape = SubResource("RectangleShape2D_hkksp")

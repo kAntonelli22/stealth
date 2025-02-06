@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cngb6df21rykq"]
 
-[ext_resource type="Script" path="res://scripts/card_carousel.gd" id="1_trr10"]
+[ext_resource type="Script" path="res://scripts/ui_scripts/card_carousel.gd" id="1_trr10"]
 
 [node name="CardCarousel" type="Control"]
 layout_mode = 3

@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 # ---- # card chosen function called when the player choses their card # ----- #
 func card_chosen(card: Node):
    if card.type == "perk":
-      Global.add_perk("perk")
+      Global.player_stats.add_perk(card.value)
       Global.show_perks = false
       get_tree().change_scene_to_packed(Global.card_select)
    elif card.type == "contract":
@@ -33,7 +33,7 @@ func instance_card(deck: Dictionary, type: String):
    var card_data = deck[picked_card]
    var card = Global.card.instantiate()
    card.type = type
-   card.value = card_data.value
+   card.data = card_data
    
    card_container.add_child(card)
    card.title.text = card_data.title

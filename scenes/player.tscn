@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsml2iuyada4p"]
+[gd_scene load_steps=6 format=3 uid="uid://dsml2iuyada4p"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_kndtj"]
+[ext_resource type="Resource" uid="uid://dbry47tg3us5o" path="res://resources/player_stats.tres" id="2_d7ceb"]
 [ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_j0h7m"]
 [ext_resource type="PackedScene" uid="uid://3p71jcnnkdqp" path="res://scenes/melee.tscn" id="3_rytvs"]
 
@@ -11,6 +12,7 @@ size = Vector2(32, 32)
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_kndtj")
+stats = ExtResource("2_d7ceb")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 self_modulate = Color(0.305882, 0.305882, 0.709804, 1)
@@ -21,4 +23,4 @@ texture = ExtResource("2_j0h7m")
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xpr8t")
 
-[node name="Melee" parent="." instance=ExtResource("3_rytvs")]
+[node name="Weapon" parent="." instance=ExtResource("3_rytvs")]

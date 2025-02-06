@@ -1,4 +1,5 @@
 extends Control
+class_name Card
 
 # ---- # nodes # ---- #
 @onready var title := $Background/CardContainer/MarginContainer/TextContainer/CardTitle
@@ -7,8 +8,8 @@ extends Control
 @onready var accept := $Background/CardContainer/CardButton
 
 # ---- # variables # ---- #
-var type : String
-var value
+var type : String       # the type of card (perk or map)
+var data                # the data that the card holds (effects, bonuses, map configs)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -16,24 +16,28 @@ func _process(delta: float) -> void:
 
 # ---- # Issue List # -------------------------------------------------------- #
 # - guard does not continue rotating to the players last know location
+# - enemy parent class has broken the physics process function and maybe process
 
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
+# - player perk system
+# - add save functions to all persistant objects
+# - create light and dark mode themes
+# - add lives and loss debuffs
 # - add game over
 # - add global groups
 # - change guard sprite to show death
 # - add player shadow in guard scenes for chasing unseen players
 # - add guard paths
 # - add guard pathfinding
-# - add guard weapons (knife, batton, pistol, shotgun, smg, rifle)
-# - add player weapons (fists, knife, sword, pistol)
+# - add weapon parent class
+# - add ranged weapons
 # - guard vision cones expand when alerted
 # - weapon sprites and animations
-# - entry and exit points
+# - entry points
 # - guard reinforce and vip exit points
 # - dash increases detection
-# - player perks
 
 # ---- # Todo List # --------------------------------------------------------- #
 # ---- # Game Info # --------------------------------------------------------- #

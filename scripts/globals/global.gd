@@ -5,6 +5,10 @@ extends Node
 var save_game_placeholder : bool = true
 var games_played : int = 0
 
+# ---- # resources # ---- #
+var player_stats := preload("res://resources/player_stats.tres")
+var perk := preload("res://resources/perk.tres")
+
 # ---- # assets # ---- #
 var godot_icon := preload("res://icon.svg")
 
@@ -108,12 +112,6 @@ func instance_target(target_route: Array, target_rotation: int, weapon: PackedSc
    target.add_to_group("Targets")
    map.add_child(target)
 
-# ---- # Add Perk # ---------------------------------------------------------- #
-# ---- # adds a perk to the player # ----------------------------------------- #
-func add_perk(perk: String):
-   print("Global: adding ", perk, " perk to player")
-   #perk_deck[perk]
-
 # ---- # Change Map # -------------------------------------------------------- #
 # ---- # loads a new map # --------------------------------------------------- #
 func change_map(map: PackedScene):
@@ -151,3 +149,47 @@ func game_over(player_died: bool):
    else: print("Global: player has lost\nfinal score: ", score)
    show_perks = true
    get_tree().change_scene_to_packed(card_select)
+
+# ---- # Save Game # --------------------------------------------------------- #
+# ---- # saves all persistent game data # ------------------------------------ #
+func save_game():
+   print("Global: saving game")
+   var save_file := FileAccess.open("user://savegame.save", FileAccess.WRITE)
+   var save_nodes : Array = get_tree().get_nodes_in_group("Persist")
+   
+   for node in save_nodes:
+      if node.scene_file_path.is_empty() or !node.has_method("save"):
+         print("Global: node missing or lacks save method")
+         continue
+      var node_data : Dictionary = node.save()
+      var json_data : String = JSON.stringify(node_data)
+      save_file.store_line(json_data)
+      
+# ---- # Load Game # --------------------------------------------------------- #
+# ---- # loads all persistent game data # ------------------------------------ #
+func load_game():
+   print("Global: loading save")
+   if not FileAccess.file_exists("user://savegame.save"):
+      print("Global: no save file")
+      return
+   
+   var save_nodes : Array = get_tree().get_nodes_in_group("Persist")
+   for node in save_nodes: node.queue_free()
+   
+   var save_file := FileAccess.open("user://savegame.save", FileAccess.WRITE)
+   while save_file.get_position() < save_file.get_length():
+      var json_data : String = save_file.get_line()
+      var json : JSON = JSON.new()      # json helper class
+      
+      var parse_result := json.parse(json_data)
+      var node_data = json.data
+      
+      var new_object = load(node_data["filename"]).instantiate()
+      get_node(node_data["parent"]).add_child(new_object)
+      new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+      
+      # Now we set the remaining variables.
+      for i in node_data.keys():
+         if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+            continue
+            new_object.set(i, node_data[i])

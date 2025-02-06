@@ -1,4 +1,5 @@
 extends Node2D
+class_name Melee
 
 # ---- # nodes # ---- #
 @onready var holder : Node2D = get_parent()

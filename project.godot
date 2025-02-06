@@ -17,8 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://scripts/global.gd"
-Signals="*res://scripts/signals.gd"
+Global="*res://scripts/globals/global.gd"
+Signals="*res://scripts/globals/signals.gd"
+Perks="*res://scripts/globals/perks.gd"
 
 [dotnet]
 
@@ -31,6 +32,7 @@ Guards="all guards in the map"
 CharacterBodies="all characterbodies in the map"
 Walls="all walls in the map"
 Windows="all windows in the map"
+Persist="objects called by global save game function"
 
 [input]
 

@@ -1,4 +1,5 @@
 extends Node2D
+class_name Exit
 
 # ---- # Nodes # ---- #
 @onready var exit_area := $ExitArea

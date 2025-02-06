@@ -38,9 +38,9 @@ shape = SubResource("RectangleShape2D_ns4x7")
 
 [node name="RechargeBar" type="ProgressBar" parent="."]
 offset_left = -16.0
-offset_top = 16.0
+offset_top = 17.0
 offset_right = 16.0
-offset_bottom = 17.0
+offset_bottom = 18.0
 theme_override_styles/background = SubResource("StyleBoxLine_xju0n")
 theme_override_styles/fill = SubResource("StyleBoxLine_xfa48")
 max_value = 1.5

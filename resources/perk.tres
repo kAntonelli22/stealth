@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dh051r5as3crv"]
+
+[ext_resource type="Script" path="res://scripts/perk.gd" id="1_2vvac"]
+
+[resource]
+script = ExtResource("1_2vvac")
