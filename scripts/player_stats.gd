@@ -16,51 +16,34 @@ class_name PlayerStats
 @export var money : int
 
 # ---- # player perks # ---- #
-@export_group("Player Perks")
-@export var perks : Array
+var perks : Array
 
 
 # Called when the node enters the scene tree for the first time.
-func _init(hp: int = 100, hp_regen: int = 1, spd: float = 300, stamina: int = 100, 
-stamina_regen: int = 0.5, dsh_dist: int = 75, dsh_cost: int = 10, prks: Array = []) -> void:
-   health = hp
-   health_regen = hp_regen
-   speed = spd
-   stamina = stamina
-   stamina_regen = stamina_regen
-   dash_distance = dsh_dist
-   dash_cost = dsh_cost
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
-   add_perk(Perk.SpeedPerk.new())
+func _init(health: int = 100, health_regen: int = 1, speed: float = 300, stamina: int = 100, 
+stamina_regen: int = 0.5, dash_dist: int = 75, dash_cost: int = 10, perks: Array = []) -> void:
+   self.health = health
+   self.health_regen = health_regen
+   self.speed = speed
+   self.stamina = stamina
+   self.stamina_regen = stamina_regen
+   self.dash_distance = dash_distance
+   self.dash_cost = dash_cost
+   self.perks = perks
 
-func update_stats(hp: int, hp_regen: int, spd: float, stamina: int, 
-stamina_regen: int, dsh_dist: int, dsh_cost: int, prks: Array) -> void:
-   health = hp
-   health_regen = hp_regen
-   speed = spd
-   stamina = stamina
-   stamina_regen = stamina_regen
-   dash_distance = dsh_dist
-   dash_cost = dsh_cost
+func update_stats(health: int, health_regen: int, speed: float, stamina: int, 
+stamina_regen: int, dash_dist: int, dash_cost: int, perks: Array) -> void:
+   self.health = health
+   self.health_regen = health_regen
+   self.speed = speed
+   self.stamina = stamina
+   self.stamina_regen = stamina_regen
+   self.dash_distance = dash_distance
+   self.dash_cost = dash_cost
+   self.perks = perks
 
-func add_perk(perk):
-   print("appending perk: ", perk)
-   perks.append(perk)
-   print("perks: ", perks)
+func add_perk(perk): perks.append(perk)
 
-func remove_perk(perk):
-   perks.remove_at(perks.find(perk))
+func remove_perk(perk): perks.remove_at(perks.find(perk))
 
-func remove_perk_at(index: int):
-   perks.remove_at(index)
-
-func get_perks() -> Array: return perks
-func get_perk(index: int) -> Array: return perks[index]
+func remove_perk_at(index: int): perks.remove_at(index)

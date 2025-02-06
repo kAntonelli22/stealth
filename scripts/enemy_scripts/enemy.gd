@@ -27,7 +27,7 @@ var threat_detected : bool = false
 # ---- # guard stats # ---- #
 var health : int = 100     # 0 - 100
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
    detection_bar.value = detection
    if health <= 0:
       print("enemy: enemy ", self.name, " has died")
@@ -53,7 +53,7 @@ func _on_vision_cone_exited(body: Node2D) -> void:
    if body != self: spotted_objects.remove_at(spotted_objects.find(body))
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
+func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    if status == "dead": return
    if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
       print("enemy: hit by stealth takedown")

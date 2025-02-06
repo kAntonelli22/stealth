@@ -11,12 +11,13 @@ func _ready() -> void:
    Signals.emit_signal("map_changed")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
 # - guard does not continue rotating to the players last know location
-# - enemy parent class has broken the physics process function and maybe process
+# - card carousel code is bad and map structure needs to be changed to fit perk structure
+# - player cannot apply perks or even see them
 
 # ---- # Issue List # -------------------------------------------------------- #
 

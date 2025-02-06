@@ -23,41 +23,22 @@ var melee := preload("res://scenes/melee.tscn")
 
 # ---- # card variables # ---- #
 var show_perks : bool = false    # used by card carousel to determine if perks should be offered
-var perk_deck = {
-   "speed": {
-      "title": "Speed Perk",
-      "image": godot_icon,
-      "description": "increases the players speed",
-      "value": 50
-      },
-   "strength": {
-      "title": "Strength Perk",
-      "image": godot_icon,
-      "description": "increases the players strength",
-      "value": 50
-      },
-   "health": {
-      "title": "Health Perk",
-      "image": godot_icon,
-      "description": "increases the players health",
-      "value": 50
-      },
-}
+
 var maps = {
    "map1": {
-      "title": "Map 1",
+      "name": "Map 1",
       "image": godot_icon,
       "description": "Guards ... 3\nTargets ... 1",
       "value": preload("res://scenes/test_map.tscn")
       },
    "map2": {
-      "title": "Map 1",
+      "name": "Map 1",
       "image": godot_icon,
       "description": "Guards ... 3\nTargets ... 1",
       "value": preload("res://scenes/test_map.tscn")
       },
    "map3": {
-      "title": "Map 1",
+      "name": "Map 1",
       "image": godot_icon,
       "description": "Guards ... 3\nTargets ... 1",
       "value": preload("res://scenes/test_map.tscn")
@@ -73,14 +54,6 @@ var targets : Array
 var characterbodies : Array
 var walls : Array
 var windows : Array
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-   pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-   pass
 
 # ---- # Instance Guard # ---------------------------------------------------- #
 # ---- # creates a guard at the given position with the given rotation and path 
@@ -114,9 +87,9 @@ func instance_target(target_route: Array, target_rotation: int, weapon: PackedSc
 
 # ---- # Change Map # -------------------------------------------------------- #
 # ---- # loads a new map # --------------------------------------------------- #
-func change_map(map: PackedScene):
+func change_map(new_map: PackedScene):
    print("Global: loading map")
-   get_tree().change_scene_to_packed(map)
+   get_tree().change_scene_to_packed(new_map)
 
 # ---- # Update Groups # ----------------------------------------------------- #
 # ---- # gets the groups from the scene tree and updates the group variables # #
@@ -181,7 +154,7 @@ func load_game():
       var json_data : String = save_file.get_line()
       var json : JSON = JSON.new()      # json helper class
       
-      var parse_result := json.parse(json_data)
+      #var parse_result := json.parse(json_data)
       var node_data = json.data
       
       var new_object = load(node_data["filename"]).instantiate()

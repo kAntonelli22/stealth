@@ -16,7 +16,7 @@ var dashing : bool = false
 @onready var dash_cost : int = stats.dash_cost
 
 # ---- # player perks # ---- #
-@onready var active_perks = stats.get_perks()
+@onready var active_perks = stats.perks
 
 # ---- # nodes  # ---- #
 @onready var sprite : Node2D = $Sprite
@@ -24,7 +24,6 @@ var dashing : bool = false
 @onready var weapon : Node2D = $Weapon
 
 func _ready() -> void:
-   print("perk: ", active_perks, stats.perks)
    for perk in active_perks:
       perk.apply_perk(self)
 
@@ -55,7 +54,7 @@ func _input(event: InputEvent) -> void:
    if event.is_action_pressed("dash"): dashing = true
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(holder : CharacterBody2D, weapon : Node2D, damage : int):
+func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    health -= damage
    print("player: took ", damage, " damage")
    Signals.emit_signal("update_attributes", health)
@@ -64,8 +63,9 @@ func exit():
    Global.game_over(false)
 
 func save():
-   var save_dict = {
-      "filename": get_scene_file_path(),
-      "parent": get_parent().get_path(),
-      # - save the players stats
-   }
+   pass
+   #var save_dict = {
+      #"filename": get_scene_file_path(),
+      #"parent": get_parent().get_path(),
+      ## - save the players stats
+   #}

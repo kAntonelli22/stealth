@@ -1,11 +1,10 @@
 extends Resource
 class_name Perk
 
-@export_group("Visual")
-@export var name : String
-@export var description : String
-#@export var icon : Resource
-@export var type : String
+var name : String
+var description : String
+#var icon : Resource
+var type : String
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,16 +16,20 @@ type: String = "Boost") -> void:
    self.type = type
 
 func apply_perk(player: CharacterBody2D):
-   print("applying ", name, " to ", player.name)
+   print("perk ", name, " does not have an application function")
 
-class BoostPerk:
-   @export var boost_percent : float
+class BoostPerk extends Perk:
+   var boost_percent : float
    
-   func _init(boost_percent: float = .10) -> void:
+   func _init(name: String, description: String, type: String, boost_percent: float = .10) -> void:
+      super(name, description, type)
       self.boost_percent = boost_percent
 
 class SpeedPerk extends BoostPerk:
-   
-   func apply_perk(player: CharacterBody2D):
-      player.speed += player.speed * boost_percent
-      print("boosting ", player.name, " speed to ", player.speed)
+   func apply_perk(player: CharacterBody2D): player.speed += player.speed * boost_percent
+
+class HealthPerk extends BoostPerk:
+   func apply_perk(player: CharacterBody2D): player.health += player.health * boost_percent
+
+class StrengthPerk extends BoostPerk:
+   func apply_perk(player: CharacterBody2D): player.speed += player.speed * boost_percent
