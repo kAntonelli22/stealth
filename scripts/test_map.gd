@@ -15,15 +15,19 @@ func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - guard does not continue rotating to the players last know location
-# - card carousel code is bad and map structure needs to be changed to fit perk structure
-# - player cannot apply perks or even see them
+# - card carousel code is bad
+# - save code needs to be cleaned up
+# - save code for perks and weapons does not work
+# - pause code does not unpause when switching or loading scene
+# - ui is not present in card scene
+# - extra enemy scene, exit scene, and exit script need to be removed from git
+# - target code doesnt work
 
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
-# - player perk system
-# - add save functions to all persistant objects
+# - add equip weapon functions
+# - add camera node
 # - create light and dark mode themes
 # - add lives and loss debuffs
 # - add game over

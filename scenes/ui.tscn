@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c45cr4c720ty"]
+[gd_scene load_steps=6 format=3 uid="uid://c45cr4c720ty"]
 
 [ext_resource type="Script" path="res://scripts/ui_scripts/ui.gd" id="1_5arqu"]
+[ext_resource type="Texture2D" uid="uid://box0x85q4wasm" path="res://icon.svg" id="2_5ttrq"]
+[ext_resource type="PackedScene" uid="uid://gmva8vo3rvmv" path="res://scenes/pause_menu.tscn" id="3_ik6k2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xf4rr"]
 bg_color = Color(0.135, 0.179083, 0.25, 1)
@@ -13,7 +15,15 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5arqu")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="PauseButton" type="Button" parent="."]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+icon = ExtResource("2_5ttrq")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HealthBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -24,7 +34,7 @@ offset_bottom = 648.0
 grow_vertical = 0
 color = Color(0.129412, 0.145098, 0.160784, 1)
 
-[node name="HBoxContainer" type="VBoxContainer" parent="ColorRect"]
+[node name="HealthContainer" type="VBoxContainer" parent="HealthBackground"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="ColorRect/HBoxContainer"]
+[node name="HealthBar" type="ProgressBar" parent="HealthBackground/HealthContainer"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_vertical = 6
@@ -41,3 +51,18 @@ theme_override_styles/background = SubResource("StyleBoxFlat_xf4rr")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6sik2")
 value = 100.0
 show_percentage = false
+
+[node name="PauseMenu" parent="." instance=ExtResource("3_ik6k2")]
+visible = false
+layout_mode = 1
+
+[node name="Saving" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 153.0
+offset_bottom = 31.0
+text = "Saving . . . "
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

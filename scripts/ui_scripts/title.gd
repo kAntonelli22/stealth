@@ -5,16 +5,12 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-   if Global.save_game_placeholder:
+   if !SaveManager.save_exists:
       continue_button.disabled = true
-   pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-   pass
 
 func _on_continue_pressed():
    print("title: continuing game")
+   SaveManager.load_game()
    
 func _on_start_game_pressed() -> void:
    get_tree().change_scene_to_packed(Global.card_select)

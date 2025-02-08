@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dy7iekkcyj4q5"]
+[gd_scene load_steps=11 format=3 uid="uid://dy7iekkcyj4q5"]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_kb20g"]
 [ext_resource type="PackedScene" uid="uid://dsml2iuyada4p" path="res://scenes/player.tscn" id="2_3of0j"]
 [ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui.tscn" id="3_08am1"]
-[ext_resource type="PackedScene" uid="uid://c160puj8rg51n" path="res://scenes/enemy.tscn" id="3_x073k"]
 [ext_resource type="PackedScene" uid="uid://dm7r1ttsqy55p" path="res://scenes/wall.tscn" id="4_wq0hb"]
 [ext_resource type="PackedScene" uid="uid://dsjdenieys0u" path="res://scenes/glass.tscn" id="5_dyel1"]
 [ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://scenes/exit.tscn" id="7_fove2"]
@@ -30,9 +29,6 @@ polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 [node name="Player" parent="." instance=ExtResource("2_3of0j")]
 position = Vector2(73, 164)
 rotation = 1.5708
-
-[node name="Enemy" parent="." instance=ExtResource("3_x073k")]
-position = Vector2(856, 309)
 
 [node name="UI" parent="." instance=ExtResource("3_08am1")]
 modulate = Color(1, 1, 1, 0.501961)

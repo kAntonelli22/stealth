@@ -14,7 +14,6 @@ func _physics_process(delta: float) -> void:
          if threat_detected: move_target = object.position
          if status != "engaging": status == "engaging"
       elif object.type == "Guard":
-         #print("guard: guard spotted")
          if object.status == "alert": status = "alert"
          elif object.status == "engaging":
             status = "engaging"
@@ -24,4 +23,4 @@ func _physics_process(delta: float) -> void:
    if player and detection < 100: detection += 1
    if detection == 100: threat_detected = true
    ai_attack(player)
-   super._physics_process(delta)
+   super(delta)

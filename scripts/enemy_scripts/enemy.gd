@@ -53,7 +53,7 @@ func _on_vision_cone_exited(body: Node2D) -> void:
    if body != self: spotted_objects.remove_at(spotted_objects.find(body))
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
-func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
+func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
    if status == "dead": return
    if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
       print("enemy: hit by stealth takedown")
@@ -66,3 +66,25 @@ func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
 func ai_attack(player: CharacterBody2D):
    if player and weapon and weapon.can_hit(player):
       if weapon.cooldown <= weapon.recharge: weapon.attack()
+
+# ---- # called by global save function when the player is present in the scene
+func save() -> Dictionary:
+   var save_dict = {
+      "type": "node",
+      "filename": get_scene_file_path(),
+      "parent": get_parent().get_path(),
+      "position_x": position.x,
+      "position_y": position.y,
+      "rotation": rotation,
+      "health": health,
+      "speed": speed,
+      "rotate_speed": rotate_speed,
+      "move_target_x": move_target.x,
+      "move_target_y": move_target.y,
+      "status": status,
+      "spotted_objects": spotted_objects,
+      "detection": detection,
+      "threat_detected": threat_detected,
+      "weapon": weapon.save(),
+   }
+   return save_dict

@@ -16,7 +16,7 @@ var godot_icon := preload("res://icon.svg")
 var card_select := preload("res://scenes/card_carousel.tscn")
 var card := preload("res://scenes/card.tscn")
 
-var guard_scene := preload("res://scenes/enemy.tscn")
+var guard_scene := preload("res://scenes/guard.tscn")
 var target_scene := preload("res://scenes/target.tscn")
 
 var melee := preload("res://scenes/melee.tscn")
@@ -54,6 +54,8 @@ var targets : Array
 var characterbodies : Array
 var walls : Array
 var windows : Array
+var persist : Array  # contains all currently loaded nodes that must be saved
+
 
 # ---- # Instance Guard # ---------------------------------------------------- #
 # ---- # creates a guard at the given position with the given rotation and path 
@@ -68,6 +70,7 @@ func instance_guard(guard_route: Array, guard_rotation: int, weapon: PackedScene
       guard.add_child(weapon_instance)
       guard.weapon = weapon_instance
    guard.add_to_group("Guards")
+   guard.add_to_group("Persist")
    map.add_child(guard)
 
 # ---- # Instance Target # --------------------------------------------------- #
@@ -83,6 +86,7 @@ func instance_target(target_route: Array, target_rotation: int, weapon: PackedSc
       target.add_child(weapon_instance)
       target.weapon = weapon_instance
    target.add_to_group("Targets")
+   target.add_to_group("Persist")
    map.add_child(target)
 
 # ---- # Change Map # -------------------------------------------------------- #
@@ -122,47 +126,3 @@ func game_over(player_died: bool):
    else: print("Global: player has lost\nfinal score: ", score)
    show_perks = true
    get_tree().change_scene_to_packed(card_select)
-
-# ---- # Save Game # --------------------------------------------------------- #
-# ---- # saves all persistent game data # ------------------------------------ #
-func save_game():
-   print("Global: saving game")
-   var save_file := FileAccess.open("user://savegame.save", FileAccess.WRITE)
-   var save_nodes : Array = get_tree().get_nodes_in_group("Persist")
-   
-   for node in save_nodes:
-      if node.scene_file_path.is_empty() or !node.has_method("save"):
-         print("Global: node missing or lacks save method")
-         continue
-      var node_data : Dictionary = node.save()
-      var json_data : String = JSON.stringify(node_data)
-      save_file.store_line(json_data)
-      
-# ---- # Load Game # --------------------------------------------------------- #
-# ---- # loads all persistent game data # ------------------------------------ #
-func load_game():
-   print("Global: loading save")
-   if not FileAccess.file_exists("user://savegame.save"):
-      print("Global: no save file")
-      return
-   
-   var save_nodes : Array = get_tree().get_nodes_in_group("Persist")
-   for node in save_nodes: node.queue_free()
-   
-   var save_file := FileAccess.open("user://savegame.save", FileAccess.WRITE)
-   while save_file.get_position() < save_file.get_length():
-      var json_data : String = save_file.get_line()
-      var json : JSON = JSON.new()      # json helper class
-      
-      #var parse_result := json.parse(json_data)
-      var node_data = json.data
-      
-      var new_object = load(node_data["filename"]).instantiate()
-      get_node(node_data["parent"]).add_child(new_object)
-      new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
-      
-      # Now we set the remaining variables.
-      for i in node_data.keys():
-         if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
-            continue
-            new_object.set(i, node_data[i])

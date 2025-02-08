@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh1otegugi6bi"]
+[gd_scene load_steps=7 format=3 uid="uid://dw6g1j1k7tqge"]
 
 [ext_resource type="Script" path="res://scripts/enemy_scripts/guard.gd" id="1_550q8"]
 [ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_phxoh"]

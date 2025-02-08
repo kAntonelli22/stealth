@@ -29,19 +29,19 @@ func _process(delta: float) -> void:
 
 
 func _on_hurtbox_entered(body: Node2D) -> void:
-   print("melee: hurtbox entered by: ", body.type)
+   #print("melee: hurtbox entered by: ", body.type)
    hurtbox_objects.append(body)
 
 func _on_hurtbox_exited(body: Node2D) -> void:
-   print("melee: hurtbox exited by: ", body.type)
+   #print("melee: hurtbox exited by: ", body.type)
    hurtbox_objects.remove_at(hurtbox_objects.find(body))
 
 func _on_direction_box_entered(body: Node2D) -> void:
-   print("melee: directionbox entered by: ", body.type)
+   #print("melee: directionbox entered by: ", body.type)
    directionbox_objects.append(body)
 
 func _on_direction_box_exited(body: Node2D) -> void:
-   print("melee: directionbox exited by: ", body.type)
+   #print("melee: directionbox exited by: ", body.type)
    directionbox_objects.remove_at(directionbox_objects.find(body))
 
 # ---- # attack function called by holder when it wants to attack # ---------- # 
@@ -56,3 +56,15 @@ func attack():
 func can_hit(object : CharacterBody2D) -> bool:
    if directionbox_objects.has(object) and hurtbox_objects.has(object): return true
    else: return false
+
+# ---- # called by global save function when the weapon is present in the scene
+func save() -> Dictionary:
+   var save_dict = {
+      "filename": get_scene_file_path(),
+      "parent": get_parent().get_path(),
+      "damage": damage,
+      "attack_speed": attack_speed,
+      "cooldown": cooldown,
+      "recharge": recharge,
+   }
+   return save_dict

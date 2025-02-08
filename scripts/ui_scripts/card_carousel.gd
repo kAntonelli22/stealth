@@ -20,20 +20,21 @@ func _process(_delta: float) -> void:
 
 # ---- # card chosen function called when the player choses their card # ----- #
 func card_chosen(card: Node):
-   if card.type == "perk":
+   if card.card_type == "perk":
       Global.player_stats.add_perk(card.data)
       Global.show_perks = false
-      get_tree().change_scene_to_packed(Global.card_select)
-   elif card.type == "contract":
+      for node in card_container.get_children(): node.queue_free()
+      for i in range(0, 3): instance_card(Global.maps, "contract")
+   elif card.card_type == "contract":
       Global.change_map(card.data.value)
       
 # ---- # instance a random card from the provided deck # --------------------- #
 func instance_card(deck: Dictionary, type: String):
    var picked_card = deck.keys().pick_random()
    var card_data = deck[picked_card]
-   if type == "perk": card_data = card_data.new("Speed Perk", "increases the players speed", "Boost")
+   if type == "perk": card_data = card_data.new()
    var card = Global.card.instantiate()
-   card.type = type
+   card.card_type = type
    card.data = card_data
    
    card_container.add_child(card)
@@ -41,3 +42,4 @@ func instance_card(deck: Dictionary, type: String):
    #card.image.texture = card_data.image
    card.description.text = card_data.description
    card.accept.pressed.connect(card_chosen.bind(card))
+   card.add_to_group("Persist")

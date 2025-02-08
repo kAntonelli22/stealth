@@ -8,28 +8,43 @@ var type : String
 
 
 # Called when the node enters the scene tree for the first time.
-func _init(name: String = "Perk", description: String = "description", 
-type: String = "Boost") -> void:
-   self.name = name
-   self.description = description
-   #self.icon = icon
-   self.type = type
+func _init(p_name: String = "Perk", p_description: String = "description", 
+p_type: String = "Boost") -> void:
+   name = p_name
+   description = p_description
+   #icon = p_icon
+   type = p_type
 
 func apply_perk(player: CharacterBody2D):
-   print("perk ", name, " does not have an application function")
+   print("perk ", name, " does not have an application function and will have no effect on ", player.name)
+
+func save() -> Dictionary:
+   return {"name": name, "description": description, "type": type}
 
 class BoostPerk extends Perk:
    var boost_percent : float
    
-   func _init(name: String, description: String, type: String, boost_percent: float = .10) -> void:
-      super(name, description, type)
-      self.boost_percent = boost_percent
+   func _init(p_name: String, p_description: String, p_type: String, p_boost_percent: float = .10) -> void:
+      super(p_name, p_description, p_type)
+      self.boost_percent = p_boost_percent
+   
+   func save() -> Dictionary:
+      return {"name": name, "description": description, "type": type, "boost_percent": boost_percent}
 
 class SpeedPerk extends BoostPerk:
+   func _init(p_name: String = "Speed Perk", p_description: String = "increases the players speed",
+   p_type: String = "Boost") -> void: super(p_name, p_description, p_type)
+   
    func apply_perk(player: CharacterBody2D): player.speed += player.speed * boost_percent
 
 class HealthPerk extends BoostPerk:
+   func _init(p_name: String = "Health Perk", p_description: String = "increases the players health",
+   p_type: String = "Boost") -> void: super(p_name, p_description, p_type)
+   
    func apply_perk(player: CharacterBody2D): player.health += player.health * boost_percent
 
 class StrengthPerk extends BoostPerk:
+   func _init(p_name: String = "Strength Perk", p_description: String = "increases the players strength",
+   p_type: String = "Boost") -> void: super(p_name, p_description, p_type)
+   
    func apply_perk(player: CharacterBody2D): player.speed += player.speed * boost_percent

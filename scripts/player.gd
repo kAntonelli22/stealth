@@ -24,6 +24,8 @@ var dashing : bool = false
 @onready var weapon : Node2D = $Weapon
 
 func _ready() -> void:
+   add_to_group("Persist")
+   print(active_perks)
    for perk in active_perks:
       perk.apply_perk(self)
 
@@ -62,10 +64,27 @@ func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
 func exit():
    Global.game_over(false)
 
-func save():
-   pass
-   #var save_dict = {
-      #"filename": get_scene_file_path(),
-      #"parent": get_parent().get_path(),
-      ## - save the players stats
-   #}
+# ---- # called by global save function when the player is present in the scene
+func save() -> Dictionary:
+   print(active_perks, weapon)
+   var perk_dict : Dictionary
+   for perk in active_perks:
+      perk_dict.get_or_add(perk, perk.save())
+   var save_dict = {
+      "type": "node",
+      "filename": get_scene_file_path(),
+      "parent": get_parent().get_path(),
+      "position_x": position.x,
+      "position_y": position.y,
+      "rotation": rotation,
+      "health": health,
+      "health_regen": health_regen,
+      "speed": speed,
+      "stamina": stamina,
+      "stamina_regen": stamina_regen,
+      "dash_distance": dash_distance,
+      "dash_cost": dash_cost,
+      "weapon": weapon.save(),
+      "active_perks": perk_dict,
+   }
+   return save_dict
