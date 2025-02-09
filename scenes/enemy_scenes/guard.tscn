@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://di4ti8q10frc7"]
+
+[ext_resource type="PackedScene" uid="uid://dw6g1j1k7tqge" path="res://scenes/enemy_scenes/enemy.tscn" id="1_h8unv"]
+[ext_resource type="Script" path="res://scripts/enemy_scripts/guard.gd" id="2_rade4"]
+
+[node name="Guard" instance=ExtResource("1_h8unv")]
+script = ExtResource("2_rade4")
+
+[editable path="VisionCone"]

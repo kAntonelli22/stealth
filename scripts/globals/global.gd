@@ -13,11 +13,11 @@ var perk := preload("res://resources/perk.tres")
 var godot_icon := preload("res://icon.svg")
 
 # ---- # scenes # ---- #
-var card_select := preload("res://scenes/card_carousel.tscn")
-var card := preload("res://scenes/card.tscn")
+var card_select := preload("res://scenes/ui_scenes/card_carousel.tscn")
+var card := preload("res://scenes/ui_scenes/card.tscn")
 
-var guard_scene := preload("res://scenes/guard.tscn")
-var target_scene := preload("res://scenes/target.tscn")
+var guard_scene := preload("res://scenes/enemy_scenes/guard.tscn")
+var target_scene := preload("res://scenes/enemy_scenes/target.tscn")
 
 var melee := preload("res://scenes/melee.tscn")
 
@@ -56,6 +56,9 @@ var walls : Array
 var windows : Array
 var persist : Array  # contains all currently loaded nodes that must be saved
 
+func _ready() -> void:
+   Signals.connect("map_changed", update_groups)
+   Signals.connect("contract_over", contract_over)
 
 # ---- # Instance Guard # ---------------------------------------------------- #
 # ---- # creates a guard at the given position with the given rotation and path 
@@ -106,7 +109,7 @@ func update_groups():
 
 # ---- # Game Over # --------------------------------------------------------- #
 # ---- # ends the game and determines the players score # -------------------- # 
-func game_over(player_died: bool):
+func contract_over(player_died: bool):
    if player_died:
       print("Global: player has lost")
       map.queue_free()

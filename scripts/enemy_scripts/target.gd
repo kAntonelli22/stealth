@@ -22,9 +22,10 @@ func _physics_process(delta: float) -> void:
          elif object.status == "dead": status = "alert"
    # ---- # end of for loop # ------------------------------------------------ #
    if player and detection < 100: detection += 1
-   if detection == 100: threat_detected = true
-   ai_attack(player)
-   super._physics_process(delta)
+   if detection == 100:
+      threat_detected = true
+      ai_attack(player)
+   super(delta)
       
 func exit():
    print("target: exiting scene")

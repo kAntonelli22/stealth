@@ -65,7 +65,7 @@ func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
 
 func ai_attack(player: CharacterBody2D):
    if player and weapon and weapon.can_hit(player):
-      if weapon.cooldown <= weapon.recharge: weapon.attack()
+      if weapon.cooldown <= weapon.recharge: weapon.attack(self)
 
 # ---- # called by global save function when the player is present in the scene
 func save() -> Dictionary:

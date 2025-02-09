@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://dy7iekkcyj4q5"]
+[gd_scene load_steps=12 format=3 uid="uid://dy7iekkcyj4q5"]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_kb20g"]
 [ext_resource type="PackedScene" uid="uid://dsml2iuyada4p" path="res://scenes/player.tscn" id="2_3of0j"]
-[ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui.tscn" id="3_08am1"]
+[ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui_scenes/ui.tscn" id="3_08am1"]
 [ext_resource type="PackedScene" uid="uid://dm7r1ttsqy55p" path="res://scenes/wall.tscn" id="4_wq0hb"]
 [ext_resource type="PackedScene" uid="uid://dsjdenieys0u" path="res://scenes/glass.tscn" id="5_dyel1"]
 [ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://scenes/exit.tscn" id="7_fove2"]
+[ext_resource type="PackedScene" uid="uid://cux6n4jev1w72" path="res://scenes/camera.tscn" id="7_u43m7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwj2h"]
 size = Vector2(1184, 16)
@@ -93,3 +94,5 @@ position = Vector2(1160, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/right"]
 position = Vector2(0, 316)
 shape = SubResource("RectangleShape2D_hkksp")
+
+[node name="Camera" parent="." instance=ExtResource("7_u43m7")]

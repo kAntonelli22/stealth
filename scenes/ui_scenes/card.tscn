@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://cp4r5vybok3jn"]
 
-[ext_resource type="Texture2D" uid="uid://box0x85q4wasm" path="res://icon.svg" id="1_qxuns"]
-[ext_resource type="Script" path="res://scripts/ui_scripts/card.gd" id="1_srjvh"]
+[ext_resource type="Script" path="res://scripts/ui_scripts/card.gd" id="1_ymm4o"]
+[ext_resource type="Texture2D" uid="uid://box0x85q4wasm" path="res://icon.svg" id="2_d7hwy"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86bnb"]
 bg_color = Color(0.423529, 0.458824, 0.490196, 1)
@@ -48,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-script = ExtResource("1_srjvh")
+script = ExtResource("1_ymm4o")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -83,7 +83,7 @@ text = "Card"
 
 [node name="CardImage" type="TextureRect" parent="Background/CardContainer/MarginContainer/TextContainer"]
 layout_mode = 2
-texture = ExtResource("1_qxuns")
+texture = ExtResource("2_d7hwy")
 expand_mode = 5
 
 [node name="CardDescription" type="Label" parent="Background/CardContainer/MarginContainer/TextContainer"]

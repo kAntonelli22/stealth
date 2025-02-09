@@ -67,7 +67,9 @@ func load_game():
          new_object.rotation = data["rotation"]
          
          # create the weapon
-         new_object.weapon = load(data["weapon"]["filename"]).instantiate()
+         var new_weapon = load(data["weapon"]["filename"]).instantiate()
+         new_object.weapon = new_weapon
+         new_object.add_child(new_weapon)
          for i in data["weapon"]:
             if i == "filename" or i == "parent": continue
             new_object.weapon.set(i, data["weapon"][i])

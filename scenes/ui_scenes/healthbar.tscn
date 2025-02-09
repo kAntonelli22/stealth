@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bthayk4qlyen"]
+
+[ext_resource type="Script" path="res://scripts/ui_scripts/healthbar.gd" id="1_agc1i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sik2"]
+bg_color = Color(0.66, 0.264, 0.264, 1)
+
+[node name="HealthBackground" type="ColorRect"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 600.0
+offset_right = 384.0
+offset_bottom = 648.0
+grow_vertical = 0
+color = Color(0.129412, 0.145098, 0.160784, 1)
+script = ExtResource("1_agc1i")
+bar_color = Color(0.658824, 0.262745, 0.262745, 1)
+
+[node name="HealthContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HealthContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.15
+theme_override_colors/font_color = Color(0.658824, 0.262745, 0.262745, 1)
+theme_override_font_sizes/font_size = 26
+text = "100"
+horizontal_alignment = 2
+
+[node name="HealthBar" type="ProgressBar" parent="HealthContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/fill = SubResource("StyleBoxFlat_6sik2")
+value = 100.0
+show_percentage = false

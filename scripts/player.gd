@@ -30,7 +30,7 @@ func _ready() -> void:
       perk.apply_perk(self)
 
 func _physics_process(delta: float) -> void:
-   if health <= 0: Global.game_over(true)
+   if health <= 0: Signals.emit_signal("contract_over", true)
    # ---- # get mouse position and direction the player is moving # ---------- #
    var mouse_position : Vector2 = get_global_mouse_position()
    var direction : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
    # handle attack event
-   if event.is_action_pressed("attack") and weapon.cooldown <= weapon.recharge: weapon.attack()
+   if event.is_action_pressed("attack") and weapon.cooldown <= weapon.recharge: weapon.attack(self)
    if event.is_action_pressed("dash"): dashing = true
 
 # ---- # called by weapons on objects they have hit # ------------------------ #
@@ -62,11 +62,10 @@ func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    Signals.emit_signal("update_attributes", health)
 
 func exit():
-   Global.game_over(false)
+   Signals.emit_signal("contract_over", false)
 
 # ---- # called by global save function when the player is present in the scene
 func save() -> Dictionary:
-   print(active_perks, weapon)
    var perk_dict : Dictionary
    for perk in active_perks:
       perk_dict.get_or_add(perk, perk.save())

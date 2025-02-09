@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dw6g1j1k7tqge"]
 
-[ext_resource type="Script" path="res://scripts/enemy_scripts/guard.gd" id="1_550q8"]
+[ext_resource type="Script" path="res://scripts/enemy_scripts/enemy.gd" id="1_exf28"]
 [ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_phxoh"]
 [ext_resource type="PackedScene" uid="uid://kf8tqdlm8c5t" path="res://addons/vision_cone_2d/vision_cone_2d_template.tscn" id="3_g403j"]
 
@@ -12,10 +12,16 @@ size = Vector2(32, 32)
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_wls33"]
 color = Color(0.517647, 0.254902, 0.0470588, 1)
 
-[node name="Guard" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D"]
 collision_mask = 7
 motion_mode = 1
-script = ExtResource("1_550q8")
+script = ExtResource("1_exf28")
+
+[node name="VisionCone" parent="." instance=ExtResource("3_g403j")]
+rotation = 3.14159
+angle_deg = 90
+max_distance = 300.0
+collision_layer_mask = 3
 
 [node name="Sprite" type="Sprite2D" parent="."]
 self_modulate = Color(0.709804, 0.305882, 0.305882, 1)
@@ -25,12 +31,6 @@ texture = ExtResource("2_phxoh")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_76hp6")
-
-[node name="VisionCone" parent="." instance=ExtResource("3_g403j")]
-rotation = 3.14159
-angle_deg = 90
-max_distance = 300.0
-collision_layer_mask = 3
 
 [node name="DetectionBar" type="ProgressBar" parent="."]
 offset_left = -15.0

@@ -49,6 +49,9 @@ func remove_perk(perk): perks.remove_at(perks.find(perk))
 func remove_perk_at(index: int): perks.remove_at(index)
 
 func save() -> Dictionary:
+   var perk_dict : Dictionary
+   for perk in perks:
+      perk_dict.get_or_add(perk, perk.save())
    var save_dict : Dictionary = {
       "type": "resource",
       "health": health,
@@ -58,6 +61,6 @@ func save() -> Dictionary:
       "stamina_regen": stamina_regen,
       "dash_distance": dash_distance,
       "dash_cost": dash_cost,
-      "perks": perks,
+      "perks": perk_dict,
    }
    return save_dict

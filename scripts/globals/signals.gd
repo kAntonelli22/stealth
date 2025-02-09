@@ -7,6 +7,7 @@ signal game_saved
 
 # ---- # scene signals # ---- #
 signal map_changed
+signal contract_over(player_died : bool)      # emitted when the player wins or loses a contract
 
 # ---- # character body signals # ---- #
 signal update_attributes(health : int)       # emmited by player for ui when health changes

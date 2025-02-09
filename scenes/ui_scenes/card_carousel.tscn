@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cngb6df21rykq"]
+[gd_scene load_steps=3 format=3 uid="uid://cngb6df21rykq"]
 
-[ext_resource type="Script" path="res://scripts/ui_scripts/card_carousel.gd" id="1_trr10"]
+[ext_resource type="Script" path="res://scripts/ui_scripts/card_carousel.gd" id="1_hjuoo"]
+[ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui_scenes/ui.tscn" id="2_dlboi"]
 
 [node name="CardCarousel" type="Control"]
 layout_mode = 3
@@ -9,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_trr10")
+script = ExtResource("1_hjuoo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -34,3 +35,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 40
+
+[node name="Control" parent="." instance=ExtResource("2_dlboi")]

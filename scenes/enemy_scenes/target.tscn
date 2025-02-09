@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddm20kmvs3hjd"]
+
+[ext_resource type="PackedScene" uid="uid://dw6g1j1k7tqge" path="res://scenes/enemy_scenes/enemy.tscn" id="1_5wq1g"]
+[ext_resource type="Script" path="res://scripts/enemy_scripts/target.gd" id="2_v367g"]
+
+[node name="Target" instance=ExtResource("1_5wq1g")]
+script = ExtResource("2_v367g")
+
+[node name="VisionCone" parent="." index="0"]
+max_distance = 150.0
+
+[node name="Sprite" parent="." index="1"]
+self_modulate = Color(0.305882, 0.709804, 0.305882, 1)
+
+[editable path="VisionCone"]
