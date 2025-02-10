@@ -24,3 +24,8 @@ texture = ExtResource("2_j0h7m")
 shape = SubResource("RectangleShape2D_xpr8t")
 
 [node name="Weapon" parent="." instance=ExtResource("3_rytvs")]
+rotation = 0.0
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

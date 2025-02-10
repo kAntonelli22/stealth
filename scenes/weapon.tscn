@@ -15,6 +15,7 @@ size = Vector2(128, 64)
 color = Color(0.1988, 0.24992, 0.71, 1)
 
 [node name="Weapon" type="Node2D"]
+rotation = 1.5708
 script = ExtResource("1_a1m0x")
 
 [node name="Hurtbox" type="Area2D" parent="."]

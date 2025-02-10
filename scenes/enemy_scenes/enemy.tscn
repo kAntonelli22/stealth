@@ -18,7 +18,7 @@ motion_mode = 1
 script = ExtResource("1_exf28")
 
 [node name="VisionCone" parent="." instance=ExtResource("3_g403j")]
-rotation = 3.14159
+rotation = 4.71239
 angle_deg = 90
 max_distance = 300.0
 collision_layer_mask = 3
@@ -33,15 +33,18 @@ texture = ExtResource("2_phxoh")
 shape = SubResource("RectangleShape2D_76hp6")
 
 [node name="DetectionBar" type="ProgressBar" parent="."]
-offset_left = -15.0
-offset_top = 16.0
-offset_right = 15.0
-offset_bottom = 17.0
+offset_left = -16.0
+offset_top = -15.0
+offset_right = 14.0
+offset_bottom = -14.0
+rotation = 1.5708
 theme_override_styles/background = SubResource("StyleBoxLine_wq8ed")
 theme_override_styles/fill = SubResource("StyleBoxLine_wls33")
 show_percentage = false
 
 [node name="DetectionShadow" type="CollisionShape2D" parent="."]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="body_entered" from="VisionCone/VisionConeArea" to="." method="_on_vision_cone_entered"]
 [connection signal="body_exited" from="VisionCone/VisionConeArea" to="." method="_on_vision_cone_exited"]

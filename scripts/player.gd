@@ -12,7 +12,7 @@ var dashing : bool = false
 @onready var speed : float = stats.speed
 @onready var stamina : float = stats.stamina
 @onready var stamina_regen : float = stats.stamina_regen
-@onready var dash_distance : int = stats.dash_distance
+@onready var dash_speed : float = stats.dash_speed
 @onready var dash_cost : int = stats.dash_cost
 
 # ---- # player perks # ---- #
@@ -22,6 +22,7 @@ var dashing : bool = false
 @onready var sprite : Node2D = $Sprite
 @onready var collider : Node2D = $Collider
 @onready var weapon : Node2D = $Weapon
+@onready var dash_timer : Timer = $DashTimer
 
 func _ready() -> void:
    add_to_group("Persist")
@@ -34,16 +35,8 @@ func _physics_process(delta: float) -> void:
    # ---- # get mouse position and direction the player is moving # ---------- #
    var mouse_position : Vector2 = get_global_mouse_position()
    var direction : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
-   
-   if direction.x: velocity.x = direction.x * speed
-   else: velocity.x = move_toward(velocity.x, 0, speed)
-   if direction.y: velocity.y = direction.y * speed
-   else: velocity.y = move_toward(velocity.y, 0, speed)
-   
-   if dashing and stamina >= dash_cost:
-      position = position.move_toward(mouse_position, dash_distance)
-      stamina -= dash_cost
-      dashing = false
+   move(direction, speed)
+   if !dash_timer.is_stopped() and stamina >= dash_cost: move(direction, dash_speed)
    if stamina < 100: stamina += delta * stamina_regen    # regenerate stamina every physics frame
    
    look_at(mouse_position)
@@ -53,8 +46,16 @@ func _physics_process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
    # handle attack event
    if event.is_action_pressed("attack") and weapon.cooldown <= weapon.recharge: weapon.attack(self)
-   if event.is_action_pressed("dash"): dashing = true
+   if event.is_action_pressed("dash") and stamina >= dash_cost:
+      stamina -= dash_cost
+      dash_timer.start()
 
+func move(direction, move_speed):
+   if direction.x: velocity.x = direction.x * move_speed
+   else: velocity.x = move_toward(velocity.x, 0, move_speed)
+   if direction.y: velocity.y = direction.y * move_speed
+   else: velocity.y = move_toward(velocity.y, 0, move_speed)
+   
 # ---- # called by weapons on objects they have hit # ------------------------ #
 func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    health -= damage
@@ -81,7 +82,7 @@ func save() -> Dictionary:
       "speed": speed,
       "stamina": stamina,
       "stamina_regen": stamina_regen,
-      "dash_distance": dash_distance,
+      "dash_speed": dash_speed,
       "dash_cost": dash_cost,
       "weapon": weapon.save(),
       "active_perks": perk_dict,

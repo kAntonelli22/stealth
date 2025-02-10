@@ -62,12 +62,11 @@ func _ready() -> void:
 
 # ---- # Instance Guard # ---------------------------------------------------- #
 # ---- # creates a guard at the given position with the given rotation and path 
-func instance_guard(guard_route: Array, guard_rotation: int, weapon: PackedScene):
-   print("Global: instancing guard at ", guard_route[0])
+func instance_guard(guard_route: Array[Vector2], guard_rotation: int, weapon: PackedScene):
    var guard := guard_scene.instantiate()
-   guard.position = guard_route[0]
-   guard.rotation += deg_to_rad(guard_rotation);
-   if guard_route.size() > 0: print("global: adding guard route")
+   print("guard info: ", guard, guard.path_route)
+   guard.path_route = guard_route
+   guard.rotation += deg_to_rad(guard_rotation)
    if weapon:
       var weapon_instance = weapon.instantiate()
       guard.add_child(weapon_instance)
@@ -78,12 +77,10 @@ func instance_guard(guard_route: Array, guard_rotation: int, weapon: PackedScene
 
 # ---- # Instance Target # --------------------------------------------------- #
 # ---- # creates a target at the given position with the given rotation and path 
-func instance_target(target_route: Array, target_rotation: int, weapon: PackedScene):
-   print("Global: instancing target at ", target_route[0])
+func instance_target(target_route: Array[Vector2], target_rotation: int, weapon: PackedScene):
    var target := target_scene.instantiate()
-   target.position = target_route[0]
+   target.path_route = target_route
    target.rotation += deg_to_rad(target_rotation);
-   if target_route.size() > 0: print("global: adding target route")
    if weapon:
       var weapon_instance = weapon.instantiate()
       target.add_child(weapon_instance)

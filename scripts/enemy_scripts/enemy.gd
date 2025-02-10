@@ -7,25 +7,32 @@ class_name Enemy
 @onready var collider := $Collider
 @onready var detection_shadow := $DetectionShadow
 @onready var detection_bar := $DetectionBar
-var weapon
-
-# ---- # physics variables # ---- #
-var speed : float = 200.0
-var rotate_speed : float = 2.0
-var move_target : Vector2 = Vector2(-1, -1)
+@onready var nav_agent := $NavigationAgent2D
+var weapon: Node2D
+var player: CharacterBody2D
 
 # ---- # logic variables # ---- #
-var type : String = "Guard"
-var status : String = "normal"      # normal | alert | engaging | dead
-var alert : bool = false
+var type: String = "Guard"
+var status: String = "normal"       # normal | alert | engaging | dead
+var alert: bool = false
 
 # ---- # sight variables # ---- #
-var spotted_objects : Array = []    # holds all objects the guard currently sees
-var detection : int = 0             # 0 - 100
-var threat_detected : bool = false
+var spotted_objects: Array = []     # holds all objects the guard currently sees
+var detection: int = 0              # 0 - 100
+var threat_detected: bool = false
 
 # ---- # guard stats # ---- #
-var health : int = 100     # 0 - 100
+var health: int = 100      # 0 - 100
+var speed: float = 200.0
+var rotate_speed: float = 2.0
+
+# ---- # path variables # ---- #
+var path_route : Array[Vector2]
+var current_point : int = 0
+
+func _ready() -> void:
+   position = path_route[current_point]
+   if current_point < path_route.size() - 1: current_point += 1
 
 func _process(_delta: float) -> void:
    detection_bar.value = detection
@@ -37,13 +44,29 @@ func _process(_delta: float) -> void:
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
 
 func _physics_process(delta: float) -> void:
-   if move_target != position and move_target != Vector2(-1, -1):
-      position = position.move_toward(move_target, delta * speed)
-      var angle_to := position.angle_to_point(move_target) + deg_to_rad(90)
-      rotation = lerp_angle(rotation, angle_to, delta * rotate_speed)
-   if move_target == position:
-      pass
-      # return to last patrol point 
+   
+   var next_position = nav_agent.get_next_path_position()
+   var angle_to := position.angle_to_point(next_position)
+   var relative_angle = fmod(angle_to - rotation + PI, PI * 2) - PI
+   var angle = abs(rad_to_deg(relative_angle))
+   
+   if player:
+      if player and detection < 100: detection += 1
+      if detection == 100:
+         threat_detected = true
+         ai_attack()
+   
+   # if ai is navigating and the angle to target is less than 90
+   if !nav_agent.is_navigation_finished() and angle <= 15:
+      rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
+      velocity = global_position.direction_to(next_position) * speed
+   elif !nav_agent.is_navigation_finished():
+      rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
+      velocity = Vector2.ZERO
+   elif nav_agent.is_navigation_finished() and path_route.size() > 0:
+      nav_agent.target_position = path_route[current_point]
+      if current_point < path_route.size() - 1: current_point += 1
+      else: current_point = 0
    move_and_slide()
 
 func _on_vision_cone_entered(body: Node2D) -> void:
@@ -63,7 +86,7 @@ func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
       print("health: ", health)
       detection = 100
 
-func ai_attack(player: CharacterBody2D):
+func ai_attack():
    if player and weapon and weapon.can_hit(player):
       if weapon.cooldown <= weapon.recharge: weapon.attack(self)
 
@@ -79,8 +102,8 @@ func save() -> Dictionary:
       "health": health,
       "speed": speed,
       "rotate_speed": rotate_speed,
-      "move_target_x": move_target.x,
-      "move_target_y": move_target.y,
+      "nav_agent.target_position.x": nav_agent.target_position.x,
+      "nav_agent.target_position.y": nav_agent.target_position.y,
       "status": status,
       "spotted_objects": spotted_objects,
       "detection": detection,
