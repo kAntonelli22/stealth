@@ -1,11 +1,18 @@
 extends Weapon
 class_name Melee
 
-# Called when the node enters the scene tree for the first time.
+# ---- # Ready
 func _ready() -> void:
    super()
 
+# ---- # Equip
+# called by character nodes when they want to equip the weapon
+static func equip(holder: CharacterBody2D):
+   super(holder)
+   var weapon = load("res://scenes/melee.tscn").instantiate()
+   holder.weapon = weapon
+   holder.add_child(weapon)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# ---- # Process
 func _process(delta: float) -> void:
    super(delta)

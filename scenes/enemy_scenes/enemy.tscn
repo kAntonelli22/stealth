@@ -46,6 +46,8 @@ show_percentage = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="Weapon" type="Node" parent="."]
+
 [connection signal="body_entered" from="VisionCone/VisionConeArea" to="." method="_on_vision_cone_entered"]
 [connection signal="body_exited" from="VisionCone/VisionConeArea" to="." method="_on_vision_cone_exited"]
 

@@ -1,22 +1,24 @@
 extends Node2D
 
-# Called when the node enters the scene tree for the first time.
+# ---- # Ready
 func _ready() -> void:
    Global.games_played += 1
    Global.map = self
-   Global.instance_guard([Vector2(200, 200), Vector2(800, 200)], 0, Global.melee)
-   Global.instance_guard([Vector2(600, 450)], 0, Global.melee)
-   Global.instance_target([Vector2(400, 425)], 90, Global.melee)
+   Global.instance_player(Vector2(100, 100), 90, Melee)
+   Global.instance_guard([Vector2(200, 200), Vector2(800, 200)], 0, Melee)
+   Global.instance_guard([Vector2(600, 450)], 0, Melee)
+   Global.instance_target([Vector2(400, 425)], 90, Melee)
    get_node("Camera").adjust_camera($Player, -15, -15, 663, 1167)
    Signals.emit_signal("map_changed")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# ---- # Process
 func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
 # - card carousel code is bad
 # - save code needs to be cleaned up
+# - ai restarts at route point one on load
 # - ai gets stuck on corners
 # - ai can backstab and damage eachother
 # - change hard coded string paths to resource uids

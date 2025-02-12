@@ -1,13 +1,14 @@
 extends Enemy
 class_name Guard
 
+# ---- # Ready
 func _ready() -> void:
    type = "Guard"
    status = "normal"
    super()
 
+# ---- #  Physics Process
 func _physics_process(delta: float) -> void:
-   # ---- # loops through all spotted objects and determines what to do # ---- #
    for object in spotted_objects:
       if object.type == "Player":      # engage the player
          player = object
@@ -20,4 +21,5 @@ func _physics_process(delta: float) -> void:
             nav_agent.target_position = object.nav_agent.target_position
          elif object.status == "dead": status = "alert"
    # ---- # end of for loop # ------------------------------------------------ #
+   if player and spotted_objects.find(player) == -1: player = null
    super(delta)

@@ -1,21 +1,21 @@
 extends Control
 class_name Card
 
-# ---- # nodes # ---- #
+# ---- # nodes
 @onready var title := $Background/CardContainer/MarginContainer/TextContainer/CardTitle
 @onready var image := $Background/CardContainer/MarginContainer/TextContainer/CardImage
 @onready var description := $Background/CardContainer/MarginContainer/TextContainer/CardDescription
 @onready var accept := $Background/CardContainer/CardButton
 
-# ---- # variables # ---- #
+# ---- # variables
 var card_type : String       # the type of card (perk or map)
 var data                # the data that the card holds (effects, bonuses, map configs)
 
-# Called when the node enters the scene tree for the first time.
+# ---- # Ready
 func _ready() -> void:
-   pass # Replace with function body.
+   pass
 
-# ---- # called by global save function when the card is present in the scene
+# ---- # Save 
 func save():
    var save_dict = {
       "type": "node",

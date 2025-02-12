@@ -5,13 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bthayk4qlyen" path="res://scenes/ui_scenes/healthbar.tscn" id="3_hbtjn"]
 [ext_resource type="PackedScene" uid="uid://gmva8vo3rvmv" path="res://scenes/ui_scenes/pause_menu.tscn" id="3_ik6k2"]
 
-[node name="Control" type="Control"]
-layout_mode = 3
-anchors_preset = 0
+[node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_5arqu")
 
 [node name="PauseButton" type="Button" parent="."]
-layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 icon = ExtResource("2_5ttrq")
@@ -19,7 +16,6 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="HealthBackground" parent="." instance=ExtResource("3_hbtjn")]
-layout_mode = 1
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
@@ -29,11 +25,9 @@ grow_vertical = 1
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_ik6k2")]
 visible = false
-layout_mode = 1
 
 [node name="Saving" type="Label" parent="."]
 visible = false
-layout_mode = 0
 offset_left = 72.0
 offset_top = 8.0
 offset_right = 153.0

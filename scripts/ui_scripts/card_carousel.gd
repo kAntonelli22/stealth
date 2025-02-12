@@ -1,24 +1,25 @@
 extends Control
 
-# ---- # nodes # ---- #
+# ---- # nodes
 
-# ---- # cards # ---- #
+# ---- # cards
 @onready var card_container = $ColorRect/MarginContainer/HBoxContainer
 @onready var current_cards = card_container.get_children()
 
-# Called when the node enters the scene tree for the first time.
+# ---- # Ready
 func _ready() -> void:
-   pass # Replace with function body.
    for i in range(0, 3):
       if Global.show_perks: instance_card(Perks.perk_deck, "perk")
       else: instance_card(Global.maps, "contract")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# ---- # Process
 func _process(_delta: float) -> void:
    pass
 
-# ---- # card chosen function called when the player choses their card # ----- #
+# ---- # Card Chosen
+# adds a perk to the players stat resource or loads a 
+# contract when the player chosen their card
 func card_chosen(card: Node):
    if card.card_type == "perk":
       Global.player_stats.add_perk(card.data)
@@ -28,7 +29,8 @@ func card_chosen(card: Node):
    elif card.card_type == "contract":
       Global.change_map(card.data.value)
       
-# ---- # instance a random card from the provided deck # --------------------- #
+# ---- # Instance Card
+# create a random perk or map card and place it in the container
 func instance_card(deck: Dictionary, type: String):
    var picked_card = deck.keys().pick_random()
    var card_data = deck[picked_card]

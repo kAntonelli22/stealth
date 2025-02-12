@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_kndtj"]
 [ext_resource type="Resource" uid="uid://dbry47tg3us5o" path="res://resources/player_stats.tres" id="2_d7ceb"]
 [ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_j0h7m"]
-[ext_resource type="PackedScene" uid="uid://cyustpl8avem8" path="res://scenes/melee.tscn" id="3_rytvs"]
+[ext_resource type="PackedScene" uid="uid://dpe146fvmhnm0" path="res://scenes/weapon.tscn" id="4_7t4yq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpr8t"]
 size = Vector2(32, 32)
@@ -23,9 +23,10 @@ texture = ExtResource("2_j0h7m")
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_xpr8t")
 
-[node name="Weapon" parent="." instance=ExtResource("3_rytvs")]
-rotation = 0.0
-
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Weapon" type="Node" parent="."]
+
+[node name="Fists" parent="Weapon" instance=ExtResource("4_7t4yq")]

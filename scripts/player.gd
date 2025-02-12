@@ -1,11 +1,11 @@
 extends CharacterBody2D
 class_name Player
 
-# ---- # logic variables # ---- #
+# ---- # logic variables
 var type : String = "Player"
 var dashing : bool = false
 
-# ---- # player stats # ---- #
+# ---- # player stats
 @export var stats : Resource
 @onready var health : int = stats.health
 @onready var health_regen : int = stats.health_regen
@@ -14,25 +14,27 @@ var dashing : bool = false
 @onready var stamina_regen : float = stats.stamina_regen
 @onready var dash_speed : float = stats.dash_speed
 @onready var dash_cost : int = stats.dash_cost
-
-# ---- # player perks # ---- #
+# ---- # player perks
 @onready var active_perks = stats.perks
 
-# ---- # nodes  # ---- #
+# ---- # nodes
 @onready var sprite : Node2D = $Sprite
 @onready var collider : Node2D = $Collider
-@onready var weapon : Node2D = $Weapon
 @onready var dash_timer : Timer = $DashTimer
+@onready var weapon_slot := $Weapon
+@onready var weapon : Node2D = $Weapon/Fists
 
+# ---- # Ready
 func _ready() -> void:
    add_to_group("Persist")
    print(active_perks)
    for perk in active_perks:
       perk.apply_perk(self)
 
+# ---- # Physics Process
 func _physics_process(delta: float) -> void:
    if health <= 0: Signals.emit_signal("contract_over", true)
-   # ---- # get mouse position and direction the player is moving # ---------- #
+   # get mouse position and direction the player is moving
    var mouse_position : Vector2 = get_global_mouse_position()
    var direction : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
    move(direction, speed)
@@ -40,9 +42,9 @@ func _physics_process(delta: float) -> void:
    if stamina < 100: stamina += delta * stamina_regen    # regenerate stamina every physics frame
    
    look_at(mouse_position)
-   rotation += deg_to_rad(90)
    move_and_slide()
 
+# ---- # Input
 func _input(event: InputEvent) -> void:
    # handle attack event
    if event.is_action_pressed("attack") and weapon.cooldown <= weapon.recharge: weapon.attack(self)
@@ -50,22 +52,23 @@ func _input(event: InputEvent) -> void:
       stamina -= dash_cost
       dash_timer.start()
 
+# ---- # Move
 func move(direction, move_speed):
    if direction.x: velocity.x = direction.x * move_speed
    else: velocity.x = move_toward(velocity.x, 0, move_speed)
    if direction.y: velocity.y = direction.y * move_speed
    else: velocity.y = move_toward(velocity.y, 0, move_speed)
    
-# ---- # called by weapons on objects they have hit # ------------------------ #
+# ---- # Hit
 func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    health -= damage
-   print("player: took ", damage, " damage")
    Signals.emit_signal("update_attributes", health)
 
+# ---- # Exit
 func exit():
    Signals.emit_signal("contract_over", false)
 
-# ---- # called by global save function when the player is present in the scene
+# ---- # Save
 func save() -> Dictionary:
    var perk_dict : Dictionary
    for perk in active_perks:
