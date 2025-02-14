@@ -1,28 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://dy7iekkcyj4q5"]
+[gd_scene load_steps=8 format=3 uid="uid://dy7iekkcyj4q5"]
 
 [ext_resource type="Script" path="res://scripts/test_map.gd" id="1_kb20g"]
 [ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui_scenes/ui.tscn" id="3_08am1"]
 [ext_resource type="PackedScene" uid="uid://dm7r1ttsqy55p" path="res://scenes/wall.tscn" id="4_wq0hb"]
 [ext_resource type="PackedScene" uid="uid://dsjdenieys0u" path="res://scenes/glass.tscn" id="5_dyel1"]
-[ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://scenes/exit.tscn" id="7_fove2"]
-[ext_resource type="PackedScene" uid="uid://cux6n4jev1w72" path="res://scenes/camera.tscn" id="7_u43m7"]
+[ext_resource type="PackedScene" path="res://exit.tscn" id="7_fove2"]
+[ext_resource type="PackedScene" path="res://scenes/camera.tscn" id="7_u43m7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_11ov2"]
 vertices = PackedVector2Array(1010, 250, 1010, 10, 1142, 10, 1142, 638, 770, 638, 770, 446, 1010, 394, 10, 638, 10, 394, 238, 394, 238, 586, 702, 638, 306, 586, 702, 446, 306, 394, 1010, 326, 10, 326, 10, 10, 942, 250, 942, 10)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 7, 10, 12), PackedInt32Array(13, 11, 12, 14), PackedInt32Array(13, 14, 6, 5), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(17, 19, 18), PackedInt32Array(15, 18, 0), PackedInt32Array(15, 0, 3), PackedInt32Array(15, 3, 6)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1152, 0, 1152, 648, 760, 648, 760, 456, 712, 456, 712, 648, 0, 648, 0, 384, 248, 384, 248, 576, 296, 576, 296, 384, 1000, 384, 1000, 336, 0, 336, 0, 0, 952, 0, 952, 240, 1000, 240, 1000, 0)])
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwj2h"]
-size = Vector2(1184, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vuvqv"]
-size = Vector2(1184, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_80bf0"]
-size = Vector2(16, 648)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkksp"]
-size = Vector2(16, 648)
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource("1_kb20g")
@@ -69,32 +57,20 @@ scale = Vector2(1, 5)
 
 [node name="Bounds" type="Node" parent="."]
 
-[node name="top" type="StaticBody2D" parent="Bounds"]
-position = Vector2(16, -16)
+[node name="Left" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(-24, 336)
+scale = Vector2(1, 14)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/top"]
-position = Vector2(560, 8)
-shape = SubResource("RectangleShape2D_vwj2h")
+[node name="Right" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(1185, 336)
+scale = Vector2(1, 14)
 
-[node name="bottom" type="StaticBody2D" parent="Bounds"]
-position = Vector2(16, 648)
+[node name="Top" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(572, -24)
+scale = Vector2(26, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/bottom"]
-position = Vector2(560, 8)
-shape = SubResource("RectangleShape2D_vuvqv")
-
-[node name="left" type="StaticBody2D" parent="Bounds"]
-position = Vector2(-8, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/left"]
-position = Vector2(0, 316)
-shape = SubResource("RectangleShape2D_80bf0")
-
-[node name="right" type="StaticBody2D" parent="Bounds"]
-position = Vector2(1160, 8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounds/right"]
-position = Vector2(0, 316)
-shape = SubResource("RectangleShape2D_hkksp")
+[node name="Bottom" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(572, 708)
+scale = Vector2(26, 1)
 
 [node name="Camera" parent="." instance=ExtResource("7_u43m7")]
