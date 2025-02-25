@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StateMachine
 class_name Player
 
 # ---- # logic variables
@@ -26,6 +26,13 @@ var dashing : bool = false
 
 # ---- # Ready
 func _ready() -> void:
+   # add states
+   #add_state("Idle")
+   #add_state("Move")
+   #add_state("Attack")
+   #add_state("Dash")
+   #call_deferred(set_state("Idle"))
+   
    add_to_group("Persist")
    print(active_perks)
    for perk in active_perks:
@@ -36,7 +43,7 @@ func _physics_process(delta: float) -> void:
    if health <= 0: Signals.emit_signal("contract_over", true)
    # get mouse position and direction the player is moving
    var mouse_position : Vector2 = get_global_mouse_position()
-   var direction : Vector2 = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
+   var direction : Vector2 = get_direction()
    move(direction, speed)
    if !dash_timer.is_stopped() and stamina >= dash_cost: move(direction, dash_speed)
    if stamina < 100: stamina += delta * stamina_regen    # regenerate stamina every physics frame
@@ -52,6 +59,26 @@ func _input(event: InputEvent) -> void:
       stamina -= dash_cost
       dash_timer.start()
 
+# ---- # State Logic
+#func _state_logic(delta):
+   #if state == "Idle":
+      #velocity.x = move_toward(velocity.x, 0, speed)
+      #velocity.y = move_toward(velocity.y, 0, speed)
+   #elif state == states.move:
+      #var direction : Vector2 = get_direction()
+      #velocity.x = direction.x * speed
+      #velocity.y = direction.y * speed
+   #elif state == "Attack":
+      #pass
+   #elif state == states.dash:
+      #var direction : Vector2 = get_direction()
+      #velocity.x = direction.x * dash_speed
+      #velocity.y = direction.y * dash_speed
+
+# ---- # Get Direction
+func get_direction() -> Vector2:
+   return Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
+   
 # ---- # Move
 func move(direction, move_speed):
    if direction.x: velocity.x = direction.x * move_speed

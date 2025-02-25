@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends StateMachine
 class_name Enemy
 
 # ---- # nodes
@@ -12,15 +12,11 @@ class_name Enemy
 var weapon: Node2D
 var player: CharacterBody2D
 
-# ---- # logic variables
-var type: String = "Enemy"
-var status: String = "normal"       # normal | alert | engaging | dead
-var alert: bool = false
 
 # ---- # sight variables
 var spotted_objects: Array = []     # holds all objects the enemy currently sees
-var detection: int = 0              # 0 - 100
-var threat_detected: bool = false
+var alertness: int = 0
+var max_alert: int = 100
 
 # ---- # enemy stats
 var health: int = 100      # 0 - 100
@@ -35,34 +31,45 @@ var current_point : int = 0
 
 # ---- # Ready
 func _ready() -> void:
-   pass
+   add_state("idle")
+   add_state("patrol")
 
 # ---- # Process
 func _process(_delta: float) -> void:
-   detection_bar.value = detection
+   detection_bar.value = alertness
    if health <= 0:
       print("enemy: enemy ", self.name, " has died")
-      status = "dead"
       vision_cone.visible = false
       detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
 
-# ---- # Physics Process
-func _physics_process(delta: float) -> void:
-   
-   var next_position = nav_agent.get_next_path_position()
-   var angle_to := position.angle_to_point(next_position)
-   var relative_angle = fmod(angle_to - rotation + PI, PI * 2) - PI
-   var angle = abs(rad_to_deg(relative_angle))
-   
+# ---- # State Logic
+# contains the logic for state actions and transitions
+func _state_logic(delta):
    if player:
-      if player and detection < 100: detection += 1
-      if detection == 100:
-         threat_detected = true
-         ai_attack()
-   elif detection > 0: detection -= 1
+      if spotted_objects.find(player) == -1: player = null
+      else: alertness += 1
+   else: alertness -= 1
+   alertness = clamp(alertness, 0, max_alert)
    
-   # if ai is navigating and the angle to target is less than 90
+   #var player
+   for object in spotted_objects:
+      if object is Player: player = object
+      elif object is Enemy:
+         if object.player != null:
+            player = object.player
+   
+   if state == states.idle and path_route.size() > 1: set_state(states.patrol)
+   if state != states.idle:
+      var next_position = nav_agent.get_next_path_position()
+      var angle_to := position.angle_to_point(next_position)
+      var relative_angle = fmod(angle_to - rotation + PI, PI * 2) - PI
+      var angle = abs(rad_to_deg(relative_angle))
+      move(next_position, angle, angle_to, delta)
+
+
+# ---- # Move
+func move(next_position, angle, angle_to, delta):
    if !nav_agent.is_navigation_finished() and angle <= 15:
       rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
       velocity = global_position.direction_to(next_position) * speed
@@ -89,14 +96,16 @@ func next_route_position() -> Vector2:
 
 # ---- # Hit
 func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
-   if status == "dead": return
-   if spotted_objects.find(holder) and status != "engaging": # and weapon.type == "stealth":
+   if health <= 0: return
+   if spotted_objects.find(holder) and alertness <= (.25 * max_alert): # and weapon.type == "stealth":
       print("enemy: hit by stealth takedown")
       health = 0
    else:
       health -= damage
       print("health: ", health)
-      detection = 100
+      alertness = 100
+      set_state("chase")
+      # move towards the direction of the attack
 
 # ---- # AI Attack
 func ai_attack():
@@ -125,10 +134,8 @@ func save() -> Dictionary:
       "nav_agent.target_position.y": nav_agent.target_position.y,
       "path_route_x": path_route_x,
       "path_route_y": path_route_y,
-      "status": status,
       "spotted_objects": spotted_objects,
-      "detection": detection,
-      "threat_detected": threat_detected,
+      "alertness": alertness,
       "weapon": weapon.save(),
    }
    return save_dict
