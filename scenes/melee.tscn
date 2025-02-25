@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://3p71jcnnkdqp"]
+[gd_scene load_steps=3 format=3 uid="uid://cyustpl8avem8"]
 
-[ext_resource type="PackedScene" path="res://scenes/weapon.tscn" id="2_pcas6"]
+[ext_resource type="PackedScene" uid="uid://dpe146fvmhnm0" path="res://scenes/weapon.tscn" id="2_pcas6"]
 [ext_resource type="Script" path="res://scripts/melee.gd" id="2_ula0b"]
 
 [node name="Melee" instance=ExtResource("2_pcas6")]

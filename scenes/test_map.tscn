@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://c45cr4c720ty" path="res://scenes/ui_scenes/ui.tscn" id="3_08am1"]
 [ext_resource type="PackedScene" uid="uid://dm7r1ttsqy55p" path="res://scenes/wall.tscn" id="4_wq0hb"]
 [ext_resource type="PackedScene" uid="uid://dsjdenieys0u" path="res://scenes/glass.tscn" id="5_dyel1"]
-[ext_resource type="PackedScene" path="res://exit.tscn" id="7_fove2"]
-[ext_resource type="PackedScene" path="res://scenes/camera.tscn" id="7_u43m7"]
+[ext_resource type="PackedScene" uid="uid://chk74u280841r" path="res://scenes/exit.tscn" id="7_fove2"]
+[ext_resource type="PackedScene" uid="uid://cux6n4jev1w72" path="res://scenes/camera.tscn" id="7_u43m7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_11ov2"]
-vertices = PackedVector2Array(1010, 250, 1010, 10, 1142, 10, 1142, 638, 770, 638, 770, 446, 1010, 394, 10, 638, 10, 394, 238, 394, 238, 586, 702, 638, 306, 586, 702, 446, 306, 394, 1010, 326, 10, 326, 10, 10, 942, 250, 942, 10)
+vertices = PackedVector2Array(1010, 250, 1010, 18, 1134, 18, 1134, 630, 768, 630, 768, 445, 1010, 394, 10, 630, 10, 394, 238, 394, 238, 586, 700, 630, 306, 586, 700, 445, 306, 394, 1010, 326, 10, 326, 10, 18, 942, 250, 942, 18)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 7, 10, 12), PackedInt32Array(13, 11, 12, 14), PackedInt32Array(13, 14, 6, 5), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(17, 19, 18), PackedInt32Array(15, 18, 0), PackedInt32Array(15, 0, 3), PackedInt32Array(15, 3, 6)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1152, 0, 1152, 648, 760, 648, 760, 456, 712, 456, 712, 648, 0, 648, 0, 384, 248, 384, 248, 576, 296, 576, 296, 384, 1000, 384, 1000, 336, 0, 336, 0, 0, 952, 0, 952, 240, 1000, 240, 1000, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1144, 8, 1144, 640, 758, 640, 758, 455, 710, 455, 710, 640, 0, 640, 0, 384, 248, 384, 248, 576, 296, 576, 296, 384, 1000, 384, 1000, 336, 0, 336, 0, 8, 952, 8, 952, 240, 1000, 240, 1000, 8)])
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource("1_kb20g")
@@ -57,20 +57,20 @@ scale = Vector2(1, 5)
 
 [node name="Bounds" type="Node" parent="."]
 
-[node name="Left" parent="Bounds" instance=ExtResource("4_wq0hb")]
-position = Vector2(-24, 336)
-scale = Vector2(1, 14)
+[node name="Wall" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(-25, 324)
+scale = Vector2(1.04416, 15.1777)
 
-[node name="Right" parent="Bounds" instance=ExtResource("4_wq0hb")]
-position = Vector2(1185, 336)
-scale = Vector2(1, 14)
+[node name="Wall3" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(572, -16)
+scale = Vector2(23.8, 1)
 
-[node name="Top" parent="Bounds" instance=ExtResource("4_wq0hb")]
-position = Vector2(572, -24)
-scale = Vector2(26, 1)
+[node name="Wall4" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(572, 664)
+scale = Vector2(23.8, 1)
 
-[node name="Bottom" parent="Bounds" instance=ExtResource("4_wq0hb")]
-position = Vector2(572, 708)
-scale = Vector2(26, 1)
+[node name="Wall2" parent="Bounds" instance=ExtResource("4_wq0hb")]
+position = Vector2(1170, 324)
+scale = Vector2(1.04416, 15.1777)
 
 [node name="Camera" parent="." instance=ExtResource("7_u43m7")]
