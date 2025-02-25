@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://rwhtvyk7l1mj"]
+
+[ext_resource type="Script" path="res://scripts/enemy_scripts/target.gd" id="1_e8p6b"]
+[ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_ivsnh"]
+[ext_resource type="PackedScene" uid="uid://kf8tqdlm8c5t" path="res://addons/vision_cone_2d/vision_cone_2d_template.tscn" id="3_w402g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrene"]
+size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tkd0r"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_460vc"]
+color = Color(0.517647, 0.254902, 0.0470588, 1)
+
+[node name="Target" type="CharacterBody2D"]
+texture_filter = 1
+script = ExtResource("1_e8p6b")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+self_modulate = Color(0.21, 1, 0.618167, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ivsnh")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nrene")
+
+[node name="VisionCone" parent="." instance=ExtResource("3_w402g")]
+rotation = 3.14159
+angle_deg = 45
+max_distance = 200.0
+collision_layer_mask = 3
+
+[node name="DetectionBar" type="ProgressBar" parent="."]
+offset_left = -15.0
+offset_top = 16.0
+offset_right = 15.0
+offset_bottom = 17.0
+theme_override_styles/background = SubResource("StyleBoxLine_tkd0r")
+theme_override_styles/fill = SubResource("StyleBoxLine_460vc")
+show_percentage = false
+
+[node name="DetectionShadow" type="CollisionShape2D" parent="."]
+
+[editable path="VisionCone"]
