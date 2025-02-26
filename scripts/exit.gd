@@ -12,15 +12,21 @@ var objects_in_area : Array = []
 
 # ---- # variables
 var exiting_object : Node2D
+var waiting_for_input : bool = false
 
 # ---- # Ready
 func _ready() -> void:
-   pass # Replace with function body.
+   add_to_group("Exits")
+
+# ---- # Process
+func _input(event):
+   if !waiting_for_input: return
+   if event.is_action_pressed("interact"): exiting_object.exit()
 
 # ---- # Exit Area Entered
 func _on_exit_area_entered(body: Node2D) -> void:
    print("exit: body ", body, " entered")
-   if body.type == "Player" or body.type == "Target":
+   if body is Player or body is Target:
       exit_timer.start()
       exiting_object = body
       objects_in_area.append(body)
@@ -35,4 +41,5 @@ func _on_exit_area_exited(body: Node2D) -> void:
 # ---- # Exit Timer Timeout
 func _on_exit_timer_timeout() -> void:
    print("exit: body ", exiting_object, " left game")
-   exiting_object.exit()
+   if exiting_object is Target: exiting_object.exit()
+   if exiting_object is Player: waiting_for_input = true

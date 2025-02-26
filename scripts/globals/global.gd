@@ -55,6 +55,8 @@ var targets : Array
 var characterbodies : Array
 var walls : Array
 var windows : Array
+var entrances : Array
+var exits : Array
 var persist : Array  # contains all currently loaded nodes that must be saved
 
 func _ready() -> void:
@@ -121,6 +123,8 @@ func update_groups():
    characterbodies = get_tree().get_nodes_in_group("CharacterBodies")
    walls = get_tree().get_nodes_in_group("Walls")
    windows = get_tree().get_nodes_in_group("Windows")
+   entrances = get_tree().get_nodes_in_group("Entrances")
+   exits = get_tree().get_nodes_in_group("Exits")
 
 # ---- # Game Over
 # ends the game and determines the players score before scene transition
@@ -130,13 +134,13 @@ func contract_over(player_died: bool):
       return
    
    var guards_killed = guards.size()
-   for guard in guards:
-      if guard.status != "dead":
-         guards_killed -= 1
+   #for guard in guards:
+      #if guard.status != "dead":
+         #guards_killed -= 1
    var targets_killed = targets.size()
-   for target in targets:
-      if target.status != "dead":
-         targets_killed -= 1
+   #for target in targets:
+      #if target.status != "dead":
+         #targets_killed -= 1
    var score = (guards_killed * 0.5) + (targets_killed * 1.5)
       
    if player_died or targets_killed < targets.size(): print("Global: player has lost\nfinal score: ", score)

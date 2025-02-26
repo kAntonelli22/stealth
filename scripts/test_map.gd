@@ -22,22 +22,25 @@ func _process(_delta: float) -> void:
 # - ai gets stuck on corners
 # - ai can backstab and damage eachother
 # - change hard coded string paths to resource uids
+# - ai do not come down from spotting the player and get should have a chase target instead
 
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
+# - enemy backpedal state. move away once past weapon effective range
 # - guard death
-# - implement ai and player state machines
 # - detection overhaul (dashing and distance factored in, noise areas, detection shadow)
 # - create light and dark mode themes
 # - add game over, lives, debuffs for losing
 # - entry points, deployment, exit points, reinforcements
+# - action key circular loading symbol for exits
 # - player movement overhaul (actual dash)
 # - weapon overhaul (ranged parent class, default weapons, equip code, drop code, sprites)
 # - combat overhaul (body parts, damage debuffs)
 
 # ---- # Todo List # --------------------------------------------------------- #
 # ---- # Game Info # --------------------------------------------------------- #
+# - player size 16x16
 # - Grayscale light - dark
 # - (#F8F9FA, #E9ECEF, #DEE2E6, #CED4DA, #ADB5BD, #6C757D, #495057, #343A40, #212529)
 # - Blues light - dark

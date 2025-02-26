@@ -8,9 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://cux6n4jev1w72" path="res://scenes/camera.tscn" id="7_u43m7"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_11ov2"]
-vertices = PackedVector2Array(1010, 250, 1010, 18, 1134, 18, 1134, 630, 768, 630, 768, 445, 1010, 394, 10, 630, 10, 394, 238, 394, 238, 586, 700, 630, 306, 586, 700, 445, 306, 394, 1010, 326, 10, 326, 10, 18, 942, 250, 942, 18)
+vertices = PackedVector2Array(1030, 270, 1030, 38, 1114, 38, 1114, 610, 788, 610, 788, 425, 1030, 414, 30, 610, 30, 414, 218, 414, 218, 606, 680, 610, 326, 606, 680, 425, 326, 414, 1030, 306, 30, 306, 30, 38, 922, 270, 922, 38)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 7, 10, 12), PackedInt32Array(13, 11, 12, 14), PackedInt32Array(13, 14, 6, 5), PackedInt32Array(15, 16, 17, 18), PackedInt32Array(17, 19, 18), PackedInt32Array(15, 18, 0), PackedInt32Array(15, 0, 3), PackedInt32Array(15, 3, 6)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1144, 8, 1144, 640, 758, 640, 758, 455, 710, 455, 710, 640, 0, 640, 0, 384, 248, 384, 248, 576, 296, 576, 296, 384, 1000, 384, 1000, 336, 0, 336, 0, 8, 952, 8, 952, 240, 1000, 240, 1000, 8)])
+agent_radius = 30.0
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource("1_kb20g")
@@ -19,7 +20,6 @@ script = ExtResource("1_kb20g")
 navigation_polygon = SubResource("NavigationPolygon_11ov2")
 
 [node name="Background" type="Polygon2D" parent="."]
-visible = false
 color = Color(0.129412, 0.145098, 0.160784, 1)
 polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 

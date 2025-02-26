@@ -36,7 +36,11 @@ func _ready() -> void:
 
 # ---- # Process
 func _process(_delta: float) -> void:
+   print("detection: ", alertness, detection_bar.value)
+   if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
+   elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
    detection_bar.value = alertness
+   
    if health <= 0:
       print("enemy: enemy ", self.name, " has died")
       vision_cone.visible = false

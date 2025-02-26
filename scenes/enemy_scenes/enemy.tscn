@@ -45,6 +45,7 @@ show_percentage = false
 [node name="DetectionShadow" type="CollisionShape2D" parent="."]
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="Weapon" type="Node" parent="."]
 
