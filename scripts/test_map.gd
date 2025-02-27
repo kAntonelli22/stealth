@@ -5,9 +5,9 @@ func _ready() -> void:
    Global.games_played += 1
    Global.map = self
    Global.instance_player(Vector2(100, 100), 90, Melee)
-   Global.instance_guard([Vector2(200, 200), Vector2(800, 200)], 0, Melee)
+   #Global.instance_guard([Vector2(200, 200), Vector2(800, 200)], 0, Melee)
    Global.instance_guard([Vector2(600, 450)], 0, Melee)
-   Global.instance_target([Vector2(400, 425)], 90, Melee)
+   #Global.instance_target([Vector2(400, 425)], 90, Melee)
    get_node("Camera").adjust_camera($Player, -15, -15, 663, 1167)
    Signals.emit_signal("map_changed")
 
@@ -27,6 +27,7 @@ func _process(_delta: float) -> void:
 # ---- # Issue List # -------------------------------------------------------- #
 
 # ---- # Todo List # --------------------------------------------------------- #
+# - enemy hunt state that transitions to idle
 # - enemy backpedal state. move away once past weapon effective range
 # - guard death
 # - detection overhaul (dashing and distance factored in, noise areas, detection shadow)

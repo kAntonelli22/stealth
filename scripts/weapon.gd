@@ -44,7 +44,7 @@ func attack(holder: CharacterBody2D):
    for object in hurtbox_objects:
       if object != holder and directionbox_objects.has(object):
          object.hit(holder, self, damage)
-         print("melee: ", object.type, " hit for ", damage, " damage")
+         print("melee: ", object.name, " hit for ", damage, " damage")
 
 # ---- # Can Hit
 func can_hit(object : CharacterBody2D) -> bool:

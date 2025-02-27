@@ -15,10 +15,10 @@ func _physics_process(delta: float) -> void:
       var transition = _get_transition(delta)
       if transition: set_state(transition)
    
-func _state_logic(delta): pass
-func _get_transition(delta): return null
-func _enter_state(new_state, old_state): pass
-func _exit_state(old_state, new_state): pass
+func _state_logic(_delta): pass
+func _get_transition(_delta): return null
+func _enter_state(_new_state, _old_state): pass
+func _exit_state(_old_state, _new_state): pass
 
 func set_state(new_state):
    print("FSM: new state: ", new_state, ", former state: ", state)

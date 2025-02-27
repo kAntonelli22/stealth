@@ -36,9 +36,9 @@ func _ready() -> void:
 
 # ---- # Process
 func _process(_delta: float) -> void:
-   print("detection: ", alertness, detection_bar.value)
-   if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
-   elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
+   #print("detection: ", alertness, detection_bar.value)
+   #if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
+   #elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
    detection_bar.value = alertness
    
    if health <= 0:
@@ -63,7 +63,9 @@ func _state_logic(delta):
          if object.player != null:
             player = object.player
    
-   if state == states.idle and path_route.size() > 1: set_state(states.patrol)
+   if state == states.idle and path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15:
+      set_state(states.patrol)
+   
    if state != states.idle:
       var next_position = nav_agent.get_next_path_position()
       var angle_to := position.angle_to_point(next_position)
@@ -71,16 +73,19 @@ func _state_logic(delta):
       var angle = abs(rad_to_deg(relative_angle))
       move(next_position, angle, angle_to, delta)
 
-
 # ---- # Move
 func move(next_position, angle, angle_to, delta):
-   if !nav_agent.is_navigation_finished() and angle <= 15:
-      rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
-      velocity = global_position.direction_to(next_position) * speed
-   elif !nav_agent.is_navigation_finished():
-      rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
-      velocity = Vector2.ZERO
-   elif nav_agent.is_navigation_finished() and path_route.size() > 0:
+   var next_velocity = position.direction_to(next_position) * speed
+   var next_rotation = rotate_toward(rotation, angle_to, delta * rotate_speed)
+   
+   if !nav_agent.is_navigation_finished():
+      if angle <= 15:
+         rotation = next_rotation
+         velocity = next_velocity
+      else:
+         rotation = next_rotation
+         velocity = Vector2.ZERO
+   elif path_route.size() > 0:
       nav_agent.target_position = next_route_position()
    move_and_slide()
 

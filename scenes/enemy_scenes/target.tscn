@@ -12,4 +12,7 @@ max_distance = 150.0
 [node name="Sprite" parent="." index="1"]
 self_modulate = Color(0.305882, 0.709804, 0.305882, 1)
 
+[node name="NavigationAgent2D" parent="." index="5"]
+debug_enabled = false
+
 [editable path="VisionCone"]

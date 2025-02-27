@@ -92,7 +92,7 @@ func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
    Signals.emit_signal("update_attributes", health)
 
 # ---- # Exit
-func exit():
+func exit_map():
    Signals.emit_signal("contract_over", false)
 
 # ---- # Save

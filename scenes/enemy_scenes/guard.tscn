@@ -6,4 +6,7 @@
 [node name="Guard" instance=ExtResource("1_h8unv")]
 script = ExtResource("2_rade4")
 
+[node name="NavigationAgent2D" parent="." index="5"]
+debug_enabled = false
+
 [editable path="VisionCone"]

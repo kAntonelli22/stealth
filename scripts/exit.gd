@@ -41,5 +41,5 @@ func _on_exit_area_exited(body: Node2D) -> void:
 # ---- # Exit Timer Timeout
 func _on_exit_timer_timeout() -> void:
    print("exit: body ", exiting_object, " left game")
-   if exiting_object is Target: exiting_object.exit()
+   if exiting_object is Target: exiting_object.exit_map()
    if exiting_object is Player: waiting_for_input = true

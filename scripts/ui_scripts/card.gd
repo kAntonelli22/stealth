@@ -16,7 +16,7 @@ func _ready() -> void:
    pass
 
 # ---- # Save 
-func save():
+func save() -> Dictionary:
    var save_dict = {
       "type": "node",
       "filename": get_scene_file_path(),
@@ -27,3 +27,4 @@ func save():
       "image_texture": image.texture,
       "description_text": description.text,
    }
+   return save_dict

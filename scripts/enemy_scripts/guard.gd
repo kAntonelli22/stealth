@@ -20,4 +20,6 @@ func _state_logic(delta):
       nav_agent.target_position = player.position
    if alertness == max_alert and state != states.chase:
       set_state(states.chase)
+   if alertness <= max_alert * .75:
+      set_state(states.idle)
    super(delta)

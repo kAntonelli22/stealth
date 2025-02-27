@@ -20,6 +20,7 @@ script = ExtResource("1_kb20g")
 navigation_polygon = SubResource("NavigationPolygon_11ov2")
 
 [node name="Background" type="Polygon2D" parent="."]
+visible = false
 color = Color(0.129412, 0.145098, 0.160784, 1)
 polygon = PackedVector2Array(0, 0, 1152, 0, 1152, 648, 0, 648)
 

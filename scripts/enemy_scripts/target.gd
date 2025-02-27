@@ -36,5 +36,5 @@ func get_exit() -> Vector2:
    else: return Vector2(0, 0)
 
 # ---- # Exit
-func exit():
+func exit_map():
    print("target: exiting scene")
