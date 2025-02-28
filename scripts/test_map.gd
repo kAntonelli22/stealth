@@ -8,7 +8,7 @@ func _ready() -> void:
    #Global.instance_guard([Vector2(200, 200), Vector2(800, 200)], 0, Melee)
    Global.instance_guard([Vector2(600, 450)], 0, Melee)
    #Global.instance_target([Vector2(400, 425)], 90, Melee)
-   get_node("Camera").adjust_camera($Player, -15, -15, 663, 1167)
+   get_node("Camera").adjust_camera($Player, -15, -300, 663, 1167)
    Signals.emit_signal("map_changed")
 
 # ---- # Process
@@ -22,10 +22,8 @@ func _process(_delta: float) -> void:
 # - ai gets stuck on corners
 # - ai can backstab and damage eachother
 # - change hard coded string paths to resource uids
-# - ai do not come down from spotting the player and get should have a chase target instead
 
 # ---- # Issue List # -------------------------------------------------------- #
-
 # ---- # Todo List # --------------------------------------------------------- #
 # - enemy hunt state that transitions to idle
 # - enemy backpedal state. move away once past weapon effective range

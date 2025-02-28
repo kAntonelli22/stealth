@@ -8,20 +8,31 @@
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_5arqu")
 
-[node name="PauseButton" type="Button" parent="."]
+[node name="LeftPanel" type="ColorRect" parent="."]
+offset_right = 256.0
+offset_bottom = 648.0
+color = Color(0.203922, 0.227451, 0.25098, 1)
+
+[node name="PauseButton" type="Button" parent="LeftPanel"]
 offset_right = 64.0
 offset_bottom = 64.0
 icon = ExtResource("2_5ttrq")
 icon_alignment = 1
 expand_icon = true
 
-[node name="HealthBackground" parent="." instance=ExtResource("3_hbtjn")]
+[node name="HealthBackground" parent="LeftPanel" instance=ExtResource("3_hbtjn")]
 anchors_preset = 0
 anchor_top = 0.0
 anchor_bottom = 0.0
+offset_left = 8.0
 offset_top = 608.0
-offset_bottom = 48.0
+offset_right = 248.0
+offset_bottom = 608.0
 grow_vertical = 1
+
+[node name="HealthContainer" parent="LeftPanel/HealthBackground" index="0"]
+offset_top = -20.0
+offset_bottom = 20.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_ik6k2")]
 visible = false
@@ -34,6 +45,6 @@ offset_right = 153.0
 offset_bottom = 31.0
 text = "Saving . . . "
 
-[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="LeftPanel/PauseButton" to="." method="_on_pause_button_pressed"]
 
-[editable path="HealthBackground"]
+[editable path="LeftPanel/HealthBackground"]

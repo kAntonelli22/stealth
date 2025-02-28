@@ -1,8 +1,8 @@
 extends CanvasLayer
 
 # ---- # nodes
-@onready var health_background = $HealthBackground
-@onready var pause_menu = $PauseMenu
+@onready var health_background = $LeftPanel/HealthBackground
+@onready var pause_menu = $LeftPanel/PauseMenu
 @onready var saving = $Saving
 
 # ---- # variables
