@@ -7,12 +7,9 @@ func _ready() -> void:
    Global.instance_player(Vector2(100, 100), 90, Melee)
    
    var entity_dict: Dictionary = {"path_route": [Vector2(200, 200), Vector2(800, 200)], "rotation": deg_to_rad(0)}
-   var patrol_route: Array[Vector2] = [Vector2(600, 450)]
    Global.entity_factory(Global.guard_scene, entity_dict, Melee, "Guards")
-   patrol_route = [Vector2(600, 400)]
-   entity_dict = {"path_route": patrol_route, "rotation": deg_to_rad(90)}
+   entity_dict = {"path_route": [Vector2(600, 400)], "rotation": deg_to_rad(90)}
    Global.entity_factory(Global.guard_scene, entity_dict, Melee, "Guards")
-   patrol_route = [Vector2(400, 425)]
    entity_dict = {"path_route": [Vector2(400, 425)], "rotation": deg_to_rad(180)}
    Global.entity_factory(Global.target_scene, entity_dict, Melee, "Guards")
    

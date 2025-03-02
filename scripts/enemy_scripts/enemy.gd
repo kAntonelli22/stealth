@@ -102,7 +102,6 @@ func next_route_position() -> Vector2:
    var index = current_point
    if current_point < path_route.size() - 1: current_point += 1
    else: current_point = 0
-   print("enemy: ", path_route)
    return path_route[index]
 
 # ---- # Hit
