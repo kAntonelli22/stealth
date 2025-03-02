@@ -15,10 +15,14 @@ var godot_icon := preload("res://icon.svg")
 # ---- # scenes
 var card_select := preload("res://scenes/ui_scenes/card_carousel.tscn")
 var card := preload("res://scenes/ui_scenes/card.tscn")
+var entrance_ui := preload("res://scenes/ui_scenes/entrance_ui.tscn")
 
 var player_scene := preload("res://scenes/player.tscn")
 var guard_scene := preload("res://scenes/enemy_scenes/guard.tscn")
 var target_scene := preload("res://scenes/enemy_scenes/target.tscn")
+
+var entrance_scene := preload("res://scenes/entrance.tscn")
+var exit_scene := preload("res://scenes/exit.tscn")
 
 var melee := preload("res://scenes/melee.tscn")
 
@@ -63,18 +67,25 @@ func _ready() -> void:
    Signals.connect("map_changed", update_groups)
    Signals.connect("contract_over", contract_over)
 
-# ---- # Enemy Factory
-# creates a new enemy for the map calling it and adds default values
-
-#func enemy_factory(position: Vector2, rotation: float, weapon):
-   #var enemy := player_scene.instantiate()
-   #guard.path_route = guard_route
-   #guard.rotation += deg_to_rad(guard_rotation)
-   #guard.position = guard.next_route_position()
-   #guard.add_to_group("Guards")
-   #guard.add_to_group("Persist")
-   #map.add_child(guard)
-   #if weapon: weapon.equip(guard)
+# ---- # Entity Factory
+# creates a new entity and loads the provided data
+func entity_factory(scene, entity_data: Dictionary, weapon, group: String):
+   print_rich("[color=64649E]Entity Factory[/color]: ")
+   var entity = scene.instantiate()
+   print_rich("\tcreating a new ", entity.name, " with the data ", entity_data)
+   for i in entity_data.keys():
+      print_rich("\tsetting key ", i, " with ", entity_data[i])
+      if i == "path_route":
+         var array: Array[Vector2]
+         array.assign(entity_data[i])
+         entity.path_route = array
+      else:
+         entity.set(i, entity_data[i])
+   
+   if group != null: entity.add_to_group(group)
+   entity.add_to_group("Persist")
+   map.add_child(entity)
+   if weapon: weapon.equip(entity)
    
 # ---- # Instance Target
 # creates a target at the given position with the given rotation and path 
@@ -109,6 +120,17 @@ func instance_target(target_route: Array[Vector2], target_rotation: int, weapon)
    target.add_to_group("Persist")
    map.add_child(target)
    if weapon: weapon.equip(target)
+
+# ---- # Instance Entrance
+func instance_entrance(position):
+   var entrance = entrance_scene.instantiate()
+   entrance.position = position
+   map.add_child(entrance)
+
+func instance_exit(position):
+   var exit = exit_scene.instantiate()
+   exit.position = position
+   map.add_child(exit)
 
 # ---- # Change Map
 func change_map(new_map: PackedScene):

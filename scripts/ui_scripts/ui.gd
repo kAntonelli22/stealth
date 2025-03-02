@@ -1,9 +1,11 @@
 extends CanvasLayer
 
 # ---- # nodes
-@onready var health_background = $LeftPanel/HealthBackground
-@onready var pause_menu = $LeftPanel/PauseMenu
-@onready var saving = $Saving
+@onready var health_background = $LeftPanel/LeftContainer/HealthBackground
+@onready var pause_menu = $PauseMenu
+@onready var saving = $LeftPanel/Saving
+@onready var carrot = $LeftPanel/Carrot
+@onready var entrance_container = $LeftPanel/LeftContainer/EntranceContainer
 
 # ---- # variables
 var paused : bool = false
@@ -21,6 +23,7 @@ func connect_signals():
    Signals.connect("update_attributes", update_ui)
    Signals.connect("map_changed", enable_health)
    Signals.connect("contract_over", disable_health)
+   Signals.connect("new_entrance", new_entrance)
 
 # ---- # Pause Game
 func pause_game():
@@ -30,6 +33,10 @@ func pause_game():
 # ---- # Update UI
 func update_ui(health : int):
    health_background.update_healthbar(health)
+
+func new_entrance(entrance: Node2D):
+   var entrance_ui = Global.entrance_ui.instantiate()
+   entrance_container.add_child(entrance_ui)
 
 # ---- # Enable and Disable Health
 func enable_health(): health_background.show()

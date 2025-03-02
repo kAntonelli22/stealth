@@ -10,7 +10,10 @@ signal map_loaded(map: Node2D, player: CharacterBody2D)
 signal map_changed
 signal contract_over(player_died: bool)       # emitted when the player wins or loses a contract
 
+# ---- # ui signals
+signal new_entrance(entrance: Node2D)        # emitted by entrance when it is instanced for ui
+
 # ---- # character body signals
-signal update_attributes(health: int)        # emmited by player for ui when health changes
+signal update_attributes(health: int)        # emitted by player for ui when health changes
 signal target_dead(target: CharacterBody2D, weapon: Node2D)       # emitted when a target dies
 signal guard_dead(guard: CharacterBody2D, weapon: Node2D)         # emitted when a guard dies

@@ -24,13 +24,14 @@ var speed: float = 200.0
 var rotate_speed: float = 2.0
 
 # ---- # path variables
-var path_route : Array[Vector2]
-var path_route_x : Array
-var path_route_y : Array
-var current_point : int = 0
+var path_route: Array[Vector2]
+var path_route_x: Array
+var path_route_y: Array
+var current_point: int = 0
 
 # ---- # Ready
 func _ready() -> void:
+   position = next_route_position()
    add_state("idle")
    add_state("patrol")
 
@@ -42,7 +43,7 @@ func _process(_delta: float) -> void:
    detection_bar.value = alertness
    
    if health <= 0:
-      print("enemy: enemy ", self.name, " has died")
+      print_rich("[color=#A84A4A]enemy[/color]: enemy ", self.name, " has died")
       vision_cone.visible = false
       detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
@@ -101,19 +102,20 @@ func next_route_position() -> Vector2:
    var index = current_point
    if current_point < path_route.size() - 1: current_point += 1
    else: current_point = 0
+   print("enemy: ", path_route)
    return path_route[index]
 
 # ---- # Hit
 func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
    if health <= 0: return
    if spotted_objects.find(holder) and alertness <= (.25 * max_alert): # and weapon.type == "stealth":
-      print("enemy: hit by stealth takedown")
+      print("[color=#A84A4A]enemy[/color]: hit by stealth takedown")
       health = 0
    else:
       health -= damage
-      print("health: ", health)
+      print("[color=#A84A4A]enemy[/color]: health reduced to ", health)
       alertness = 100
-      set_state("chase")
+      set_state(states.chase)
       # move towards the direction of the attack
 
 # ---- # AI Attack
@@ -128,7 +130,6 @@ func save() -> Dictionary:
    for point in path_route:
          path_route_x.append(point.x)
          path_route_y.append(point.y)
-   print("path_route ", path_route_x.size())
    var save_dict = {
       "type": "node",
       "filename": get_scene_file_path(),
@@ -153,7 +154,5 @@ func save() -> Dictionary:
 # called by SaveManager
 # stitches path_route json arrays back together
 func custom_load():
-   print("custom: ", path_route_x.size())
    for i in range(0, path_route_x.size()):
-      print("adding point ", Vector2(path_route_x[i], path_route_y[i]))
       path_route.append(Vector2(path_route_x[i], path_route_y[i]))
