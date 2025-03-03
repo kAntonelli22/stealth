@@ -17,8 +17,7 @@ p_type: String = "Boost") -> void:
    type = p_type
 
 # ---- # Apply Perk
-func apply_perk(player: CharacterBody2D):
-   print("perk ", name, " does not have an application function and will have no effect on ", player.name)
+func apply_perk(player: CharacterBody2D): pass
 
 # ---- # Save
 func save() -> Dictionary:

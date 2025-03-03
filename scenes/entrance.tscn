@@ -1,20 +1,56 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2n1apesu06pj"]
+[gd_scene load_steps=13 format=3 uid="uid://b2n1apesu06pj"]
 
 [ext_resource type="Script" path="res://scripts/entrance.gd" id="1_2v8xo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggvfn"]
-size = Vector2(48, 48)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxjo4"]
+bg_color = Color(0.277638, 0.673661, 0.457222, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxqos"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gom82"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8v8oc"]
+bg_color = Color(0.223529, 0.647059, 0.72549, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c4nt"]
+bg_color = Color(0.223681, 0.648542, 0.726105, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3hxu"]
+bg_color = Color(0.352941, 0.803922, 0.890196, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dbhoj"]
+bg_color = Color(0.354848, 0.805251, 0.891419, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmddk"]
+bg_color = Color(0.313726, 0.772549, 0.858824, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cto2d"]
+bg_color = Color(0.312153, 0.771289, 0.857417, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ikp7x"]
+bg_color = Color(0.470588, 0.862745, 0.941176, 0.498039)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0mbr"]
+bg_color = Color(0.470588, 0.862745, 0.941176, 0.498039)
 
 [node name="Entrance" type="Node2D"]
 script = ExtResource("1_2v8xo")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.469292, 0.864245, 0.941803, 0.498039)
-polygon = PackedVector2Array(-24, -24, 24, -24, 24, 24, -24, 24)
+[node name="MapButton" type="Button" parent="."]
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_lxjo4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_xxqos")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gom82")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_8v8oc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4c4nt")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_e3hxu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dbhoj")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_hmddk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cto2d")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_ikp7x")
+theme_override_styles/normal = SubResource("StyleBoxFlat_q0mbr")
 
-[node name="EntranceArea" type="Area2D" parent="."]
-
-[node name="AreaCollider" type="CollisionShape2D" parent="EntranceArea"]
-shape = SubResource("RectangleShape2D_ggvfn")
-
-[connection signal="input_event" from="EntranceArea" to="." method="_on_area_input_event"]
+[connection signal="pressed" from="MapButton" to="." method="_on_map_button_pressed"]

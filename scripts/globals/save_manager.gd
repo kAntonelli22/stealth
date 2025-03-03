@@ -22,7 +22,7 @@ func save_game():
    
    for node in save_nodes:
       if node.scene_file_path.is_empty() or !node.has_method("save"):
-         print("Global: node missing or lacks save method")
+         print_rich("[color=Crimson]Error[/color]: SaveManager cannot find save method")
          continue
       var json_data : String = JSON.stringify(node.save())
       save_file.store_line(json_data)
@@ -30,9 +30,9 @@ func save_game():
 # ---- # Load Game
 # loads all persistent game data, removes duplicates, and loads the saved scene
 func load_game():
-   print("Global: loading save")
+   print_rich("SaveManager: loading save file")
    if not FileAccess.file_exists("user://savegame.save"):
-      print("Global: no save file")
+      print_rich("[color=Crimson]Error[/color]: SaveManager cannot find save file")
       return
    
    var save_file := FileAccess.open("user://savegame.save", FileAccess.READ)
@@ -92,5 +92,5 @@ func json_get_line(json_file):
    var json : JSON = JSON.new()      # json helper class
       
    var parse_result := json.parse(json_data)
-   if not parse_result == OK: print("Global: parse error")
+   if not parse_result == OK: print_rich("[color=Crimson]Error[/color]: SaveManager parse error")
    return json.data

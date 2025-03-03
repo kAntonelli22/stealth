@@ -34,7 +34,7 @@ func _ready() -> void:
    #call_deferred(set_state("Idle"))
    
    add_to_group("Persist")
-   print(active_perks)
+   print_rich("[color=Royalblue]Current Player Perks[/color]: ", active_perks)
    for perk in active_perks:
       perk.apply_perk(self)
 

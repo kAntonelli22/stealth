@@ -37,4 +37,4 @@ func get_exit() -> Vector2:
 
 # ---- # Exit
 func exit_map():
-   print("target: exiting scene")
+   print_rich("[color=Orangered]Target[/color]: exiting scene")

@@ -35,6 +35,7 @@ func update_ui(health : int):
    health_background.update_healthbar(health)
 
 func new_entrance(entrance: Node2D):
+   print_rich("[color=AquaMarine]UI[/color]: entrance signal received")
    var entrance_ui = Global.entrance_ui.instantiate()
    entrance_container.add_child(entrance_ui)
 

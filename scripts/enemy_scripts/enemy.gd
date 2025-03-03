@@ -37,13 +37,12 @@ func _ready() -> void:
 
 # ---- # Process
 func _process(_delta: float) -> void:
-   #print("detection: ", alertness, detection_bar.value)
    #if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
    #elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
    detection_bar.value = alertness
    
    if health <= 0:
-      print_rich("[color=#A84A4A]enemy[/color]: enemy ", self.name, " has died")
+      print_rich("[color=Orangered]enemy[/color]: enemy ", self.name, " has died")
       vision_cone.visible = false
       detection_bar.visible = false
       process_mode = PROCESS_MODE_DISABLED      # pause node on death
@@ -73,6 +72,15 @@ func _state_logic(delta):
       var relative_angle = fmod(angle_to - rotation + PI, PI * 2) - PI
       var angle = abs(rad_to_deg(relative_angle))
       move(next_position, angle, angle_to, delta)
+
+# ---- # Get Transition
+# contains the logic for transitioning between states
+#func _get_transition(_delta):
+   #match(state):
+      #states.idle:
+         #if path_route.size() > 0: return states.patrol
+      #states.patrol: pass
+   #return null
 
 # ---- # Move
 func move(next_position, angle, angle_to, delta):
@@ -108,11 +116,11 @@ func next_route_position() -> Vector2:
 func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
    if health <= 0: return
    if spotted_objects.find(holder) and alertness <= (.25 * max_alert): # and weapon.type == "stealth":
-      print("[color=#A84A4A]enemy[/color]: hit by stealth takedown")
+      print_rich("[color=Orangered]enemy[/color]: hit by stealth takedown")
       health = 0
    else:
       health -= damage
-      print("[color=#A84A4A]enemy[/color]: health reduced to ", health)
+      print_rich("[color=Orangered]enemy[/color]: health reduced to ", health)
       alertness = 100
       set_state(states.chase)
       # move towards the direction of the attack

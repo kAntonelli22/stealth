@@ -69,7 +69,7 @@ func _ready() -> void:
 
 # ---- # Entity Factory
 # creates a new entity and loads the provided data
-func entity_factory(scene, entity_data: Dictionary, weapon, group: String):
+func entity_factory(scene, entity_data: Dictionary, weapon, group: String = ""):
    print_rich("[color=64649E]Entity Factory[/color]: ")
    var entity = scene.instantiate()
    print_rich("\tcreating a new ", entity.name, " with the data ", entity_data)
@@ -82,44 +82,10 @@ func entity_factory(scene, entity_data: Dictionary, weapon, group: String):
       else:
          entity.set(i, entity_data[i])
    
-   if group != null: entity.add_to_group(group)
+   if group != "": entity.add_to_group(group)
    entity.add_to_group("Persist")
    map.add_child(entity)
    if weapon: weapon.equip(entity)
-   
-# ---- # Instance Target
-# creates a target at the given position with the given rotation and path 
-func instance_player(position: Vector2, rotation: float, weapon):
-   var player := player_scene.instantiate()
-   player.rotation += deg_to_rad(rotation);
-   player.position = position
-   player.add_to_group("Persist")
-   map.add_child(player)
-   if weapon: weapon.equip(player)
-   
-# ---- # Instance Guard
-# creates a guard at the given position with the given rotation and path 
-func instance_guard(guard_route: Array[Vector2], guard_rotation: int, weapon):
-   var guard := guard_scene.instantiate()
-   guard.path_route = guard_route
-   guard.rotation += deg_to_rad(guard_rotation)
-   guard.position = guard.next_route_position()
-   guard.add_to_group("Guards")
-   guard.add_to_group("Persist")
-   map.add_child(guard)
-   if weapon: weapon.equip(guard)
-
-# ---- # Instance Target
-# creates a target at the given position with the given rotation and path 
-func instance_target(target_route: Array[Vector2], target_rotation: int, weapon):
-   var target := target_scene.instantiate()
-   target.path_route = target_route
-   target.rotation += deg_to_rad(target_rotation);
-   target.position = target.next_route_position()
-   target.add_to_group("Targets")
-   target.add_to_group("Persist")
-   map.add_child(target)
-   if weapon: weapon.equip(target)
 
 # ---- # Instance Entrance
 func instance_entrance(position):
@@ -134,7 +100,7 @@ func instance_exit(position):
 
 # ---- # Change Map
 func change_map(new_map: PackedScene):
-   print("Global: loading map")
+   print_rich("[color=64649E][b]Changing Map[/b][/color]: ")
    get_tree().change_scene_to_packed(new_map)
 
 # ---- # Update Groups
@@ -165,7 +131,9 @@ func contract_over(player_died: bool):
          #targets_killed -= 1
    var score = (guards_killed * 0.5) + (targets_killed * 1.5)
       
-   if player_died or targets_killed < targets.size(): print("Global: player has lost\nfinal score: ", score)
-   else: print("Global: player has lost\nfinal score: ", score)
+   if player_died or targets_killed < targets.size():
+      print_rich("[color=Crimson]Player has lost[/color]\nfinal score: ", score)
+   else:
+      print_rich("[color=Royalblue]Player has won[/color]\nfinal score: ", score)
    show_perks = true
    get_tree().change_scene_to_packed(card_select)

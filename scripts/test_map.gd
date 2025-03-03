@@ -4,16 +4,20 @@ extends Node2D
 func _ready() -> void:
    Global.games_played += 1
    Global.map = self
-   Global.instance_player(Vector2(100, 100), 90, Melee)
    
-   var entity_dict: Dictionary = {"path_route": [Vector2(200, 200), Vector2(800, 200)], "rotation": deg_to_rad(0)}
+   var entity_dict: Dictionary = {"position": Vector2(100, 100), "rotation": deg_to_rad(90)}
+   Global.entity_factory(Global.player_scene, entity_dict, Melee)
+   
+   entity_dict = {"path_route": [Vector2(200, 200), Vector2(800, 200)], "rotation": deg_to_rad(0)}
    Global.entity_factory(Global.guard_scene, entity_dict, Melee, "Guards")
-   entity_dict = {"path_route": [Vector2(600, 400)], "rotation": deg_to_rad(90)}
+   
+   entity_dict = {"path_route": [Vector2(600, 400)], "rotation": 0}
    Global.entity_factory(Global.guard_scene, entity_dict, Melee, "Guards")
-   entity_dict = {"path_route": [Vector2(400, 425)], "rotation": deg_to_rad(180)}
+   
+   entity_dict = {"path_route": [Vector2(400, 425)], "rotation": deg_to_rad(90)}
    Global.entity_factory(Global.target_scene, entity_dict, Melee, "Guards")
    
-   Global.instance_entrance(Vector2.ZERO)
+   Global.instance_entrance(Vector2(25, 25))
    get_node("Camera").adjust_camera($Player, -15, -300, 663, 1167)
    Signals.emit_signal("map_changed")
 
@@ -22,8 +26,8 @@ func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - card carousel code is bad
-# - save code needs to be cleaned up
+# - new entrance signal is not being recieved
+# - load runs into issues with enemy ready code
 # - ai restarts at route point one on load
 # - ai gets stuck on corners
 # - ai can backstab and damage eachother
@@ -31,6 +35,7 @@ func _process(_delta: float) -> void:
 
 # ---- # Issue List # -------------------------------------------------------- #
 # ---- # Todo List # --------------------------------------------------------- #
+# - generic map scene that all maps are created out of or inherit from
 # - enemy hunt state that transitions to idle
 # - enemy backpedal state. move away once past weapon effective range
 # - guard death

@@ -25,7 +25,7 @@ func _input(event):
 
 # ---- # Exit Area Entered
 func _on_exit_area_entered(body: Node2D) -> void:
-   print("exit: body ", body, " entered")
+   print("[color=#64649E]exit[/color]: body ", body, " entered")
    if body is Player or body is Target:
       exit_timer.start()
       exiting_object = body

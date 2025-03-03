@@ -9,6 +9,6 @@ health_regen = 1
 speed = 300.0
 stamina = 100.0
 stamina_regen = 1.0
-dash_speed = 0
+dash_speed = 900
 dash_cost = 5
 money = 0
