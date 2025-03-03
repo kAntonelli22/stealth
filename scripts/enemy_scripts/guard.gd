@@ -10,17 +10,25 @@ func _ready() -> void:
 
 # ---- # State Logic
 func _state_logic(delta):
-   #for object in spotted_objects:
-      #if object is Player: player = object
-      #elif object is Guard:
-         #if object.state == state.chase:
-            #set_state("chase")
-            #player = object.player
             
-   if player != null and state == states.chase:
-      nav_agent.target_position = player.position
-   if alertness == max_alert and state != states.chase:
-      set_state(states.chase)
-   if alertness <= max_alert * .75 and state == states.chase:
-      set_state(states.idle)
+   match(state):
+      states.hunt:
+         pass
+      states.chase:
+         nav_agent.target_position = player.position
+         # if player is to close: backpedal
+         # elif player is to far: nav_agent.target_position = player.position
+         # else: hold position
+   
    super(delta)
+
+# ---- # Get Transition
+func _get_transition(_delta):
+   match(state):
+      states.hunt:
+         if player != null: return states.chase
+         # if detection shadow is within vision cone: return states.idle
+         if alertness <- max_alert * .75: return states.idle
+      states.chase:
+         if player == null: return states.hunt
+   return null

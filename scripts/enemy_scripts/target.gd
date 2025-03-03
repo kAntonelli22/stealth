@@ -9,20 +9,21 @@ func _ready() -> void:
 
 # ---- # State Logic
 func _state_logic(delta):
-   #for object in spotted_objects:
-      #if object is Player: player = object
-      #elif object is Guard:
-         #if object.state == state.chase:
-            #set_state("chase")
-            #player = object.player
-            
-   if player != null and state == states.run:
-      #nav_agent.target_position = player.position
-      nav_agent.target_position = get_exit() # get nearest exit and run to it. this is bad
-   if alertness == max_alert and state != states.run:
-      set_state(states.run)
+   match(state):
+      states.run:
+         if player != null: nav_agent.target_position = get_exit()
    super(delta)
 
+# ---- # Get Transition
+func _get_transition(_delta):
+   match(state):
+      states.run:
+         if alertness <- max_alert * .75: return states.idle
+      states.chase:
+         if player == null: return states.hunt
+   if player != null and state != states.run: return states.run
+   return null
+   
 # ---- # Get Exit
 func get_exit() -> Vector2:
    var current_exit: Node2D
