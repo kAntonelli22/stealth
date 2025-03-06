@@ -25,7 +25,7 @@ func _get_transition(_delta):
    
 # ---- # Get Exit
 func get_exit() -> Vector2:
-   var current_exit: Node2D
+   var current_exit: Node2D = null
    for exit in Global.exits:
       if current_exit == null:
          current_exit = exit

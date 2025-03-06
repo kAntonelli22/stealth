@@ -27,6 +27,9 @@ func _process(_delta: float) -> void:
 
 # ---- # Issue List # -------------------------------------------------------- #
 # - new entrance signal is not being recieved
+# - player cannot exit map
+# - guards instantly begin chasing player after detecting them once
+# - target flees as soon as they see the player
 # - load runs into issues with enemy ready code
 # - ai restarts at route point one on load
 # - ai gets stuck on corners
