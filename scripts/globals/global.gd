@@ -100,7 +100,7 @@ func instance_exit(position):
 
 # ---- # Change Map
 func change_map(new_map: PackedScene):
-   print_rich("[color=64649E][b]Changing Map[/b][/color]: ")
+   print_rich("[color=64649E][b]Changing Map[/b][/color]")
    get_tree().change_scene_to_packed(new_map)
 
 # ---- # Update Groups

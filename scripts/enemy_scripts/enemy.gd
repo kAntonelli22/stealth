@@ -122,7 +122,7 @@ func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
       health -= damage
       print_rich("[color=Orangered]enemy[/color]: health reduced to ", health)
       alertness = 100
-      set_state(states.chase)
+      # change state to deal with the attack
       # move towards the direction of the attack
 
 # ---- # AI Attack

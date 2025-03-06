@@ -38,8 +38,8 @@ func load_game():
    var save_file := FileAccess.open("user://savegame.save", FileAccess.READ)
    var first_line = json_get_line(save_file)
    
-   var map
-   var player
+   var map = null
+   var player = null
       
    if first_line.has("scene_root"):          # if line contains scene then load and skip
       map = get_tree().change_scene_to_file(first_line["scene_root"])

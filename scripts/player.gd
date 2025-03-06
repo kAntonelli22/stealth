@@ -87,12 +87,14 @@ func move(direction, move_speed):
    else: velocity.y = move_toward(velocity.y, 0, move_speed)
    
 # ---- # Hit
-func hit(_holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
+func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
+   print_rich("[color=Royalblue]Player[/color]: hit by [color=Orangered]", holder, "[/color] for [color=Orangered]", damage, "[/color]")
    health -= damage
    Signals.emit_signal("update_attributes", health)
 
 # ---- # Exit
 func exit_map():
+   print_rich("[color=Royalblue]Player[/color]: exiting map")
    Signals.emit_signal("contract_over", false)
 
 # ---- # Save

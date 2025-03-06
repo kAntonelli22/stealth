@@ -25,7 +25,7 @@ func _input(event):
 
 # ---- # Exit Area Entered
 func _on_exit_area_entered(body: Node2D) -> void:
-   print("[color=#64649E]exit[/color]: body ", body, " entered")
+   print_rich("[color=#64649E]exit[/color]: body ", body, " entered")
    if body is Player or body is Target:
       exit_timer.start()
       exiting_object = body
@@ -33,13 +33,13 @@ func _on_exit_area_entered(body: Node2D) -> void:
 
 # ---- # Exit Area Exited
 func _on_exit_area_exited(body: Node2D) -> void:
-   print("[color=#64649E]exit[/color]: body ", body, " exited")
+   print_rich("[color=#64649E]exit[/color]: body ", body, " exited")
    if body == exiting_object:
       exit_timer.stop()
       objects_in_area.remove_at(objects_in_area.find(body))
 
 # ---- # Exit Timer Timeout
 func _on_exit_timer_timeout() -> void:
-   print("[color=#64649E]exit[/color]: body ", exiting_object, " left game")
+   print_rich("[color=#64649E]exit[/color]: body ", exiting_object, " left game")
    if exiting_object is Target: exiting_object.exit_map()
    if exiting_object is Player: waiting_for_input = true

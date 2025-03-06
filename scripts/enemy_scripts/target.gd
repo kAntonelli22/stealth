@@ -18,10 +18,9 @@ func _state_logic(delta):
 func _get_transition(_delta):
    match(state):
       states.run:
-         if alertness <- max_alert * .75: return states.idle
-      states.chase:
-         if player == null: return states.hunt
+         if alertness <= max_alert * .75: return states.idle
    if player != null and state != states.run: return states.run
+   super(_delta)
    return null
    
 # ---- # Get Exit
