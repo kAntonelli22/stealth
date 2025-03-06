@@ -4,22 +4,25 @@ class_name Target
 # ---- # Ready
 func _ready() -> void:
    super()
-   add_state("run")
+   add_state("flee")
+   add_state("escaped")
    call_deferred("set_state", states.idle)
 
 # ---- # State Logic
 func _state_logic(delta):
    match(state):
-      states.run:
+      states.flee:
          if player != null: nav_agent.target_position = get_exit()
+      states.escaped:
+         return
    super(delta)
 
 # ---- # Get Transition
 func _get_transition(_delta):
    match(state):
-      states.run:
+      states.flee:
          if alertness <= max_alert * .75: return states.idle
-   if player != null and state != states.run: return states.run
+   if player != null and state != states.flee and alertness > max_alert *.75: return states.flee
    super(_delta)
    return null
    
@@ -37,4 +40,5 @@ func get_exit() -> Vector2:
 
 # ---- # Exit
 func exit_map():
-   print_rich("[color=Orangered]Target[/color]: exiting scene")
+   print_rich("[color=Darkred]Target has escaped[/color]")
+   set_state(states.escaped)

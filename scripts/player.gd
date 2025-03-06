@@ -88,7 +88,7 @@ func move(direction, move_speed):
    
 # ---- # Hit
 func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
-   print_rich("[color=Royalblue]Player[/color]: hit by [color=Orangered]", holder, "[/color] for [color=Orangered]", damage, "[/color]")
+   print_rich("[color=Royalblue]Player[/color]: hit by [color=Darkred]", holder, "[/color] for [color=Darkred]", damage, "[/color]")
    health -= damage
    Signals.emit_signal("update_attributes", health)
 

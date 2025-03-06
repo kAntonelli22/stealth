@@ -34,22 +34,25 @@ func _ready() -> void:
    position = next_route_position()
    add_state("idle")
    add_state("patrol")
+   add_state("dead")
 
 # ---- # Process
 func _process(_delta: float) -> void:
+   if state == states.dead: return
    #if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
    #elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
    detection_bar.value = alertness
    
    if health <= 0:
-      print_rich("[color=Orangered]enemy[/color]: enemy ", self.name, " has died")
+      print_rich("[color=Darkred]enemy[/color]: enemy ", self.name, " has died")
       vision_cone.visible = false
       detection_bar.visible = false
-      process_mode = PROCESS_MODE_DISABLED      # pause node on death
+      set_state(states.dead)
 
 # ---- # State Logic
 # contains the logic for state actions and transitions
 func _state_logic(delta):
+   if state == states.dead: print("dead")
    if player:
       if spotted_objects.find(player) == -1: player = null
       else: alertness += 1
@@ -65,7 +68,7 @@ func _state_logic(delta):
    
    if state == states.idle and path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15:
       set_state(states.patrol)
-   
+
    if state != states.idle:
       var next_position = nav_agent.get_next_path_position()
       var angle_to := position.angle_to_point(next_position)
@@ -78,7 +81,7 @@ func _state_logic(delta):
 #func _get_transition(_delta):
    #match(state):
       #states.idle:
-         #if path_route.size() > 0: return states.patrol
+         #if path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15: return states.patrol
       #states.patrol: pass
    #return null
 
@@ -114,13 +117,13 @@ func next_route_position() -> Vector2:
 
 # ---- # Hit
 func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
-   if health <= 0: return
+   if state == states.dead: return
    if spotted_objects.find(holder) and alertness <= (.25 * max_alert): # and weapon.type == "stealth":
-      print_rich("[color=Orangered]enemy[/color]: hit by stealth takedown")
+      print_rich("[color=Darkred]enemy[/color]: hit by stealth takedown")
       health = 0
    else:
       health -= damage
-      print_rich("[color=Orangered]enemy[/color]: health reduced to ", health)
+      print_rich("[color=Darkred]enemy[/color]: health reduced to ", health)
       alertness = 100
       # change state to deal with the attack
       # move towards the direction of the attack

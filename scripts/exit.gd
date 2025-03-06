@@ -21,7 +21,7 @@ func _ready() -> void:
 # ---- # Process
 func _input(event):
    if !waiting_for_input: return
-   if event.is_action_pressed("interact"): exiting_object.exit()
+   if event.is_action_pressed("interact"): exiting_object.exit_map()
 
 # ---- # Exit Area Entered
 func _on_exit_area_entered(body: Node2D) -> void:
@@ -40,6 +40,6 @@ func _on_exit_area_exited(body: Node2D) -> void:
 
 # ---- # Exit Timer Timeout
 func _on_exit_timer_timeout() -> void:
-   print_rich("[color=#64649E]exit[/color]: body ", exiting_object, " left game")
+   print_rich("[color=#64649E]exit[/color]: body ", exiting_object, " exit function called")
    if exiting_object is Target: exiting_object.exit_map()
    if exiting_object is Player: waiting_for_input = true

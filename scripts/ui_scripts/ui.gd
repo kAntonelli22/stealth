@@ -12,8 +12,9 @@ var paused : bool = false
 
 # ---- # Ready
 func _ready() -> void:
-   Signals.connect("map_changed", connect_signals)
-
+   #Signals.connect("map_changed", connect_signals)
+   connect_signals()
+   
 # ---- # Input
 func _input(event: InputEvent) -> void:
    if event.is_action_pressed("pause_menu"): pause_game()
