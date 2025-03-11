@@ -1,23 +1,12 @@
-[gd_scene format=3 uid="uid://co3to2m7xgjmy"]
+[gd_scene load_steps=2 format=3 uid="uid://co3to2m7xgjmy"]
 
-[node name="EntranceUI" type="ColorRect"]
+[ext_resource type="Script" path="res://scripts/entrance_ui.gd" id="1_7cbb0"]
+
+[node name="Button" type="Button"]
 custom_minimum_size = Vector2(128, 64)
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.169245, 0.169245, 0.169245, 1)
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 10
-
-[node name="Label" type="Label" parent="MarginContainer"]
-layout_mode = 2
+offset_right = 20.0
+offset_bottom = 15.0
 text = "Entrance"
+script = ExtResource("1_7cbb0")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

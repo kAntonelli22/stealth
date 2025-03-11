@@ -38,6 +38,10 @@ func _ready() -> void:
    for perk in active_perks:
       perk.apply_perk(self)
 
+# ---- # Process
+func _process(_delta: float) -> void:
+   sprite.rotation = -rotation
+
 # ---- # Physics Process
 func _physics_process(delta: float) -> void:
    if health <= 0: Signals.emit_signal("contract_over", true)

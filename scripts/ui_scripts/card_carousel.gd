@@ -43,5 +43,5 @@ func instance_card(deck: Dictionary, type: String):
    card.title.text = card_data.name
    #card.image.texture = card_data.image
    card.description.text = card_data.description
-   card.accept.pressed.connect(card_chosen.bind(card))
+   card.button.pressed.connect(card_chosen.bind(card))
    card.add_to_group("Persist")

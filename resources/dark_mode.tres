@@ -1,3 +1,48 @@
-[gd_resource type="Theme" format=3 uid="uid://b07c8ipcwbeuu"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://b07c8ipcwbeuu"]
+
+[ext_resource type="Texture2D" uid="uid://2wxprnw4fu8x" path="res://assets/buttons/DarkH.png" id="1_k82cp"]
+[ext_resource type="Texture2D" uid="uid://b8xhbpkp6xtja" path="res://assets/buttons/DarkD.png" id="1_yes77"]
+[ext_resource type="Texture2D" uid="uid://dc2i3qui48ptr" path="res://assets/buttons/DarkN.png" id="2_78mhd"]
+[ext_resource type="Texture2D" uid="uid://c37rceiu34axt" path="res://assets/buttons/DarkP.png" id="3_01arn"]
+[ext_resource type="FontFile" uid="uid://bqb5kjp7kovek" path="res://assets/fonts/itch bundle/ThickPixels.ttf" id="4_co3xq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q2e4p"]
+texture = ExtResource("1_yes77")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_70ufp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ghxb3"]
+texture = ExtResource("1_k82cp")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6kf72"]
+texture = ExtResource("2_78mhd")
+texture_margin_left = 10.0
+texture_margin_top = 5.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tv8pb"]
+content_margin_top = 16.0
+texture = ExtResource("3_01arn")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
 
 [resource]
+default_font = ExtResource("4_co3xq")
+default_font_size = 16
+Button/font_sizes/font_size = 16
+Button/styles/disabled = SubResource("StyleBoxTexture_q2e4p")
+Button/styles/focus = SubResource("StyleBoxEmpty_70ufp")
+Button/styles/hover = SubResource("StyleBoxTexture_ghxb3")
+Button/styles/normal = SubResource("StyleBoxTexture_6kf72")
+Button/styles/pressed = SubResource("StyleBoxTexture_tv8pb")

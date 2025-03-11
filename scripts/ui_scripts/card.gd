@@ -2,10 +2,10 @@ extends Control
 class_name Card
 
 # ---- # nodes
-@onready var title := $Background/CardContainer/MarginContainer/TextContainer/CardTitle
-@onready var image := $Background/CardContainer/MarginContainer/TextContainer/CardImage
-@onready var description := $Background/CardContainer/MarginContainer/TextContainer/CardDescription
-@onready var accept := $Background/CardContainer/CardButton
+@onready var title := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardTitle
+@onready var image := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardImage
+@onready var description := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardDescription
+@onready var button := $Outline/CardButton
 
 # ---- # variables
 var card_type : String       # the type of card (perk or map)

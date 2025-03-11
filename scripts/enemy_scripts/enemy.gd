@@ -38,9 +38,8 @@ func _ready() -> void:
 
 # ---- # Process
 func _process(_delta: float) -> void:
+   sprite.rotation = -rotation
    if state == states.dead: return
-   #if alertness > 25 and detection_bar.value <= 25: vision_cone.angle_deg += vision_cone.angle_deg + 30
-   #elif alertness <= 25 and detection_bar.value > 25: vision_cone.angle_deg -= vision_cone.angle_deg - 30
    detection_bar.value = alertness
    
    if health <= 0:
@@ -65,9 +64,6 @@ func _state_logic(delta):
       elif object is Enemy:
          if object.player != null:
             player = object.player
-   
-   if state == states.idle and path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15:
-      set_state(states.patrol)
 
    if state != states.idle:
       var next_position = nav_agent.get_next_path_position()
@@ -78,12 +74,12 @@ func _state_logic(delta):
 
 # ---- # Get Transition
 # contains the logic for transitioning between states
-#func _get_transition(_delta):
-   #match(state):
-      #states.idle:
-         #if path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15: return states.patrol
-      #states.patrol: pass
-   #return null
+func _get_transition(_delta):
+   match(state):
+      states.idle:
+         if path_route.size() > 0 and position.distance_to(path_route[current_point]) > 15: return states.patrol
+      states.patrol: pass
+   return null
 
 # ---- # Move
 func move(next_position, angle, angle_to, delta):

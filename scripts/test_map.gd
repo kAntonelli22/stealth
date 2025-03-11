@@ -20,7 +20,7 @@ func _ready() -> void:
    
    Global.instance_entrance(Vector2(50, 50))
    Global.instance_entrance(Vector2(50, 150))
-   get_node("Camera").adjust_camera($Player, -15, -300, 663, 1167)
+   get_node("Camera").adjust_camera($Player, $Background)
    Signals.emit_signal("map_changed")
 
 # ---- # Process
@@ -28,7 +28,8 @@ func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - enemy get transition function does not work as intended
+# - vision cones can be changed mid game
+# - clicks on ui causes player to attack
 # - guards instantly begin chasing player after detecting them once
 # - load runs into issues with enemy ready code
 # - ai restarts at route point one on load
@@ -38,6 +39,12 @@ func _process(_delta: float) -> void:
 
 # ---- # Issue List # -------------------------------------------------------- #
 # ---- # Todo List # --------------------------------------------------------- #
+# - shop screen
+# - inventory system
+# - save slots on new game
+# - saves automatic when shop screen reachd
+# - deployment screen with paused game
+# - reinforcement signal that deploys more guards
 # - generic map scene that all maps are created out of or inherit from
 # - enemy hunt state that transitions to idle
 # - enemy backpedal state. move away once past weapon effective range
@@ -45,7 +52,6 @@ func _process(_delta: float) -> void:
 # - detection overhaul (dashing and distance factored in, noise areas, detection shadow)
 # - create light and dark mode themes
 # - add game over, lives, debuffs for losing
-# - deployment, reinforcements
 # - action key circular loading symbol for exits
 # - player movement overhaul (actual dash)
 # - weapon overhaul (ranged parent class, default weapons, equip code, drop code, sprites)
@@ -54,8 +60,9 @@ func _process(_delta: float) -> void:
 # ---- # Todo List # --------------------------------------------------------- #
 # ---- # Game Info # --------------------------------------------------------- #
 # - player size 16x16
-# - Grayscale light - dark
-# - (#F8F9FA, #E9ECEF, #DEE2E6, #CED4DA, #ADB5BD, #6C757D, #495057, #343A40, #212529)
+# - Grayscale dark - light
+# - (#15151A, #292933, #3E3E4D, #A3A3CC, #B8B8E6, #CCCCFF)
+
 # - Blues light - dark
 # - (#4E4EB5, #64649E, #474794, #29294D)
 # - Reds light - dark

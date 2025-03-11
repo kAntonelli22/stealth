@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dw6g1j1k7tqge"]
 
 [ext_resource type="Script" path="res://scripts/enemy_scripts/enemy.gd" id="1_exf28"]
-[ext_resource type="Texture2D" uid="uid://p5ratbcbwoaj" path="res://assets/square.png" id="2_phxoh"]
 [ext_resource type="PackedScene" uid="uid://kf8tqdlm8c5t" path="res://addons/vision_cone_2d/vision_cone_2d_template.tscn" id="3_g403j"]
+[ext_resource type="Texture2D" uid="uid://clsqcgm3hmadt" path="res://assets/lil guy.png" id="3_rrnxy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_76hp6"]
 size = Vector2(32, 32)
@@ -26,8 +26,9 @@ collision_layer_mask = 3
 [node name="Sprite" type="Sprite2D" parent="."]
 self_modulate = Color(0.709804, 0.305882, 0.305882, 1)
 texture_filter = 1
-scale = Vector2(2, 2)
-texture = ExtResource("2_phxoh")
+position = Vector2(8.34465e-07, 1.43051e-06)
+scale = Vector2(1.6, 1.45455)
+texture = ExtResource("3_rrnxy")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_76hp6")

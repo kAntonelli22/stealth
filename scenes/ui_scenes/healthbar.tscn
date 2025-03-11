@@ -1,48 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://bthayk4qlyen"]
+[gd_scene load_steps=6 format=3 uid="uid://bthayk4qlyen"]
 
 [ext_resource type="Script" path="res://scripts/ui_scripts/healthbar.gd" id="1_agc1i"]
+[ext_resource type="Texture2D" uid="uid://cjlkh8ugea0iq" path="res://assets/progress_bars/outline.png" id="2_7ihis"]
+[ext_resource type="Texture2D" uid="uid://dkjdb6p7taldb" path="res://assets/heart.png" id="2_rxnss"]
+[ext_resource type="Texture2D" uid="uid://cadvk57eru6n5" path="res://assets/progress_bars/progress.png" id="3_wioug"]
+[ext_resource type="Texture2D" uid="uid://b2ii7ji3nujdw" path="res://assets/progress_bars/under.png" id="4_q0y7f"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sik2"]
-bg_color = Color(0.66, 0.264, 0.264, 1)
-
-[node name="HealthBackground" type="ColorRect"]
-custom_minimum_size = Vector2(0, 48)
+[node name="HealthContainer" type="HBoxContainer"]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
+offset_top = -8.0
+offset_right = -896.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.129412, 0.145098, 0.160784, 1)
+theme_override_constants/separation = -16
 script = ExtResource("1_agc1i")
-bar_color = Color(0.658824, 0.262745, 0.262745, 1)
 
-[node name="HealthContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="HealthContainer"]
+[node name="Heart" type="TextureRect" parent="."]
+z_index = 2
 texture_filter = 1
-custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-size_flags_stretch_ratio = 0.15
-theme_override_colors/font_color = Color(0.658824, 0.262745, 0.262745, 1)
-theme_override_font_sizes/font_size = 26
-text = "100"
-horizontal_alignment = 2
+texture = ExtResource("2_rxnss")
+expand_mode = 3
 
-[node name="HealthBar" type="ProgressBar" parent="HealthContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 8
-theme_override_styles/fill = SubResource("StyleBoxFlat_6sik2")
-value = 100.0
-show_percentage = false
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("4_q0y7f")
+texture_over = ExtResource("2_7ihis")
+texture_progress = ExtResource("3_wioug")
+tint_progress = Color(1, 0.121569, 0.0431373, 1)

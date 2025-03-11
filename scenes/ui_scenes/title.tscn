@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://i7kqwngmfxp"]
+[gd_scene load_steps=3 format=3 uid="uid://i7kqwngmfxp"]
 
 [ext_resource type="Script" path="res://scripts/ui_scripts/title.gd" id="1_ltd3y"]
+[ext_resource type="PackedScene" uid="uid://kf8jrw1sjy07" path="res://scenes/ui_scenes/save_slots.tscn" id="2_6lfdt"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -15,7 +16,7 @@ script = ExtResource("1_ltd3y")
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-color = Color(0.129412, 0.145098, 0.160784, 1)
+color = Color(0.0823529, 0.0823529, 0.101961, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
 layout_mode = 1
@@ -46,7 +47,7 @@ text = "Continue"
 
 [node name="Start Game" type="Button" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Start"
+text = "New Game"
 
 [node name="Settings" type="Button" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -60,8 +61,17 @@ text = "Guide"
 layout_mode = 2
 text = "Quit"
 
+[node name="SaveSlots" parent="." instance=ExtResource("2_6lfdt")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Start Game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Guide" to="." method="_on_guide_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

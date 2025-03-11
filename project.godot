@@ -46,6 +46,12 @@ Persist="objects called by global save game function"
 Entrances="all entrances to the map"
 Exits="all exits in the map"
 
+[gui]
+
+theme/custom="res://resources/dark_mode.tres"
+theme/custom_font="res://assets/fonts/itch bundle/ThickPixels.ttf"
+theme/default_font_antialiasing=0
+
 [input]
 
 move_left={
@@ -95,5 +101,6 @@ interact={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

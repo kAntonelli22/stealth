@@ -25,7 +25,7 @@ color = Color(0.31, 0.31, 0.31, 0.333333)
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 648.0
-color = Color(0.129412, 0.145098, 0.160784, 1)
+color = Color(0.0823529, 0.0823529, 0.101961, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
 layout_mode = 1

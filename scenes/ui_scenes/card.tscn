@@ -1,40 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://cp4r5vybok3jn"]
+[gd_scene load_steps=6 format=3 uid="uid://cp4r5vybok3jn"]
 
 [ext_resource type="Script" path="res://scripts/ui_scripts/card.gd" id="1_ymm4o"]
 [ext_resource type="Texture2D" uid="uid://box0x85q4wasm" path="res://icon.svg" id="2_d7hwy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_86bnb"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h45nx"]
+bg_color = Color(1, 1, 1, 0.12549)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4cxp1"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fh4i"]
+bg_color = Color(1, 1, 1, 0.25098)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87c0e"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snd5i"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ggghu"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_upakl"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iokre"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vmnge"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3t7s"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lht7p"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6xcxr"]
-bg_color = Color(0.423529, 0.458824, 0.490196, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdiam"]
+bg_color = Color(1, 1, 1, 0)
 
 [node name="Card" type="Control"]
 custom_minimum_size = Vector2(125, 250)
@@ -50,43 +26,56 @@ size_flags_horizontal = 0
 size_flags_vertical = 4
 script = ExtResource("1_ymm4o")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Outline" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.678431, 0.709804, 0.741176, 1)
+color = Color(0.639216, 0.639216, 0.8, 1)
 
-[node name="CardContainer" type="VBoxContainer" parent="Background"]
+[node name="MarginContainer" type="MarginContainer" parent="Outline"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/CardContainer"]
+[node name="Background" type="ColorRect" parent="Outline/MarginContainer"]
 layout_mode = 2
+color = Color(0.0823529, 0.0823529, 0.101961, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Outline/MarginContainer/Background"]
+layout_mode = 2
+offset_right = 121.0
+offset_bottom = 246.0
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="TextContainer" type="VBoxContainer" parent="Background/CardContainer/MarginContainer"]
+[node name="CardContainer" type="VBoxContainer" parent="Outline/MarginContainer/Background/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 8
 
-[node name="CardTitle" type="Label" parent="Background/CardContainer/MarginContainer/TextContainer"]
+[node name="CardTitle" type="Label" parent="Outline/MarginContainer/Background/MarginContainer/CardContainer"]
 layout_mode = 2
 text = "Card"
 
-[node name="CardImage" type="TextureRect" parent="Background/CardContainer/MarginContainer/TextContainer"]
+[node name="CardImage" type="TextureRect" parent="Outline/MarginContainer/Background/MarginContainer/CardContainer"]
 layout_mode = 2
 texture = ExtResource("2_d7hwy")
 expand_mode = 5
 
-[node name="CardDescription" type="Label" parent="Background/CardContainer/MarginContainer/TextContainer"]
+[node name="CardDescription" type="Label" parent="Outline/MarginContainer/Background/MarginContainer/CardContainer"]
 custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_font_sizes/font_size = 11
@@ -94,20 +83,16 @@ text = "description"
 autowrap_mode = 3
 text_overrun_behavior = 3
 
-[node name="CardButton" type="Button" parent="Background/CardContainer"]
+[node name="CardButton" type="Button" parent="Outline"]
 custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/focus = SubResource("StyleBoxFlat_86bnb")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_4cxp1")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_87c0e")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_snd5i")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_ggghu")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_upakl")
-theme_override_styles/hover = SubResource("StyleBoxFlat_iokre")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_vmnge")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_n3t7s")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_lht7p")
-theme_override_styles/normal = SubResource("StyleBoxFlat_6xcxr")
-text = "Accept"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_h45nx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5fh4i")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hdiam")
+text = "
+"

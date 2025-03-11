@@ -17,8 +17,8 @@ func _state_logic(delta):
       states.chase:
          nav_agent.target_position = player.position
          ai_attack()
-         # if player is to close: backpedal
-         # elif player is to far: nav_agent.target_position = player.position
+         # if weapon.effective_range(player) > 0: nav_agent.target_position = player.position
+         # elif weapon.effective_range(player) < 0: backpedal
          # else: hold position
    
    super(delta)
@@ -27,14 +27,19 @@ func _state_logic(delta):
 func _get_transition(_delta):
    match(state):
       states.idle:
-         if alertness >= max_alert * .75: return states.hunt
+         if alertness >= max_alert * .75: 
+            #vision_cone.angle_deg += 30  # vision cone doesnt update until reloaded
+            return states.hunt
       states.patrol:
-         if alertness >= max_alert * .75: return states.hunt
+         if alertness >= max_alert * .75: 
+            #vision_cone.angle_deg += 30
+            return states.hunt
       states.hunt:
          if player != null: return states.chase
          # if detection shadow is within vision cone: return states.idle
-         if alertness <= max_alert * .75: return states.idle
+         if alertness <= max_alert * .75: 
+            #vision_cone.angle_deg -= 30
+            return states.idle
       states.chase:
          if player == null: return states.hunt
-   super(_delta)
-   return null
+   return super(_delta)
