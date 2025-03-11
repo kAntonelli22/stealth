@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://b07c8ipcwbeuu"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://b07c8ipcwbeuu"]
 
 [ext_resource type="Texture2D" uid="uid://2wxprnw4fu8x" path="res://assets/buttons/DarkH.png" id="1_k82cp"]
 [ext_resource type="Texture2D" uid="uid://b8xhbpkp6xtja" path="res://assets/buttons/DarkD.png" id="1_yes77"]
@@ -9,40 +9,58 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q2e4p"]
 texture = ExtResource("1_yes77")
 texture_margin_left = 10.0
-texture_margin_top = 5.0
+texture_margin_top = 8.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_70ufp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4et1"]
+bg_color = Color(0.168627, 0.129412, 0.54902, 0.25098)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ghxb3"]
 texture = ExtResource("1_k82cp")
 texture_margin_left = 10.0
-texture_margin_top = 5.0
+texture_margin_top = 8.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6kf72"]
 texture = ExtResource("2_78mhd")
 texture_margin_left = 10.0
-texture_margin_top = 5.0
+texture_margin_top = 8.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tv8pb"]
-content_margin_top = 16.0
+content_margin_top = 12.0
 texture = ExtResource("3_01arn")
 texture_margin_left = 5.0
 texture_margin_top = 5.0
 texture_margin_right = 5.0
 texture_margin_bottom = 5.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o3sgi"]
+bg_color = Color(0.103744, 0.103744, 0.103743, 0.25098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5moc"]
+bg_color = Color(1, 1, 1, 0.12549)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2oocx"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eg71k"]
+bg_color = Color(1, 1, 1, 0.188235)
+
 [resource]
 default_font = ExtResource("4_co3xq")
 default_font_size = 16
 Button/font_sizes/font_size = 16
 Button/styles/disabled = SubResource("StyleBoxTexture_q2e4p")
-Button/styles/focus = SubResource("StyleBoxEmpty_70ufp")
+Button/styles/focus = SubResource("StyleBoxFlat_t4et1")
 Button/styles/hover = SubResource("StyleBoxTexture_ghxb3")
 Button/styles/normal = SubResource("StyleBoxTexture_6kf72")
 Button/styles/pressed = SubResource("StyleBoxTexture_tv8pb")
+OverlayButton/base_type = &"Button"
+OverlayButton/styles/disabled = SubResource("StyleBoxFlat_o3sgi")
+OverlayButton/styles/hover = SubResource("StyleBoxFlat_k5moc")
+OverlayButton/styles/normal = SubResource("StyleBoxFlat_2oocx")
+OverlayButton/styles/pressed = SubResource("StyleBoxFlat_eg71k")
