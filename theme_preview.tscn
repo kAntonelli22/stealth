@@ -43,6 +43,10 @@ layout_mode = 2
 disabled = true
 text = "Disabled"
 
+[node name="Label" type="Label" parent="ScrollContainer/TopContainer/NormalButtons"]
+layout_mode = 2
+text = "Label"
+
 [node name="SquareButtons" type="VBoxContainer" parent="ScrollContainer/TopContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -50,11 +54,13 @@ size_flags_horizontal = 3
 [node name="SquareNormal" type="Button" parent="ScrollContainer/TopContainer/SquareButtons"]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
+theme_type_variation = &"SquareButton"
 text = "Normal"
 
 [node name="SquarePressed" type="Button" parent="ScrollContainer/TopContainer/SquareButtons"]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
+theme_type_variation = &"SquareButton"
 toggle_mode = true
 button_pressed = true
 text = "Pressed"
@@ -62,6 +68,7 @@ text = "Pressed"
 [node name="SquareDisabled" type="Button" parent="ScrollContainer/TopContainer/SquareButtons"]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 2
+theme_type_variation = &"SquareButton"
 disabled = true
 text = "Disabled"
 

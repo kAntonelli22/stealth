@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dpe146fvmhnm0"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_a1m0x"]
-[ext_resource type="Texture2D" uid="uid://bhpujpj4trrxe" path="res://assets/triangle.png" id="1_xoe0f"]
+[ext_resource type="Texture2D" uid="uid://bw13eb7qqm35s" path="res://assets/weapons/fists.aseprite" id="2_b7n15"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q4wc8"]
 radius = 64.0
@@ -26,9 +26,8 @@ rotation = 1.5708
 shape = SubResource("CircleShape2D_q4wc8")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(12, -20)
-scale = Vector2(0.5, 1.5)
-texture = ExtResource("1_xoe0f")
+position = Vector2(-5.79198e-05, -16)
+texture = ExtResource("2_b7n15")
 
 [node name="DirectionBox" type="Area2D" parent="."]
 monitorable = false

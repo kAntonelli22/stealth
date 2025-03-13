@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c45cr4c720ty"]
+[gd_scene load_steps=5 format=3 uid="uid://c45cr4c720ty"]
 
 [ext_resource type="Script" path="res://scripts/ui_scripts/ui.gd" id="1_5arqu"]
 [ext_resource type="PackedScene" uid="uid://bthayk4qlyen" path="res://scenes/ui_scenes/healthbar.tscn" id="3_hbtjn"]
 [ext_resource type="PackedScene" uid="uid://gmva8vo3rvmv" path="res://scenes/ui_scenes/pause_menu.tscn" id="3_ik6k2"]
+[ext_resource type="Texture2D" uid="uid://ci4solmwc6xid" path="res://assets/ui/menu_icon.aseprite" id="3_q0ilb"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_5arqu")
@@ -40,6 +41,7 @@ anchor_right = 1.0
 offset_left = -64.0
 offset_bottom = 64.0
 grow_horizontal = 0
+theme_type_variation = &"SquareButton"
 theme_override_font_sizes/font_size = 32
 text = "<--"
 
@@ -55,8 +57,11 @@ text = "Saving . . . "
 [node name="PauseButton" type="Button" parent="."]
 offset_right = 64.0
 offset_bottom = 64.0
+theme_type_variation = &"SquareButton"
 theme_override_font_sizes/font_size = 32
-text = "☰"
+icon = ExtResource("3_q0ilb")
+icon_alignment = 1
+expand_icon = true
 
 [node name="PauseMenu" parent="." instance=ExtResource("3_ik6k2")]
 visible = false

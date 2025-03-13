@@ -15,6 +15,10 @@ run/main_scene="res://scenes/ui_scenes/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[aseprite_importers]
+
+aseprite_executable_path="F:/aseprite/aseprite.exe"
+
 [autoload]
 
 Global="*res://scripts/globals/global.gd"
@@ -34,6 +38,10 @@ project/assembly_name="Stealth"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/addons/nklbdev.aseprite_importers/plugin.cfg")
 
 [global_group]
 

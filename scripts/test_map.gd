@@ -28,7 +28,8 @@ func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - vision cones can be changed mid game
+# - camera does not take ui offset into account when centering on player
+# - vision cones cannot be changed mid game
 # - clicks on ui causes player to attack
 # - guards instantly begin chasing player after detecting them once
 # - load runs into issues with enemy ready code

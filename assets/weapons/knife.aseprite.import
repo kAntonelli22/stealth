@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clsqcgm3hmadt"
-path="res://.godot/imported/lil guy.png-65c3034a31d9b6e24c2a98dde2aea046.ctex"
+uid="uid://cw04lnujhf661"
+path="res://.godot/imported/knife.aseprite-e202e7bf450e9ee31a5ec2f6b6a267aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lil guy.png"
-dest_files=["res://.godot/imported/lil guy.png-65c3034a31d9b6e24c2a98dde2aea046.ctex"]
+source_file="res://assets/weapons/knife.aseprite"
+dest_files=["res://.godot/imported/knife.aseprite-e202e7bf450e9ee31a5ec2f6b6a267aa.ctex"]
 
 [params]
 

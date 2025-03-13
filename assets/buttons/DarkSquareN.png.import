@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p5ratbcbwoaj"
-path="res://.godot/imported/square.png-a07b0c09e99da012e8f7e5d58d728c57.ctex"
+uid="uid://dxcxbd55aocov"
+path="res://.godot/imported/DarkSquareN.png-5992c871e8318e6c3b25b02b60bf123a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/square.png"
-dest_files=["res://.godot/imported/square.png-a07b0c09e99da012e8f7e5d58d728c57.ctex"]
+source_file="res://assets/buttons/DarkSquareN.png"
+dest_files=["res://.godot/imported/DarkSquareN.png-5992c871e8318e6c3b25b02b60bf123a.ctex"]
 
 [params]
 
