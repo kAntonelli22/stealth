@@ -11,6 +11,7 @@ func _ready() -> void:
    for i in range(0, 3):
       if Global.show_perks: instance_card(Perks.perk_deck, "perk")
       else: instance_card(Global.maps, "contract")
+      # TODO emit save signal after creating contract cards
 
 
 # ---- # Process
@@ -24,8 +25,9 @@ func card_chosen(card: Node):
    if card.card_type == "perk":
       Global.player_stats.add_perk(card.data)
       Global.show_perks = false
-      for node in card_container.get_children(): node.queue_free()
-      for i in range(0, 3): instance_card(Global.maps, "contract")
+      get_tree().change_scene_to_packed(Global.shop)
+      #for node in card_container.get_children(): node.queue_free()
+      #for i in range(0, 3): instance_card(Global.maps, "contract")
    elif card.card_type == "contract":
       Global.change_map(card.data.value)
       

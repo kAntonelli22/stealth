@@ -67,3 +67,5 @@ theme_override_font_sizes/font_size = 32
 text = "-->"
 
 [node name="Control" parent="." instance=ExtResource("1_og5q1")]
+
+[connection signal="pressed" from="ColorRect/ContractButton" to="." method="_on_contract_button_pressed"]

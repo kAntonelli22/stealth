@@ -30,6 +30,10 @@ SaveManager="*res://scripts/globals/save_manager.gd"
 
 gdscript/warnings/unused_signal=0
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="Stealth"
@@ -41,7 +45,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/addons/nklbdev.aseprite_importers/plugin.cfg")
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg")
 
 [global_group]
 

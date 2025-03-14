@@ -14,6 +14,7 @@ class_name PlayerStats
 # ---- player economy
 @export_group("Player Economy")
 @export var money : int
+# TODO set up player money system
 
 # ---- # player perks
 var perks : Array

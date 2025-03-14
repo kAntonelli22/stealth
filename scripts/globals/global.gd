@@ -16,6 +16,7 @@ var godot_icon := preload("res://icon.svg")
 var card_select := preload("res://scenes/ui_scenes/card_carousel.tscn")
 var card := preload("res://scenes/ui_scenes/card.tscn")
 var entrance_ui := preload("res://scenes/ui_scenes/entrance_ui.tscn")
+var shop := preload("res://scenes/ui_scenes/shop.tscn")
 
 var player_scene := preload("res://scenes/player.tscn")
 var guard_scene := preload("res://scenes/enemy_scenes/guard.tscn")
