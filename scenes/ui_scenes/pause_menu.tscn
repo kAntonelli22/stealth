@@ -54,6 +54,7 @@ alignment = 0
 
 [node name="Save" type="Button" parent="Background/MarginContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Save Game"
 alignment = 0
 

@@ -28,6 +28,12 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 2
 
+[node name="Perk Container" type="VBoxContainer" parent="LeftPanel/LeftContainer"]
+layout_mode = 2
+
+[node name="Inventory" type="VBoxContainer" parent="LeftPanel/LeftContainer"]
+layout_mode = 2
+
 [node name="HealthBackground" parent="LeftPanel/LeftContainer" instance=ExtResource("3_hbtjn")]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2

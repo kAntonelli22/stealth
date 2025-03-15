@@ -12,6 +12,7 @@ func _ready():
 # ---- # Save Game
 # saves all persistent game data and the current scene
 func save_game():
+   print_rich("[color=#64649E]SaveManager[/color]: saving game")
    Signals.emit_signal("game_saved")
    save_exists = true
    var save_file := FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -30,7 +31,7 @@ func save_game():
 # ---- # Load Game
 # loads all persistent game data, removes duplicates, and loads the saved scene
 func load_game():
-   print_rich("SaveManager: loading save file")
+   print_rich("[color=#64649E]SaveManager[/color]: loading game")
    if not FileAccess.file_exists("user://savegame.save"):
       print_rich("[color=Crimson]Error[/color]: SaveManager cannot find save file")
       return
@@ -48,9 +49,8 @@ func load_game():
    
    var save_nodes : Array = get_tree().get_nodes_in_group("Persist")
    for node in save_nodes:
+      node.get_parent().remove_child(node)
       node.queue_free()
-      await get_tree().process_frame
-      await get_tree().process_frame
       Global.update_groups()
    
    while save_file.get_position() < save_file.get_length():
@@ -65,18 +65,18 @@ func load_game():
       elif data["type"] == "node":
          var new_object = load(data["filename"]).instantiate()
          get_node(data["parent"]).add_child(new_object)
-         new_object.position = Vector2(data["position_x"], data["position_y"])
-         new_object.rotation = data["rotation"]
+         #new_object.position = Vector2(data["position_x"], data["position_y"])
+         #new_object.rotation = data["rotation"]
          
          if !player and data["filename"] == "res://scenes/player.tscn": player = new_object
          
          # create the weapon --- update to use equip
-         var new_weapon = load(data["weapon"]["filename"]).instantiate()
-         new_object.weapon = new_weapon
-         new_object.add_child(new_weapon)
-         for i in data["weapon"]:
-            if i == "filename" or i == "parent": continue
-            new_object.weapon.set(i, data["weapon"][i])
+         #var new_weapon = load(data["weapon"]["filename"]).instantiate()
+         #new_object.weapon = new_weapon
+         #new_object.add_child(new_weapon)
+         #for i in data["weapon"]:
+            #if i == "filename" or i == "parent": continue
+            #new_object.weapon.set(i, data["weapon"][i])
       
          # set the remaining variables
          for i in data.keys():

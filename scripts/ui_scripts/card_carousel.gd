@@ -8,10 +8,11 @@ extends Control
 
 # ---- # Ready
 func _ready() -> void:
-   for i in range(0, 3):
-      if Global.show_perks: instance_card(Perks.perk_deck, "perk")
-      else: instance_card(Global.maps, "contract")
-      # TODO emit save signal after creating contract cards
+   if Global.show_perks:
+      for i in range(0, 3): instance_card(Perks.perk_deck, "perk")
+   else:
+      for i in range(0, 3): instance_card(Global.maps, "contract")
+      Signals.emit_signal("save_game")
 
 
 # ---- # Process

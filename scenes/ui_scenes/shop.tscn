@@ -30,14 +30,14 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 50
 
-[node name="Label" type="Label" parent="ColorRect/MarginContainer"]
+[node name="Title" type="Label" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Shop Screen"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="ColorRect/MarginContainer"]
+[node name="Money" type="Label" parent="ColorRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

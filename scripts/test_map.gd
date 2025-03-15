@@ -28,35 +28,33 @@ func _process(_delta: float) -> void:
    pass
 
 # ---- # Issue List # -------------------------------------------------------- #
-# - FIXME camera does not take ui offset into account when centering on player
-# - FIXME vision cones cannot be changed mid game
-# - FIXME clicks on ui causes player to attack
-# - FIXME guards instantly begin chasing player after detecting them once
-# - FIXME load runs into issues with enemy ready code
-# - FIXME ai restarts at route point one on load
-# - FIXME ai gets stuck on corners
-# - FIXME ai can backstab and damage eachother
-# - FIXME change hard coded string paths to resource uids
+# FIXME camera does not take ui offset into account when centering on player
+# FIXME vision cones cannot be changed mid game
+# FIXME clicks on ui causes player to attack
+# FIXME guards instantly begin chasing player after detecting them once
+# FIXME load runs into issues with enemy ready code
+# FIXME ai restarts at route point one on load
+# FIXME ai gets stuck on corners
+# FIXME ai can backstab and damage eachother
+# FIXME change hard coded string paths to resource uids
 
 # ---- # Issue List # -------------------------------------------------------- #
 # ---- # Todo List # --------------------------------------------------------- #
-# - TODO shop screen
-# - TODO inventory system
-# - TODO save slots on new game
-# - TODO saves automatic when shop screen reachd
-# - TODO deployment screen with paused game
-# - TODO reinforcement signal that deploys more guards
-# - TODO generic map scene that all maps are created out of or inherit from
-# - TODO enemy hunt state that transitions to idle
-# - TODO enemy backpedal state. move away once past weapon effective range
-# - TODO fully implement guard death and score calculation along with player economics
-# - TODO detection overhaul (dashing and distance factored in, noise areas, detection shadow)
-# - TODO create light and dark mode themes
-# - TODO add game over, lives, debuffs for losing
-# - TODO action key circular loading symbol for exits
-# - TODO player movement overhaul (actual dash)
-# - TODO weapon overhaul (ranged parent class, default weapons, equip code, drop code, sprites)
-# - TODO combat overhaul (body parts, damage debuffs)
+# TODO inventory system
+# TODO saves automatic when shop screen reachd
+# TODO deployment screen with paused game
+# TODO reinforcement signal that deploys more guards
+# TODO generic map scene that all maps are created out of or inherit from
+# TODO enemy hunt state that transitions to idle
+# TODO enemy backpedal state. move away once past weapon effective range
+# TODO fully implement guard death and score calculation along with player economics
+# TODO detection overhaul (dashing and distance factored in, noise areas, detection shadow)
+# TODO create light and dark mode themes
+# TODO add game over, lives, debuffs for losing
+# TODO action key circular loading symbol for exits
+# TODO player movement overhaul (actual dash)
+# TODO weapon overhaul (ranged parent class, default weapons, equip code, drop code, sprites)
+# TODO combat overhaul (body parts, damage debuffs)
 
 # ---- # Todo List # --------------------------------------------------------- #
 # ---- # Game Info # --------------------------------------------------------- #

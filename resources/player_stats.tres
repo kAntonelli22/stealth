@@ -11,4 +11,6 @@ stamina = 100.0
 stamina_regen = 1.0
 dash_speed = 900
 dash_cost = 5
-money = 0
+money = 30
+max_perks = 0
+inventory_slots = 0

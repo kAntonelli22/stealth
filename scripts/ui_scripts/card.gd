@@ -1,6 +1,8 @@
 extends Control
 class_name Card
 
+# FIXME card does not load data after loading save
+
 # ---- # nodes
 @onready var title := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardTitle
 @onready var image := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardImage
