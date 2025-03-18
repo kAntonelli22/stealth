@@ -20,7 +20,6 @@ func _ready() -> void:
 # ---- # Save
 func save(array: Array[SavedData]):
    var saved_data = SavedCardData.new()
-   print("card saving")
    saved_data.path = scene_file_path
    saved_data.parent = get_parent().get_path()
    saved_data.data = data

@@ -1,6 +1,8 @@
 extends StateMachine
 class_name Player
 
+# TODO implement player state machine
+
 # ---- # logic variables
 var type : String = "Player"
 var dashing : bool = false
@@ -100,27 +102,3 @@ func hit(holder : CharacterBody2D, _holder_weapon : Node2D, damage : int):
 func exit_map():
    print_rich("[color=Royalblue]Player[/color]: exiting map")
    Signals.emit_signal("contract_over", false)
-
-# ---- # Save
-func save() -> Dictionary:
-   var perk_dict : Dictionary
-   for perk in active_perks:
-      perk_dict.get_or_add(perk, perk.save())
-   var save_dict = {
-      "type": "node",
-      "filename": get_scene_file_path(),
-      "parent": get_parent().get_path(),
-      "position_x": position.x,
-      "position_y": position.y,
-      "rotation": rotation,
-      "health": health,
-      "health_regen": health_regen,
-      "speed": speed,
-      "stamina": stamina,
-      "stamina_regen": stamina_regen,
-      "dash_speed": dash_speed,
-      "dash_cost": dash_cost,
-      "weapon": weapon.save(),
-      "active_perks": perk_dict,
-   }
-   return save_dict

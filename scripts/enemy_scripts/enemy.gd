@@ -128,37 +128,3 @@ func hit(holder : CharacterBody2D, _p_weapon : Node2D, damage : int):
 func ai_attack():
    if player and weapon and weapon.can_hit(player):
       if weapon.cooldown <= weapon.recharge: weapon.attack(self)
-
-# ---- # Save 
-func save() -> Dictionary:
-   path_route_x = []
-   path_route_y = []
-   for point in path_route:
-         path_route_x.append(point.x)
-         path_route_y.append(point.y)
-   var save_dict = {
-      "type": "node",
-      "filename": get_scene_file_path(),
-      "parent": get_parent().get_path(),
-      "position_x": position.x,
-      "position_y": position.y,
-      "rotation": rotation,
-      "health": health,
-      "speed": speed,
-      "rotate_speed": rotate_speed,
-      "nav_agent.target_position.x": nav_agent.target_position.x,
-      "nav_agent.target_position.y": nav_agent.target_position.y,
-      "path_route_x": path_route_x,
-      "path_route_y": path_route_y,
-      "spotted_objects": spotted_objects,
-      "alertness": alertness,
-      "weapon": weapon.save(),
-   }
-   return save_dict
-
-# ---- # Custom Load
-# called by SaveManager
-# stitches path_route json arrays back together
-func custom_load():
-   for i in range(0, path_route_x.size()):
-      path_route.append(Vector2(path_route_x[i], path_route_y[i]))

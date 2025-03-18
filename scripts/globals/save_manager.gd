@@ -4,6 +4,7 @@ extends Node
 # TODO create SavedData class
 # FIXME save slots 2 and 3 do not work?
 # FIXME saves dont work until the game is restarted
+# FIXME code injection is possible with this design
 
 # ---- # variables
 var current_path: String

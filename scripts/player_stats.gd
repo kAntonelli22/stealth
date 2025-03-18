@@ -80,6 +80,25 @@ func remove_perk(perk): perks.remove_at(perks.find(perk))
 func remove_perk_at(index: int): perks.remove_at(index)
 
 # ---- # Save
+func save(array: Array[SavedData]):
+   var saved_data = SavedPlayerData.new()
+   saved_data.path = scene_file_path
+   saved_data.parent = get_parent().get_path()
+   saved_data.data = data
+   array.append(saved_data)
+
+# ---- # On Save Game
+func before_load():
+   get_parent().remove_child(self)
+   queue_free()
+
+# ---- # On Save Game
+func after_load(saved_data: SavedData):
+   var saved_card = saved_data as SavedCardData
+   data = saved_card.data
+
+
+# ---- # Save
 func save() -> Dictionary:
    var perk_dict : Dictionary
    for perk in perks:
