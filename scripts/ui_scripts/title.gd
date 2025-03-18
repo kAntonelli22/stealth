@@ -6,7 +6,7 @@ extends Control
 
 # ---- # Ready
 func _ready() -> void:
-   if !SaveManager.save_exists:
+   if SaveManager.current_path == "":
       continue_button.disabled = true
 
 # ---- # Continue Pressed

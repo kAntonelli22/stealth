@@ -68,7 +68,9 @@ theme_override_constants/separation = 8
 
 [node name="CardTitle" type="Label" parent="Outline/MarginContainer/Background/MarginContainer/CardContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Card"
+text_overrun_behavior = 3
 
 [node name="CardImage" type="TextureRect" parent="Outline/MarginContainer/Background/MarginContainer/CardContainer"]
 layout_mode = 2

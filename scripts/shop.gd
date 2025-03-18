@@ -18,11 +18,6 @@ func update_money():
 func _ready() -> void:
    update_money()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-   pass
-
 func _on_contract_button_pressed() -> void:
    Global.show_perks = false;
-   get_tree().change_scene_to_packed(Global.card_select)
+   Global.change_scene(Global.card_select)

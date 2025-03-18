@@ -10,7 +10,7 @@ extends Control
 # ---- # Ready
 func _ready() -> void:
    Signals.connect("game_saved", enable_load)
-   if !SaveManager.save_exists:
+   if SaveManager.current_path == "":
       load_button.disabled = true
 
 # ---- # Enable Load

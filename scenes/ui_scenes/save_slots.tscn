@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://kf8jrw1sjy07"]
 
-[ext_resource type="Script" path="res://scripts/save_slots.gd" id="1_nuqpq"]
+[ext_resource type="Script" path="res://scripts/save_scripts/save_slots.gd" id="1_nuqpq"]
 
 [node name="SaveSlots" type="ColorRect"]
 process_mode = 2

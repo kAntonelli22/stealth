@@ -51,7 +51,7 @@ func _process(_delta: float) -> void:
 # ---- # State Logic
 # contains the logic for state actions and transitions
 func _state_logic(delta):
-   if state == states.dead: print("dead")
+   if state == states.dead: return
    if player:
       if spotted_objects.find(player) == -1: player = null
       else: alertness += 1

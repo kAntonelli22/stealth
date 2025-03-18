@@ -1,8 +1,6 @@
 extends Control
 class_name Card
 
-# FIXME card does not load data after loading save
-
 # ---- # nodes
 @onready var title := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardTitle
 @onready var image := $Outline/MarginContainer/Background/MarginContainer/CardContainer/CardImage
@@ -10,23 +8,30 @@ class_name Card
 @onready var button := $Outline/CardButton
 
 # ---- # variables
-var card_type : String       # the type of card (perk or map)
-var data                # the data that the card holds (effects, bonuses, map configs)
+var data                # the data that the card holds (Perk or Contract class)
 
 # ---- # Ready
 func _ready() -> void:
-   pass
+   title.text = data.name
+   #image.texture = data.texture
+   description.text = data.description
+   add_to_group("Persist")
+   
+# ---- # Save
+func save(array: Array[SavedData]):
+   var saved_data = SavedCardData.new()
+   print("card saving")
+   saved_data.path = scene_file_path
+   saved_data.parent = get_parent().get_path()
+   saved_data.data = data
+   array.append(saved_data)
 
-# ---- # Save 
-func save() -> Dictionary:
-   var save_dict = {
-      "type": "node",
-      "filename": get_scene_file_path(),
-      "parent": get_parent().get_path(),
-      "card_type": card_type,
-      "data": data,
-      "title_text": title.text,
-      "image_texture": image.texture,
-      "description_text": description.text,
-   }
-   return save_dict
+# ---- # On Save Game
+func before_load():
+   get_parent().remove_child(self)
+   queue_free()
+
+# ---- # On Save Game
+func after_load(saved_data: SavedData):
+   var saved_card = saved_data as SavedCardData
+   data = saved_card.data

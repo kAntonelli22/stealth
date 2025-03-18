@@ -2,7 +2,6 @@ extends Node2D
 
 # ---- # Ready
 func _ready() -> void:
-   Global.games_played += 1
    Global.map = self
    
    var entity_dict: Dictionary = {"position": Vector2(100, 100), "rotation": deg_to_rad(90)}
@@ -41,7 +40,6 @@ func _process(_delta: float) -> void:
 # ---- # Issue List # -------------------------------------------------------- #
 # ---- # Todo List # --------------------------------------------------------- #
 # TODO inventory system
-# TODO saves automatic when shop screen reachd
 # TODO deployment screen with paused game
 # TODO reinforcement signal that deploys more guards
 # TODO generic map scene that all maps are created out of or inherit from

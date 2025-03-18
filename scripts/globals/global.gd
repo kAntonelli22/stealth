@@ -3,11 +3,10 @@ extends Node
 
 # ---- # save game stuff
 var save_game_placeholder : bool = true
-var games_played : int = 0
+var rounds : int = 0
 
 # ---- # resources
 var player_stats := preload("res://resources/player_stats.tres")
-var perk := preload("res://resources/perk.tres")
 
 # ---- # assets
 var godot_icon := preload("res://icon.svg")
@@ -30,6 +29,9 @@ var melee := preload("res://scenes/melee.tscn")
 # ---- # card variables
 var show_perks : bool = false    # used by card carousel to determine if perks should be offered
 
+var contracts = {
+   "contract": Contract,
+}
 var maps = {
    "map1": {
       "name": "Map 1",
@@ -53,6 +55,7 @@ var maps = {
 
 # ---- # map variables
 var map
+var current_contract: Contract
 
 # ---- # group variables
 var guards : Array
@@ -99,10 +102,15 @@ func instance_exit(position):
    exit.position = position
    map.add_child(exit)
 
-# ---- # Change Map
-func change_map(new_map: PackedScene):
-   print_rich("[color=64649E][b]Changing Map[/b][/color]")
-   get_tree().change_scene_to_packed(new_map)
+# ---- # Change Scene
+func change_scene(new_scene: PackedScene):
+   get_tree().change_scene_to_packed(new_scene)
+
+# ---- # Start Contract
+func start_contract(new_contract: Contract):
+   print_rich("[color=64649E][b]Starting Contract[/b][/color]")
+   current_contract = new_contract
+   change_scene(new_contract.map)
 
 # ---- # Update Groups
 # updates global group variables
@@ -117,24 +125,33 @@ func update_groups():
 
 # ---- # Game Over
 # ends the game and determines the players score before scene transition
+# TODO change calculation of money modifier
 func contract_over(player_died: bool):
-   if player_died:
-      get_tree().change_scene_to_packed(card_select)
-      return
    
-   var guards_killed = guards.size()
-   #for guard in guards:
-      #if guard.status != "dead":
-         #guards_killed -= 1
-   var targets_killed = targets.size()
-   #for target in targets:
-      #if target.status != "dead":
-         #targets_killed -= 1
-   var score = (guards_killed * 0.5) + (targets_killed * 1.5)
+   var guards_killed = current_contract.guards
+   for guard in guards:
+      if guard.state == guard.states["dead"]:
+         guards_killed -= 1
+   var targets_killed = current_contract.targets
+   for target in targets:
+      if target.state == target.states["dead"]:
+         targets_killed -= 1
+   var target_mod: float = (targets_killed / current_contract.targets) * 4
+   var guard_mod: float = (guards_killed / current_contract.guards) * 2
+   var time_mod = 1#(start_time - end_time) * 1
+   
+   var payout = current_contract.payout * target_mod * guard_mod * time_mod
       
    if player_died or targets_killed < targets.size():
-      print_rich("[color=Crimson]Player has lost[/color]\nfinal score: ", score)
+      print_rich("[color=Crimson]Player has lost[/color]\n
+      target modifier: ", target_mod, "\nguard modifier: ", guard_mod,
+      "\ntime modifier: ", time_mod)
    else:
-      print_rich("[color=Royalblue]Player has won[/color]\nfinal score: ", score)
+      print_rich("[color=Royalblue]Player has won[/color]\n
+      target modifier: ", target_mod, "\nguard modifier: ", guard_mod,
+      "\ntime modifier: ", time_mod, "\ncontract payout")
+      player_stats.money += payout
    show_perks = true
-   get_tree().change_scene_to_packed(card_select)
+   current_contract = null
+   rounds += 1
+   change_scene(card_select)
