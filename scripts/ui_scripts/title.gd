@@ -11,7 +11,6 @@ func _ready() -> void:
 
 # ---- # Continue Pressed
 func _on_continue_pressed():
-   print("title: continuing game")
    SaveManager.load_game()
 # ---- # Start Game Pressed
 func _on_new_game_pressed() -> void:

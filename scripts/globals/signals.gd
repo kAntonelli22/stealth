@@ -13,6 +13,7 @@ signal contract_over(player_died: bool)       # emitted when the player wins or 
 # ---- # ui signals
 signal new_entrance(entrance: Node2D)        # emitted by entrance when it is instanced for ui
 signal entrance_selected(entrance: Node2D)   # emitted by entrance when the user selected
+signal card_created(card: Card)              # emitted by cards so scenes can receive its pressed signal
 
 # ---- # character body signals
 signal update_attributes(health: int)        # emitted by player for ui when health changes

@@ -1,6 +1,7 @@
 extends Control
 
 # TODO offer items to be purchased
+# TODO show players perks
 
 # ---- # Nodes
 @onready var money := $ColorRect/MarginContainer/Money
@@ -19,5 +20,5 @@ func _ready() -> void:
    update_money()
 
 func _on_contract_button_pressed() -> void:
-   Global.show_perks = false;
+   Global.show_perks = false
    Global.change_scene(Global.card_select)

@@ -38,6 +38,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
+[node name="Heart" parent="LeftPanel/LeftContainer/HealthBackground" index="0"]
+texture = null
+
 [node name="Carrot" type="Button" parent="LeftPanel"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1

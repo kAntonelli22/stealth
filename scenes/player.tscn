@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dsml2iuyada4p"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_kndtj"]
-[ext_resource type="Resource" uid="uid://dbry47tg3us5o" path="res://resources/player_stats.tres" id="2_d7ceb"]
+[ext_resource type="Resource" uid="uid://c5580u65j0st" path="res://resources/player_stats.tres" id="2_d7ceb"]
 [ext_resource type="Texture2D" uid="uid://clsqcgm3hmadt" path="res://assets/sprites/lil guy.png" id="3_7laq3"]
 [ext_resource type="PackedScene" uid="uid://dpe146fvmhnm0" path="res://scenes/weapon.tscn" id="4_7t4yq"]
 

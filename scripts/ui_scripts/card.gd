@@ -8,13 +8,14 @@ class_name Card
 @onready var button := $Outline/CardButton
 
 # ---- # variables
-var data                # the data that the card holds (Perk or Contract class)
+var data    # the data that the card holds (Perk or Contract class)
 
 # ---- # Ready
 func _ready() -> void:
    title.text = data.name
    #image.texture = data.texture
    description.text = data.description
+   Signals.emit_signal("card_created", self)
    add_to_group("Persist")
    
 # ---- # Save
@@ -25,12 +26,12 @@ func save(array: Array[SavedData]):
    saved_data.data = data
    array.append(saved_data)
 
-# ---- # On Save Game
+# ---- # Before Load Game
 func before_load():
    get_parent().remove_child(self)
    queue_free()
 
-# ---- # On Save Game
+# ---- # After Load Game
 func after_load(saved_data: SavedData):
    var saved_card = saved_data as SavedCardData
    data = saved_card.data

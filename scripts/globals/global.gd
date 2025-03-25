@@ -2,8 +2,8 @@ extends Node
 
 
 # ---- # save game stuff
-var save_game_placeholder : bool = true
-var rounds : int = 0
+var save: bool = true
+var rounds: int = 0
 
 # ---- # resources
 var player_stats := preload("res://resources/player_stats.tres")
@@ -12,10 +12,10 @@ var player_stats := preload("res://resources/player_stats.tres")
 var godot_icon := preload("res://icon.svg")
 
 # ---- # scenes
-var card_select := preload("res://scenes/ui_scenes/card_carousel.tscn")
+var card_select := load("res://scenes/ui_scenes/card_carousel.tscn")    # HACK if card select and shop are preload it causes cyclical reference
 var card := preload("res://scenes/ui_scenes/card.tscn")
 var entrance_ui := preload("res://scenes/ui_scenes/entrance_ui.tscn")
-var shop := preload("res://scenes/ui_scenes/shop.tscn")
+var shop := load("res://scenes/ui_scenes/shop.tscn")
 
 var player_scene := preload("res://scenes/player.tscn")
 var guard_scene := preload("res://scenes/enemy_scenes/guard.tscn")
@@ -128,11 +128,11 @@ func update_groups():
 # TODO change calculation of money modifier
 func contract_over(player_died: bool):
    
-   var guards_killed = current_contract.guards
+   var guards_killed: float = current_contract.guards
    for guard in guards:
       if guard.state == guard.states["dead"]:
          guards_killed -= 1
-   var targets_killed = current_contract.targets
+   var targets_killed: float = current_contract.targets
    for target in targets:
       if target.state == target.states["dead"]:
          targets_killed -= 1
@@ -150,7 +150,7 @@ func contract_over(player_died: bool):
       print_rich("[color=Royalblue]Player has won[/color]\n
       target modifier: ", target_mod, "\nguard modifier: ", guard_mod,
       "\ntime modifier: ", time_mod, "\ncontract payout")
-      player_stats.money += payout
+      player_stats.money += round(payout)
    show_perks = true
    current_contract = null
    rounds += 1

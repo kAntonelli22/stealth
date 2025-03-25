@@ -2,10 +2,10 @@ extends Resource
 class_name Perk
 
 # ---- # variables
-var name : String
-var description : String
+@export var name : String
+@export var description : String
 #var icon : Resource
-var type : String
+@export var type : String
 
 
 # ---- # Perk Initializer
@@ -29,7 +29,7 @@ func save() -> Dictionary:
 # ---- # BoostPerk
 class BoostPerk extends Perk:
    # ---- # variables
-   var boost_percent : float
+   @export var boost_percent : float
    
    # ---- # BoostPerk Initializer
    func _init(
